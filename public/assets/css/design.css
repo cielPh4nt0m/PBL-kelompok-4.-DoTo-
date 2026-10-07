@@ -260,6 +260,7 @@ a.g2:hover, .g2.lift:hover { box-shadow: var(--g2-shadow-hover); transform: tran
 .page-head .sub { margin: 4px 0 0; color: var(--mute); font-size: .9rem; }
 .panel { padding: 20px; }
 .panel + .panel { margin-top: 16px; }
+.layout-2 > .panel { margin-top: 0; }
 .panel h2 { margin: 0 0 12px; font-size: 1rem; font-weight: 700; }
 .label-caps { font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); }
 .muted { color: var(--mute); }
@@ -327,7 +328,13 @@ textarea:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
 .layout-2 { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; }
 
 /* Board */
-.board { display: flex; gap: 14px; overflow-x: auto; padding: 4px 2px 16px; scroll-snap-type: x proximity; }
+.board {
+  display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
+  /* Ruang ekstra supaya bayangan kolom tidak terpotong container scroll;
+     margin negatif menjaga posisi kolom tetap sejajar judul halaman. */
+  padding: 8px 16px 64px; margin: -8px -16px -48px;
+  scroll-padding-inline: 16px;
+}
 .segment-col { flex: none; width: 300px; padding: 14px; scroll-snap-align: start; }
 .segment-col > h2 { display: flex; justify-content: space-between; align-items: center; margin: 0 0 10px; font-size: .98rem; font-weight: 700; }
 .status-group { margin-top: 12px; }
@@ -393,6 +400,7 @@ tr.revoked td { color: var(--mute); }
   .topbar { margin: 8px 8px 0; top: 8px; }
   .nav { order: 3; width: 100%; justify-content: space-between; }
   .nav a { flex: 1; text-align: center; padding: 7px 6px; }
+  .user-chip { margin-left: auto; }
   .user-chip span { display: none; }
   .page-head h1 { font-size: 1.4rem; }
   .segment-col { width: 84vw; }
