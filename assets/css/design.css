@@ -169,5 +169,4 @@ body { animation: page-in .9s ease-out both; }
  
 @media (prefers-reduced-motion: reduce) {
   body { animation: none; }
-  .rain { display: none; }
 }

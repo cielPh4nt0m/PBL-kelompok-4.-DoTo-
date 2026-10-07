@@ -3,23 +3,16 @@
    dan taruh <div class="rain" aria-hidden="true"></div> tepat setelah <body>. */
 (function () {
   // Ganti dengan nama file foto bisnismu (taruh di assets/img/)
-  var IMAGES = [
-    'assets/img/bisnis-1.jpg',
-    'assets/img/bisnis-2.jpg',
-    'assets/img/bisnis-3.jpg',
-    'assets/img/bisnis-4.jpg',
-    'assets/img/bisnis-5.jpg',
-    'assets/img/bisnis-6.jpg',
-    'assets/img/bisnis-7.jpg',
-    'assets/img/bisnis-8.jpg',
-    'assets/img/bisnis-9.jpg',
-    'assets/img/bisnis-10.jpg',
-    'assets/img/bisnis-11.jpg',
-    'assets/img/bisnis-12.jpg',
-    'assets/img/bisnis-13.jpg',
-    'assets/img/bisnis-14.jpg'
+    // Folder foto dihitung dari lokasi effects.js, jadi aman dari halaman mana pun
+  var BASE = document.currentScript.src.replace(/js\/[^/]*$/, 'img/');
+  var FILES = [
+    'bisnis-1.png', 'bisnis-2.png', 'bisnis-3.png', 'bisnis-4.png',
+    'bisnis-5.png', 'bisnis-6.png', 'bisnis-7.png', 'bisnis-8.png',
+    'bisnis-9.png', 'bisnis-10.png', 'bisnis-11.png', 'bisnis-12.png',
+    'bisnis-13.png', 'bisnis-14.png'
   ];
-  var FALLBACK = ['📈', '💼', '🤝', '📊', '🗂️', '💡']; // dipakai bila foto belum ada
+  var IMAGES = FILES.map(function (f) { return BASE + f; });
+  // var FALLBACK = ['📈', '💼', '🤝', '📊', '🗂️', '💡'];
 
   var layer = document.querySelector('.rain');
   if (!layer || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -31,7 +24,7 @@
     return new Promise(function (ok) {
       var i = new Image();
       i.onload = function () { ok(src); };
-      i.onerror = function () { ok(null); };
+      i.onerror = function () { console.warn('Foto tidak ditemukan:', src); ok(null); };
       i.src = src;
     });
   }
