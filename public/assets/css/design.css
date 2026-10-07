@@ -77,7 +77,7 @@ input {
   color: var(--ink);
   border: 1px solid var(--line);
   border-radius: var(--radius-field);
-  background: rgba(255,255,255,.55);
+  background: var(--field-bg);
   box-shadow: var(--field-shadow);
 }
 input:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
@@ -95,18 +95,18 @@ input[aria-invalid="true"] { border-color: var(--err); }
   border-radius: var(--radius-field);
   cursor: pointer;
 }
-.btn-primary { background: var(--btn); color: #fff; border: 0; box-shadow: 0 3px 6px rgba(0,0,0,.25); }
+.btn-primary { background: var(--btn); color: var(--btn-text); border: 0; box-shadow: 0 3px 6px rgba(0,0,0,.25); }
 .btn-primary:hover { background: var(--btn-hover); }
 .btn-primary[disabled] { opacity: .7; cursor: progress; }
 
 .btn-outline {
-  background: rgba(255,255,255,.55);
+  background: var(--field-bg);
   color: var(--ink);
   border: 1px solid var(--line);
   font-weight: 500;
   box-shadow: var(--field-shadow);
 }
-.btn-outline:hover { background: #fff; }
+.btn-outline:hover { background: var(--btn-outline-hover); }
 .btn-outline svg { width: 18px; height: 18px; }
 
 /* 4. Halaman login ---------------------------------------- */
@@ -151,7 +151,7 @@ body { animation: page-in .9s ease-out both; }
   width: var(--s); aspect-ratio: 4 / 3;
   border-radius: 14px;
   background-size: cover; background-position: center;
-  border: 1px solid rgba(255,255,255,.9);
+  border: 1px solid var(--glass-edge);
   box-shadow: 0 8px 24px rgba(60,100,170,.2);
   opacity: var(--o, .7);
   animation: rain-fall var(--d, 22s) linear var(--delay, 0s) infinite;
@@ -160,7 +160,7 @@ body { animation: page-in .9s ease-out both; }
 .rain-card.fallback {
   display: grid; place-items: center;
   font-size: calc(var(--s) * .3);
-  background: linear-gradient(135deg, #cfe3fb, #e9dcff);
+  background: var(--rain-fallback);
 }
 @keyframes rain-fall {
   from { transform: translateY(-30vh) rotate(var(--r, 0deg)); }
@@ -193,6 +193,35 @@ body { animation: page-in .9s ease-out both; }
   --g2-shadow-hover: 0 12px 28px rgba(30,60,130,.2), inset 0 1px 0 #fff;
 
   --accent: var(--azure);
+  --accent-text: var(--azure);
+  --btn-text: #fff;
+  --btn-outline-hover: #fff;
+  --field-bg: rgba(255,255,255,.55);
+  --select-bg: rgba(255,255,255,.7);
+  --select-border: rgba(59,66,82,.35);
+  --ghost-bg: rgba(255,255,255,.3);
+  --ghost-hover: rgba(255,255,255,.7);
+  --nav-hover-bg: rgba(255,255,255,.55);
+  --nav-active-bg: var(--navy);
+  --nav-active-text: #fff;
+  --chip-bg: rgba(255,255,255,.75);
+  --chip-text: var(--navy);
+  --chip-solid-bg: var(--navy);
+  --chip-solid-text: #fff;
+  --add-col-bg: rgba(255,255,255,.18);
+  --divider: rgba(59,66,82,.2);
+  --divider-soft: rgba(59,66,82,.1);
+  --reveal-bg: rgba(255,247,222,.85);
+  --reveal-border: rgba(217,119,6,.5);
+  --code-bg: rgba(255,255,255,.8);
+  --action-card-bg: rgba(255,255,255,.7);
+  --rain-fallback: linear-gradient(135deg, #cfe3fb, #e9dcff);
+  --app-bg: #eef4fd;
+  --app-bg-image:
+    radial-gradient(ellipse 38% 46% at 88% 6%,  rgba(79,227,240,.55) 0%, rgba(79,227,240,0) 70%),
+    radial-gradient(ellipse 42% 50% at 6% 30%,  rgba(58,139,230,.42) 0%, rgba(58,139,230,0) 70%),
+    radial-gradient(ellipse 40% 46% at 70% 92%, rgba(106,63,168,.34) 0%, rgba(106,63,168,0) 70%),
+    radial-gradient(ellipse 30% 30% at 30% 85%, rgba(169,205,243,.7) 0%, rgba(169,205,243,0) 70%);
   --p-low: #6b7280;
   --p-medium: #2563eb;
   --p-high: #d97706;
@@ -201,12 +230,8 @@ body { animation: page-in .9s ease-out both; }
 
 /* Lapis 0: latar lebih berwarna supaya efek kaca terlihat */
 body.app {
-  background-color: #eef4fd;
-  background-image:
-    radial-gradient(ellipse 38% 46% at 88% 6%,  rgba(79,227,240,.55) 0%, rgba(79,227,240,0) 70%),
-    radial-gradient(ellipse 42% 50% at 6% 30%,  rgba(58,139,230,.42) 0%, rgba(58,139,230,0) 70%),
-    radial-gradient(ellipse 40% 46% at 70% 92%, rgba(106,63,168,.34) 0%, rgba(106,63,168,0) 70%),
-    radial-gradient(ellipse 30% 30% at 30% 85%, rgba(169,205,243,.7) 0%, rgba(169,205,243,0) 70%);
+  background-color: var(--app-bg);
+  background-image: var(--app-bg-image);
 }
 
 /* Lapis 1 dan 2 */
@@ -243,8 +268,8 @@ a.g2:hover, .g2.lift:hover { box-shadow: var(--g2-shadow-hover); transform: tran
   padding: 7px 14px; border-radius: 999px;
   font-size: .85rem; font-weight: 600; color: var(--mute); text-decoration: none;
 }
-.nav a:hover { background: rgba(255,255,255,.55); color: var(--ink); }
-.nav a[aria-current="page"] { background: var(--navy); color: #fff; box-shadow: 0 3px 10px rgba(15,30,61,.3); }
+.nav a:hover { background: var(--nav-hover-bg); color: var(--ink); }
+.nav a[aria-current="page"] { background: var(--nav-active-bg); color: var(--nav-active-text); box-shadow: 0 3px 10px rgba(15,30,61,.3); }
 .user-chip { display: flex; align-items: center; gap: 8px; font-size: .82rem; font-weight: 600; }
 .avatar {
   width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
@@ -255,7 +280,7 @@ a.g2:hover, .g2.lift:hover { box-shadow: var(--g2-shadow-hover); transform: tran
 /* Kerangka halaman */
 .page { width: 100%; max-width: 1240px; margin: 0 auto; padding: 24px 16px 48px; position: relative; z-index: 1; }
 .page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
-.eyebrow { margin: 0 0 4px; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--azure); }
+.eyebrow { margin: 0 0 4px; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-text); }
 .page-head h1 { margin: 0; font-size: 1.75rem; font-weight: 700; letter-spacing: -.01em; }
 .page-head .sub { margin: 4px 0 0; color: var(--mute); font-size: .9rem; }
 .panel { padding: 20px; }
@@ -273,10 +298,10 @@ a.g2:hover, .g2.lift:hover { box-shadow: var(--g2-shadow-hover); transform: tran
 .btn-ghost {
   width: 100%; height: 34px; margin-top: 8px;
   border: 1px dashed rgba(58,139,230,.6); border-radius: var(--radius-field);
-  background: rgba(255,255,255,.3); color: var(--azure);
+  background: var(--ghost-bg); color: var(--accent-text);
   font: inherit; font-size: .82rem; font-weight: 600; cursor: pointer;
 }
-.btn-ghost:hover { background: rgba(255,255,255,.7); }
+.btn-ghost:hover { background: var(--ghost-hover); }
 .btn-danger { background: none; border: 0; color: var(--err); font: inherit; font-size: .8rem; font-weight: 600; cursor: pointer; }
 .row-form { display: flex; gap: 8px; align-items: flex-start; flex-wrap: wrap; }
 .row-form input { flex: 1 1 160px; width: auto; }
@@ -284,15 +309,15 @@ a.g2:hover, .g2.lift:hover { box-shadow: var(--g2-shadow-hover); transform: tran
 select {
   height: 34px; padding: 0 8px;
   font: inherit; font-size: .82rem; color: var(--ink);
-  border: 1px solid rgba(59,66,82,.35); border-radius: var(--radius-field);
-  background: rgba(255,255,255,.7);
+  border: 1px solid var(--select-border); border-radius: var(--radius-field);
+  background: var(--select-bg);
 }
 select:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
 textarea {
   width: 100%; min-height: 70px; padding: 8px 12px; resize: vertical;
   font: inherit; font-size: .9rem; color: var(--ink);
   border: 1px solid var(--line); border-radius: var(--radius-field);
-  background: rgba(255,255,255,.55); box-shadow: var(--field-shadow);
+  background: var(--field-bg); box-shadow: var(--field-shadow);
 }
 textarea:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
 .check { display: inline-flex; align-items: center; gap: 8px; margin: 0; font-size: .85rem; color: var(--ink); cursor: pointer; }
@@ -309,11 +334,11 @@ textarea:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
 .pill.urgent { background: var(--p-urgent); }
 .chip {
   display: inline-block; padding: 2px 8px; border-radius: 999px;
-  font-size: .7rem; font-weight: 600; color: var(--navy);
-  background: rgba(255,255,255,.75); border: 1px solid rgba(58,139,230,.3);
+  font-size: .7rem; font-weight: 600; color: var(--chip-text);
+  background: var(--chip-bg); border: 1px solid rgba(58,139,230,.3);
 }
-.chip.solid { background: var(--navy); color: #fff; border-color: var(--navy); }
-.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; font-weight: 600; color: var(--azure); }
+.chip.solid { background: var(--chip-solid-bg); color: var(--chip-solid-text); border-color: var(--chip-solid-bg); }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .78rem; font-weight: 600; color: var(--accent-text); }
 
 /* Projects */
 .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
@@ -346,7 +371,7 @@ textarea:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
 .task-card .who { font-size: .74rem; color: var(--mute); }
 .task-card select { width: 100%; margin-top: 8px; height: 30px; }
 .task-card.archived { opacity: .55; }
-.segment-col.add { background: rgba(255,255,255,.18); border-style: dashed; box-shadow: none; }
+.segment-col.add { background: var(--add-col-bg); border-style: dashed; box-shadow: none; }
 
 /* Detail tugas */
 .task-title { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
@@ -368,16 +393,16 @@ textarea:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
 /* Token */
 .table-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: .85rem; }
-th { text-align: left; padding: 8px 10px; border-bottom: 1px solid rgba(59,66,82,.2); }
-td { padding: 10px; border-bottom: 1px solid rgba(59,66,82,.1); }
+th { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--divider); }
+td { padding: 10px; border-bottom: 1px solid var(--divider-soft); }
 tr.revoked td { color: var(--mute); }
-.token-reveal { margin-top: 14px; padding: 14px; border: 1px solid rgba(217,119,6,.5); background: rgba(255,247,222,.85); }
-.token-reveal code { display: block; margin: 8px 0; padding: 8px; overflow-wrap: anywhere; border-radius: 8px; background: rgba(255,255,255,.8); font-size: .82rem; }
+.token-reveal { margin-top: 14px; padding: 14px; border: 1px solid var(--reveal-border); background: var(--reveal-bg); }
+.token-reveal code { display: block; margin: 8px 0; padding: 8px; overflow-wrap: anywhere; border-radius: 8px; background: var(--code-bg); font-size: .82rem; }
 
 /* AI */
 .ai-wrap { max-width: 820px; margin: 0 auto; }
 .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
-.prompt-chip { padding: 8px 14px; border-radius: 999px; font: inherit; font-size: .82rem; font-weight: 600; cursor: pointer; color: var(--navy); }
+.prompt-chip { padding: 8px 14px; border-radius: 999px; font: inherit; font-size: .82rem; font-weight: 600; cursor: pointer; color: var(--chip-text); }
 .chat { display: flex; flex-direction: column; gap: 12px; min-height: 120px; margin-bottom: 14px; }
 .msg { max-width: 78%; padding: 10px 14px; font-size: .9rem; line-height: 1.45; }
 .msg p { margin: 0; }
@@ -388,7 +413,7 @@ tr.revoked td { color: var(--mute); }
 }
 .msg.assistant { align-self: flex-start; border-radius: 16px 16px 16px 4px; }
 .msg.thinking p { color: var(--mute); font-style: italic; }
-.action-card { margin-top: 10px; padding: 12px; border-radius: 12px; background: rgba(255,255,255,.7); border: 1px solid rgba(58,139,230,.3); }
+.action-card { margin-top: 10px; padding: 12px; border-radius: 12px; background: var(--action-card-bg); border: 1px solid rgba(58,139,230,.3); }
 .action-card ul { margin: 8px 0; padding-left: 18px; font-size: .84rem; }
 .action-card .actions { display: flex; gap: 8px; }
 .action-card .btn { width: auto; height: 32px; padding: 0 14px; }
@@ -406,3 +431,168 @@ tr.revoked td { color: var(--mute); }
   .segment-col { width: 84vw; }
   .msg { max-width: 92%; }
 }
+
+/* =========================================================
+   6. Cahaya bergerak di latar (semua halaman)
+   Tiga blob cahaya dari warna logo yang melayang pelan di belakang
+   konten. Hanya transform yang dianimasikan (ringan, tanpa repaint);
+   gradien statis di body tetap jadi dasarnya.
+   ========================================================= */
+html::before,
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  /* -1: di bawah sorotan kursor (z 0) dan konten (z 1), tapi tetap di atas
+     latar body karena latar body digambar di kanvas. */
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  will-change: transform;
+  animation: var(--glow-anim) ease-in-out infinite alternate;
+}
+
+/* Biru: blob terbesar, kiri atas */
+body::before {
+  --glow-anim: glow-drift-a 11s;
+  width: 70vmax; height: 70vmax;
+  top: -22vmax; left: -18vmax;
+  background: radial-gradient(circle, rgba(58,139,230,.5) 0%, rgba(58,139,230,0) 65%);
+}
+
+/* Cyan: kanan atas */
+body::after {
+  --glow-anim: glow-drift-b 14s;
+  width: 55vmax; height: 55vmax;
+  top: -18vmax; right: -14vmax;
+  background: radial-gradient(circle, rgba(79,227,240,.52) 0%, rgba(79,227,240,0) 65%);
+}
+
+/* Ungu: kanan bawah */
+html::before {
+  --glow-anim: glow-drift-c 16s;
+  width: 60vmax; height: 60vmax;
+  bottom: -26vmax; right: 6vw;
+  background: radial-gradient(circle, rgba(106,63,168,.38) 0%, rgba(106,63,168,0) 65%);
+}
+
+@keyframes glow-drift-a {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(30vw, 16vh, 0) scale(1.18); }
+  100% { transform: translate3d(10vw, 38vh, 0) scale(.92); }
+}
+@keyframes glow-drift-b {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(-24vw, 26vh, 0) scale(.9); }
+  100% { transform: translate3d(-38vw, 8vh, 0) scale(1.15); }
+}
+@keyframes glow-drift-c {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(-32vw, -18vh, 0) scale(1.2); }
+  100% { transform: translate3d(-10vw, -34vh, 0) scale(1); }
+}
+
+/* Sorotan kursor (dibuat oleh assets/js/cursor-glow.js): satu lapis di atas
+   cahaya latar, di bawah panel kaca, jadi terlihat menembus kaca. */
+.cursor-glow {
+  --size: 340px;
+  position: fixed; top: 0; left: 0; z-index: 0;
+  width: var(--size); height: var(--size);
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(58,139,230,.38) 0%, rgba(79,227,240,.18) 40%, rgba(79,227,240,0) 70%);
+  transform: translate3d(var(--x, -999px), var(--y, -999px), 0);
+  will-change: transform;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+.cursor-glow.on { opacity: 1; }
+
+/* Hormati pengaturan "kurangi animasi": cahaya tetap ada, tapi diam. */
+@media (prefers-reduced-motion: reduce) {
+  html::before,
+  body::before,
+  body::after { animation: none; }
+}
+
+/* =========================================================
+   7. Tema gelap (navy) + tombol ganti tema
+   data-theme di <html> disetel oleh assets/js/theme.js: mengikuti
+   sistem, atau pilihan user yang tersimpan. Hanya nilai token yang
+   ditimpa; semua komponen di atas otomatis ikut.
+   ========================================================= */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ink: #e6edf8;
+  --mute: #b4c1d8;
+  --line: #3b4c6b;
+  --btn: #2563eb;
+  --btn-hover: #1d4fc4;
+  --err: #ff7a8c;
+  --focus: #5aa2ff;
+  --bg: #0b1424;
+  --blue: #14315a;
+  --blue-soft: #102542;
+
+  /* Kartu login (.glass) */
+  --glass-bg: linear-gradient(160deg, rgba(26,42,74,.72), rgba(14,24,46,.58));
+  --glass-edge: rgba(150,185,255,.2);
+  --glass-shadow: 0 16px 44px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08);
+  --field-shadow: 0 2px 6px rgba(0,0,0,.35);
+
+  /* Kaca lapis 1 dan 2 */
+  --g1-bg: linear-gradient(155deg, rgba(22,38,68,.74), rgba(12,22,42,.6));
+  --g1-edge: rgba(140,180,255,.18);
+  --g1-shadow: 0 18px 50px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.07);
+  --g2-bg: linear-gradient(160deg, rgba(34,52,88,.86), rgba(22,36,64,.74));
+  --g2-edge: rgba(160,195,255,.22);
+  --g2-shadow: 0 4px 16px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.09);
+  --g2-shadow-hover: 0 12px 30px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.12);
+
+  --accent-text: #74b4ff;
+  --btn-text: #fff;
+  --btn-outline-hover: rgba(255,255,255,.12);
+  --field-bg: rgba(8,16,32,.55);
+  --select-bg: rgba(8,16,32,.6);
+  --select-border: rgba(150,180,230,.3);
+  --ghost-bg: rgba(255,255,255,.04);
+  --ghost-hover: rgba(255,255,255,.1);
+  --nav-hover-bg: rgba(255,255,255,.08);
+  --nav-active-bg: #e6edf8;
+  --nav-active-text: var(--navy);
+  --chip-bg: rgba(255,255,255,.08);
+  --chip-text: #cfe0fa;
+  --chip-solid-bg: #e6edf8;
+  --chip-solid-text: var(--navy);
+  --add-col-bg: rgba(255,255,255,.03);
+  --divider: rgba(150,180,230,.22);
+  --divider-soft: rgba(150,180,230,.12);
+  --reveal-bg: rgba(80,58,10,.55);
+  --reveal-border: rgba(245,170,40,.5);
+  --code-bg: rgba(0,0,0,.35);
+  --action-card-bg: rgba(8,16,32,.45);
+  --rain-fallback: linear-gradient(135deg, #1b3560, #2e2154);
+  --app-bg: #0b1424;
+  --app-bg-image:
+    radial-gradient(ellipse 38% 46% at 88% 6%,  rgba(79,227,240,.16) 0%, rgba(79,227,240,0) 70%),
+    radial-gradient(ellipse 42% 50% at 6% 30%,  rgba(58,139,230,.2) 0%, rgba(58,139,230,0) 70%),
+    radial-gradient(ellipse 40% 46% at 70% 92%, rgba(106,63,168,.22) 0%, rgba(106,63,168,0) 70%);
+}
+
+/* Tombol ganti tema: ikon bulan di tema terang, matahari di tema gelap */
+.theme-toggle {
+  flex: none; display: grid; place-items: center;
+  width: 36px; height: 36px; padding: 0; border-radius: 50%;
+  color: var(--ink); cursor: pointer;
+  background: var(--g2-bg); border: 1px solid var(--g2-edge); box-shadow: var(--g2-shadow);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.theme-toggle:hover { box-shadow: var(--g2-shadow-hover); }
+.theme-toggle svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.theme-toggle .icon-moon { fill: currentColor; stroke: none; }
+.theme-toggle .icon-sun circle { fill: currentColor; }
+.theme-toggle .icon-sun,
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+.theme-fab { position: fixed; top: 14px; right: 16px; z-index: 5; }

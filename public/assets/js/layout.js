@@ -42,6 +42,7 @@ export async function initLayout(active) {
     h('div', { class: 'user-chip' },
       h('div', { class: 'avatar', 'aria-hidden': 'true' }, me.username.slice(0, 1).toUpperCase()),
       h('span', {}, me.username)),
+    window.DotoTheme ? window.DotoTheme.button() : null,
     logout);
 
   document.body.prepend(bar);
