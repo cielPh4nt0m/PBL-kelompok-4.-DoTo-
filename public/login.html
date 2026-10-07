@@ -3,19 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Doto – Register</title>
+<title>Doto – Sign in</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/design.css">
-<script src="../assets/js/app.js" defer></script>
-<style>
-  /* Khusus halaman register: tautan kembali ke login */
-  .switch { margin: 14px 0 0; text-align: center; font-size: .8rem; color: var(--mute); }
-  .switch a { color: var(--ink); font-weight: 600; text-decoration: none; }
-  .switch a:hover { text-decoration: underline; }
-</style>
+<link rel="stylesheet" href="assets/css/design.css">
+<script src="assets/js/app.js" defer></script>
 </head>
 <body>
-  <div class="rain" aria-hidden="true"></div>
+<div class="rain" aria-hidden="true"></div>
 <header class="brand">
   <svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4fe3f0"/><stop offset=".55" stop-color="#3a8be6"/><stop offset="1" stop-color="#6a3fa8"/></linearGradient></defs><rect x="2" y="2" width="36" height="36" rx="11" fill="url(#lg)"/><path d="M14 10h7a10 10 0 0 1 0 20h-7z" fill="#0f1e3d" opacity=".85"/><path d="M18 15l7 5-7 5z" fill="#fff"/></svg>
   <div><h1>Doto</h1><p>Doto : Manajemen Tugas Tim &amp; Agen AI</p></div>
@@ -23,25 +17,19 @@
 
 <main class="login-main">
   <form class="glass login-card" id="f" novalidate>
-    <h2>Register</h2>
-    <p class="sub">let's finish your work with us!</p>
+    <h2>Sign in</h2>
+    <p class="sub">Do everything in a blink of an eye -</p>
 
     <div class="field">
-      <label for="u">Username</label>
+      <label for="u">Username or email</label>
       <input id="u" autocomplete="username" aria-describedby="eu">
       <p class="error" id="eu"></p>
     </div>
 
     <div class="field">
-      <label for="e">Email</label>
-      <input id="e" type="email" autocomplete="email" aria-describedby="ee">
-      <p class="error" id="ee"></p>
-    </div>
-
-    <div class="field">
       <label for="p">Password</label>
       <div class="password-wrap">
-        <input id="p" type="password" autocomplete="new-password" aria-describedby="ep">
+        <input id="p" type="password" autocomplete="current-password" aria-describedby="ep">
         <button type="button" class="toggle-pass" id="eye" aria-label="Show password">Show</button>
       </div>
       <p class="error" id="ep"></p>
@@ -49,18 +37,18 @@
 
     <a class="forgot" href="#" id="fg">Forgot Password?</a>
     <button class="btn btn-primary" id="go" type="submit">Get Started</button>
+    <p class="switch">Don't have an account? <a href="register.html">Register</a></p>
     <div class="divider">or</div>
     <button class="btn btn-outline" type="button" id="gg">
       <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.9 2.4 30.4 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-3-.8-4.7s.3-3.2.8-4.7l-7.9-6.1C1 16.4 0 20.1 0 24s1 7.6 2.6 10.8z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
       Sign in with Google
     </button>
     <p class="status" id="st" role="status"></p>
-    <p class="switch">Already have an account? <a href="login.html">Sign in</a></p>
   </form>
 </main>
 
 <script>
-const $ = id => document.getElementById(id), u = $('u'), e = $('e'), p = $('p'), st = $('st');
+const $ = id => document.getElementById(id), u = $('u'), p = $('p'), st = $('st');
 function bad(el, msg, out) { el.setAttribute('aria-invalid', !!msg); $(out).textContent = msg || ''; }
 
 const eye = $('eye');
@@ -73,18 +61,29 @@ eye.addEventListener('keydown', ev => { if (ev.key === ' ' || ev.key === 'Enter'
 eye.addEventListener('keyup', ev => { if (ev.key === ' ' || ev.key === 'Enter') reveal(false); });
 eye.addEventListener('contextmenu', ev => ev.preventDefault());
 
-$('f').onsubmit = ev => {
-  ev.preventDefault(); st.textContent = '';
-  const a = u.value.trim().length >= 3 ? '' : 'Username must be at least 3 characters.';
-  const b = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.value.trim()) ? '' : 'Enter a valid email address.';
-  const c = p.value.length >= 6 ? '' : 'Password must be at least 6 characters.';
-  bad(u, a, 'eu'); bad(e, b, 'ee'); bad(p, c, 'ep');
-  const first = a ? u : b ? e : c ? p : null;
-  if (first) { first.focus(); return; }
-  const go = $('go'); go.disabled = true; go.textContent = 'Creating account…';
-  setTimeout(() => { go.disabled = false; go.textContent = 'Get Started'; st.textContent = 'Demo: form valid. Backend register belum terhubung.'; }, 900);
+$('f').onsubmit = e => {
+  e.preventDefault(); st.textContent = '';
+  const a = u.value.trim() ? '' : 'Enter your username or email.';
+  const b = p.value.length < 6 ? 'Password must be at least 6 characters.' : '';
+  bad(u, a, 'eu'); bad(p, b, 'ep');
+  if (a || b) { (a ? u : p).focus(); return; }
+  const go = $('go'); go.disabled = true; go.textContent = 'Signing in…';
+  fetch('api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ login: u.value.trim(), password: p.value }),
+  })
+    .then(async res => {
+      if (res.ok) { location.href = 'projects.html'; return; }
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || 'Sign in failed.');
+    })
+    .catch(err => { go.disabled = false; go.textContent = 'Get Started'; st.textContent = err.message; });
 };
-$('fg').onclick = ev => { ev.preventDefault(); st.textContent = 'Reset password belum tersedia di demo ini.'; };
+
+// Sudah login? Langsung ke halaman proyek.
+fetch('api/me').then(res => { if (res.ok) location.replace('projects.html'); });
+$('fg').onclick = e => { e.preventDefault(); st.textContent = 'Reset password belum tersedia di demo ini.'; };
 $('gg').onclick = () => { st.textContent = 'Google sign-in belum terhubung di demo ini.'; };
 </script>
 </body>
