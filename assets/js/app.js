@@ -6,13 +6,17 @@
     // Folder foto dihitung dari lokasi effects.js, jadi aman dari halaman mana pun
   var BASE = document.currentScript.src.replace(/js\/[^/]*$/, 'img/');
   var FILES = [
-    'bisnis-1.png', 'bisnis-2.png', 'bisnis-3.png', 'bisnis-4.png',
-    'bisnis-5.png', 'bisnis-6.png', 'bisnis-7.png', 'bisnis-8.png',
-    'bisnis-9.png', 'bisnis-10.png', 'bisnis-11.png', 'bisnis-12.png',
-    'bisnis-13.png', 'bisnis-14.png'
+    'bisnis-1.jpg', 'bisnis-2.jpg', 'bisnis-3.jpg', 'bisnis-4.jpg',
+    'bisnis-5.jpg', 'bisnis-6.jpg', 'bisnis-7.jpg', 'bisnis-8.jpg',
+    'bisnis-9.jpg', 'bisnis-10.jpg', 'bisnis-11.jpg', 'bisnis-12.jpg',
+    'bisnis-13.jpg', 'bisnis-14.jpg'
   ];
   var IMAGES = FILES.map(function (f) { return BASE + f; });
-  // var FALLBACK = ['📈', '💼', '🤝', '📊', '🗂️', '💡'];
+  var FALLBACK = [
+  '📈', '📉', '📊', '💼', '🤝', '🗂️', '💡', '📅', '🗓️', '⏰',
+  '✅', '📝', '📌', '📎', '🎯', '🚀', '💰', '🏢', '👥', '🧑‍💻',
+  '📣', '🔔', '📧', '💬', '🔍', '⚙️', '🏆', '📋', '🧠', '⭐'
+];
 
   var layer = document.querySelector('.rain');
   if (!layer || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
