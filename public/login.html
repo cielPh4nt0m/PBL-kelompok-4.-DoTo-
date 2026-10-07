@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Doto – Sign in</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/design.css">
-<script src="../assets/js/app.js" defer></script>
+<link rel="stylesheet" href="assets/css/design.css">
+<script src="assets/js/app.js" defer></script>
 </head>
 <body>
 <div class="rain" aria-hidden="true"></div>
@@ -21,7 +21,7 @@
     <p class="sub">Do everything in a blink of an eye -</p>
 
     <div class="field">
-      <label for="u">Username</label>
+      <label for="u">Username or email</label>
       <input id="u" autocomplete="username" aria-describedby="eu">
       <p class="error" id="eu"></p>
     </div>
@@ -63,13 +63,26 @@ eye.addEventListener('contextmenu', ev => ev.preventDefault());
 
 $('f').onsubmit = e => {
   e.preventDefault(); st.textContent = '';
-  const a = u.value.trim() ? '' : 'Enter your username.';
+  const a = u.value.trim() ? '' : 'Enter your username or email.';
   const b = p.value.length < 6 ? 'Password must be at least 6 characters.' : '';
   bad(u, a, 'eu'); bad(p, b, 'ep');
   if (a || b) { (a ? u : p).focus(); return; }
   const go = $('go'); go.disabled = true; go.textContent = 'Signing in…';
-  setTimeout(() => { go.disabled = false; go.textContent = 'Get Started'; st.textContent = 'Demo: form valid. Backend login belum terhubung.'; }, 900);
+  fetch('api/auth/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ login: u.value.trim(), password: p.value }),
+  })
+    .then(async res => {
+      if (res.ok) { location.href = 'projects.html'; return; }
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.error || 'Sign in failed.');
+    })
+    .catch(err => { go.disabled = false; go.textContent = 'Get Started'; st.textContent = err.message; });
 };
+
+// Sudah login? Langsung ke halaman proyek.
+fetch('api/me').then(res => { if (res.ok) location.replace('projects.html'); });
 $('fg').onclick = e => { e.preventDefault(); st.textContent = 'Reset password belum tersedia di demo ini.'; };
 $('gg').onclick = () => { st.textContent = 'Google sign-in belum terhubung di demo ini.'; };
 </script>

@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Doto – Register</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/design.css">
-<script src="../assets/js/app.js" defer></script>
+<link rel="stylesheet" href="assets/css/design.css">
+<script src="assets/js/app.js" defer></script>
 <style>
   /* Khusus halaman register: tautan kembali ke login */
   .switch { margin: 14px 0 0; text-align: center; font-size: .8rem; color: var(--mute); }
@@ -75,14 +75,26 @@ eye.addEventListener('contextmenu', ev => ev.preventDefault());
 
 $('f').onsubmit = ev => {
   ev.preventDefault(); st.textContent = '';
-  const a = u.value.trim().length >= 3 ? '' : 'Username must be at least 3 characters.';
+  const a = /^[A-Za-z0-9_.]{3,32}$/.test(u.value.trim()) ? '' : 'Username must be 3–32 characters: letters, numbers, _ or .';
   const b = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.value.trim()) ? '' : 'Enter a valid email address.';
   const c = p.value.length >= 6 ? '' : 'Password must be at least 6 characters.';
   bad(u, a, 'eu'); bad(e, b, 'ee'); bad(p, c, 'ep');
   const first = a ? u : b ? e : c ? p : null;
   if (first) { first.focus(); return; }
   const go = $('go'); go.disabled = true; go.textContent = 'Creating account…';
-  setTimeout(() => { go.disabled = false; go.textContent = 'Get Started'; st.textContent = 'Demo: form valid. Backend register belum terhubung.'; }, 900);
+  fetch('api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username: u.value.trim(), email: e.value.trim(), password: p.value }),
+  })
+    .then(async res => {
+      if (res.ok) { location.href = 'projects.html'; return; }
+      const data = await res.json().catch(() => ({}));
+      // Tampilkan error validasi per field dari server (mis. username sudah dipakai).
+      const details = data.details ? ' ' + Object.entries(data.details).map(([f, m]) => `${f} ${m}`).join('; ') : '';
+      throw new Error((data.error || 'Registration failed.') + details);
+    })
+    .catch(err => { go.disabled = false; go.textContent = 'Get Started'; st.textContent = err.message; });
 };
 $('fg').onclick = ev => { ev.preventDefault(); st.textContent = 'Reset password belum tersedia di demo ini.'; };
 $('gg').onclick = () => { st.textContent = 'Google sign-in belum terhubung di demo ini.'; };
