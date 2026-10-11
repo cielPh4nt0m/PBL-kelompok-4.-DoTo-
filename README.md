@@ -20,7 +20,10 @@ backend/     kode PHP native (tidak bisa diakses langsung dari browser)
   bin/         archive-cron.php
 cli/doto.js  CLI (Node ≥ 20, tanpa dependency)
 mcp/         MCP server (Node ≥ 20)
+docs/        dokumentasi, termasuk desain database (CDM & PDM)
 ```
+
+Desain database (CDM dan PDM) ada di [`docs/database.md`](docs/database.md).
 
 ## Kebutuhan
 
