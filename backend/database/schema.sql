@@ -96,3 +96,68 @@ CREATE TABLE IF NOT EXISTS task_history (
     CONSTRAINT task_history_task_fk FOREIGN KEY (task_id) REFERENCES tasks (id),
     CONSTRAINT task_history_actor_fk FOREIGN KEY (actor_user_id) REFERENCES users (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- View. Dibuat ulang setiap migrasi (CREATE OR REPLACE), jadi aman dijalankan berulang.
+
+-- Tugas lengkap dengan proyek, segment, assignee, dan pembuat. Dipakai TaskRepository.
+-- Sengaja tanpa agregat/subquery supaya MySQL bisa MERGE view ini ke query pemanggil.
+CREATE OR REPLACE VIEW v_task_detail AS
+SELECT
+    t.*,
+    p.`key` AS project_key,
+    p.name AS project_name,
+    s.name AS segment_name,
+    a.email AS assignee_email,
+    a.name AS assignee_name,
+    a.username AS assignee_username,
+    c.username AS creator_username
+FROM tasks t
+JOIN projects p ON p.id = t.project_id
+JOIN segments s ON s.id = t.segment_id
+JOIN users c ON c.id = t.created_by
+LEFT JOIN users a ON a.id = t.assignee_id;
+
+-- Riwayat tugas dengan display_id tugas dan user pelakunya. Dipakai TaskHistoryRepository.
+CREATE OR REPLACE VIEW v_task_history_detail AS
+SELECT
+    h.*,
+    t.display_id AS task_display_id,
+    u.username AS actor_username,
+    u.name AS actor_name
+FROM task_history h
+JOIN tasks t ON t.id = h.task_id
+JOIN users u ON u.id = h.actor_user_id;
+
+-- Ringkasan per proyek: jumlah segment dan tugas aktif per status.
+CREATE OR REPLACE VIEW v_project_summary AS
+SELECT
+    p.id,
+    p.`key` AS project_key,
+    p.name AS project_name,
+    (SELECT COUNT(*) FROM segments s WHERE s.project_id = p.id) AS segment_count,
+    COUNT(t.id) AS total_tasks,
+    COALESCE(SUM(t.archived_at IS NULL AND t.status = 'idea'), 0) AS idea_count,
+    COALESCE(SUM(t.archived_at IS NULL AND t.status = 'todo'), 0) AS todo_count,
+    COALESCE(SUM(t.archived_at IS NULL AND t.status = 'in_progress'), 0) AS in_progress_count,
+    COALESCE(SUM(t.archived_at IS NULL AND t.status = 'needs_review'), 0) AS needs_review_count,
+    COALESCE(SUM(t.archived_at IS NULL AND t.status = 'done'), 0) AS done_count,
+    COALESCE(SUM(t.archived_at IS NOT NULL), 0) AS archived_count
+FROM projects p
+LEFT JOIN tasks t ON t.project_id = p.id
+GROUP BY p.id, p.`key`, p.name;
+
+-- Beban kerja per user: tugas yang ditugaskan, belum selesai, dan belum diarsipkan.
+CREATE OR REPLACE VIEW v_user_workload AS
+SELECT
+    u.id,
+    u.username,
+    u.name,
+    COUNT(t.id) AS active_tasks,
+    COALESCE(SUM(t.status = 'idea'), 0) AS idea_count,
+    COALESCE(SUM(t.status = 'todo'), 0) AS todo_count,
+    COALESCE(SUM(t.status = 'in_progress'), 0) AS in_progress_count,
+    COALESCE(SUM(t.status = 'needs_review'), 0) AS needs_review_count,
+    COALESCE(SUM(t.priority IN ('high', 'urgent')), 0) AS high_priority_count
+FROM users u
+LEFT JOIN tasks t ON t.assignee_id = u.id AND t.archived_at IS NULL AND t.status <> 'done'
+GROUP BY u.id, u.username, u.name;

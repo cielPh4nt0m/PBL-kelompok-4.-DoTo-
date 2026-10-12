@@ -8,7 +8,7 @@ final class TaskRepository
 {
     public static function findByDisplayId(\PDO $pdo, string $displayId): ?array
     {
-        $stmt = $pdo->prepare('SELECT * FROM tasks WHERE display_id = :display_id');
+        $stmt = $pdo->prepare('SELECT * FROM v_task_detail WHERE display_id = :display_id');
         $stmt->execute(['display_id' => $displayId]);
         $row = $stmt->fetch();
         return $row === false ? null : $row;
@@ -16,7 +16,7 @@ final class TaskRepository
 
     public static function findById(\PDO $pdo, string $id): ?array
     {
-        $stmt = $pdo->prepare('SELECT * FROM tasks WHERE id = :id');
+        $stmt = $pdo->prepare('SELECT * FROM v_task_detail WHERE id = :id');
         $stmt->execute(['id' => $id]);
         $row = $stmt->fetch();
         return $row === false ? null : $row;
@@ -96,7 +96,7 @@ final class TaskRepository
 
     public static function findBySegment(\PDO $pdo, string $segmentId, bool $includeArchived): array
     {
-        $sql = 'SELECT * FROM tasks WHERE segment_id = :segment_id';
+        $sql = 'SELECT * FROM v_task_detail WHERE segment_id = :segment_id';
         if (!$includeArchived) {
             $sql .= ' AND archived_at IS NULL';
         }
@@ -136,7 +136,7 @@ final class TaskRepository
             $params['q1'] = $params['q2'] = '%' . $filters['q'] . '%';
         }
 
-        $sql = 'SELECT * FROM tasks';
+        $sql = 'SELECT * FROM v_task_detail';
         if ($conditions !== []) {
             $sql .= ' WHERE ' . implode(' AND ', $conditions);
         }

@@ -32,7 +32,7 @@ final class TaskHistoryRepository
     public static function findByTaskId(\PDO $pdo, string $taskId, int $limit = 50): array
     {
         $stmt = $pdo->prepare(
-            'SELECT * FROM task_history WHERE task_id = :task_id ORDER BY created_at DESC LIMIT :limit'
+            'SELECT * FROM v_task_history_detail WHERE task_id = :task_id ORDER BY created_at DESC LIMIT :limit'
         );
         $stmt->bindValue('task_id', $taskId);
         $stmt->bindValue('limit', $limit, \PDO::PARAM_INT);

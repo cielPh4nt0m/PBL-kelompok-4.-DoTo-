@@ -32,20 +32,8 @@ final class TaskService
 
     public static function toTaskDTO(\PDO $pdo, array $row): array
     {
+        // $row berasal dari view v_task_detail, jadi data assignee sudah ikut ter-join.
         $tags = TaskTagRepository::findByTaskId($pdo, $row['id']);
-
-        $assigneeEmail = null;
-        $assigneeName = null;
-        $assigneeUsername = null;
-        if ($row['assignee_id'] !== null) {
-            $assignee = UserRepository::findById($pdo, $row['assignee_id']);
-            if ($assignee !== null) {
-                $assigneeEmail = $assignee['email'];
-                $assigneeName = $assignee['name'];
-                $assigneeUsername = $assignee['username'];
-            }
-        }
-
         $links = $row['links'] !== null ? (json_decode($row['links'], true) ?: []) : [];
 
         return [
@@ -59,9 +47,9 @@ final class TaskService
             'status' => $row['status'],
             'priority' => $row['priority'],
             'assigneeId' => $row['assignee_id'],
-            'assigneeEmail' => $assigneeEmail,
-            'assigneeName' => $assigneeName,
-            'assigneeUsername' => $assigneeUsername,
+            'assigneeEmail' => $row['assignee_email'],
+            'assigneeName' => $row['assignee_name'],
+            'assigneeUsername' => $row['assignee_username'],
             'createdBy' => $row['created_by'],
             'tags' => $tags,
             'links' => $links,
@@ -102,6 +90,7 @@ final class TaskService
             'id' => $row['id'],
             'taskId' => $row['task_id'],
             'actorUserId' => $row['actor_user_id'],
+            'actorUsername' => $row['actor_username'],
             'actorChannel' => $row['actor_channel'],
             'agentName' => $row['agent_name'],
             'action' => $row['action'],
@@ -324,7 +313,7 @@ final class TaskService
                 'created_at' => $now,
             ]);
 
-            $stmt = $pdo->prepare('SELECT * FROM task_history WHERE id = :id');
+            $stmt = $pdo->prepare('SELECT * FROM v_task_history_detail WHERE id = :id');
             $stmt->execute(['id' => $id]);
 
             return self::toHistoryDTO($stmt->fetch());

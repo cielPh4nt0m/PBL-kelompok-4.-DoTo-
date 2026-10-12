@@ -7,6 +7,7 @@ Konvensi umum:
 - Semua ID berupa UUID v4 yang disimpan sebagai `CHAR(36)`.
 - Semua timestamp berupa milidetik sejak epoch yang disimpan sebagai `BIGINT`.
 - DBMS: MySQL/MariaDB, engine InnoDB, charset `utf8mb4`.
+- Versi PostgreSQL (tidak dipakai aplikasi, untuk tugas basis data) ada di [`backend/database/schema-postgres.sql`](../backend/database/schema-postgres.sql), lengkap dengan view, function/procedure, dan data dummy.
 
 ## CDM (Conceptual Data Model)
 
@@ -84,6 +85,8 @@ erDiagram
         datetime created_at
     }
 ```
+
+Versi gambar: [PNG](img/cdm.png) · [SVG](img/cdm.svg)
 
 | Entitas | Keterangan |
 |---|---|
@@ -197,6 +200,8 @@ erDiagram
     }
 ```
 
+Versi gambar: [PNG](img/pdm.png) · [SVG](img/pdm.svg)
+
 Kolom tanpa keterangan `NULL` bersifat `NOT NULL`.
 
 ### Constraint dan index
@@ -241,3 +246,31 @@ Beberapa kolom `VARCHAR` hanya menerima nilai tertentu. Validasinya dilakukan di
 | `tasks.priority` | `low`, `medium`, `high`, `urgent` | `medium` |
 | `task_history.actor_channel` | `web`, `cli`, `agent` | |
 | `task_history.action` | `created`, `status_changed`, `priority_changed`, `assignee_changed`, `segment_changed`, `field_updated`, `comment`, `archived` | |
+
+## View
+
+View didefinisikan di bagian akhir `schema.sql` dengan `CREATE OR REPLACE VIEW`, jadi ikut dibuat ulang setiap kali `migrate.php` dijalankan.
+
+| View | Sumber | Kolom tambahan | Dipakai aplikasi |
+|---|---|---|---|
+| `v_task_detail` | `tasks` ⨝ `projects`, `segments`, `users` (pembuat), ⟕ `users` (assignee) | `project_key`, `project_name`, `segment_name`, `assignee_email`, `assignee_name`, `assignee_username`, `creator_username` | Ya: semua query baca di `TaskRepository` (detail, board, search) |
+| `v_task_history_detail` | `task_history` ⨝ `tasks`, `users` (pelaku) | `task_display_id`, `actor_username`, `actor_name` | Ya: `TaskHistoryRepository::findByTaskId` dan komentar baru |
+| `v_project_summary` | `projects` ⟕ `tasks`, dikelompokkan per proyek | `segment_count`, `total_tasks`, `idea_count`, `todo_count`, `in_progress_count`, `needs_review_count`, `done_count`, `archived_count` | Tidak, untuk laporan/rekap |
+| `v_user_workload` | `users` ⟕ `tasks` aktif (belum `done`, belum diarsipkan) | `active_tasks`, jumlah per status, `high_priority_count` (`high` + `urgent`) | Tidak, untuk laporan/rekap |
+
+Catatan:
+
+- `v_task_detail` dan `v_task_history_detail` sengaja tidak memakai agregat atau subquery, supaya MySQL/MariaDB bisa melebur (MERGE) view ke query pemanggil dan index tabel asli tetap dipakai. Karena itu tag tidak ikut di view; tag tetap diambil dari `task_tags`.
+- Penulisan data (`INSERT`/`UPDATE`) tetap langsung ke tabel, bukan lewat view.
+- Kolom hitungan di `v_project_summary` dan `v_user_workload` hanya menghitung tugas yang belum diarsipkan, kecuali `total_tasks` dan `archived_count`.
+
+Contoh pemakaian:
+
+```sql
+SELECT display_id, title, status, segment_name, assignee_username
+FROM v_task_detail
+WHERE project_key = 'WEB' AND archived_at IS NULL;
+
+SELECT * FROM v_project_summary;
+SELECT * FROM v_user_workload ORDER BY active_tasks DESC;
+```

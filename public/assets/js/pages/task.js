@@ -20,6 +20,7 @@ function historyItem(entry) {
   return h('li', {},
     h('div', { class: 'meta' },
       h('span', {}, formatDate(entry.createdAt)),
+      entry.actorUsername ? h('span', {}, `@${entry.actorUsername}`) : null,
       h('span', { class: `chip${entry.actorChannel === 'agent' ? ' solid' : ''}` }, channelLabel(entry)),
       h('strong', { style: 'color:var(--ink)' }, entry.action.replace('_', ' '))),
     detail);
