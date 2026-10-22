@@ -48,37 +48,5 @@
   </form>
 </main>
 
-<script>
-const $ = id => document.getElementById(id), u = $('u'), p = $('p'), st = $('st');
-function saveAcc(name, email) {
-  let l = []; try { l = JSON.parse(localStorage.getItem('doto_accounts')) || []; } catch (x) {}
-  const i = l.findIndex(a => a.username === name);
-  if (i < 0) l.push({ username: name, email: email || '' }); else if (email) l[i].email = email;
-  localStorage.setItem('doto_accounts', JSON.stringify(l)); localStorage.setItem('doto_current', JSON.stringify(name));
-}
-function bad(el, msg, out) { el.setAttribute('aria-invalid', !!msg); $(out).textContent = msg || ''; }
-
-const eye = $('eye');
-eye.setAttribute('aria-label', 'Hold to show password');
-eye.style.userSelect = 'none'; eye.style.webkitUserSelect = 'none'; eye.style.touchAction = 'none';
-const reveal = on => { p.type = on ? 'text' : 'password'; eye.setAttribute('aria-pressed', on); };
-eye.addEventListener('pointerdown', ev => { ev.preventDefault(); reveal(true); });
-['pointerup', 'pointerleave', 'pointercancel', 'blur'].forEach(t => eye.addEventListener(t, () => reveal(false)));
-eye.addEventListener('keydown', ev => { if (ev.key === ' ' || ev.key === 'Enter') { ev.preventDefault(); reveal(true); } });
-eye.addEventListener('keyup', ev => { if (ev.key === ' ' || ev.key === 'Enter') reveal(false); });
-eye.addEventListener('contextmenu', ev => ev.preventDefault());
-
-$('f').onsubmit = e => {
-  e.preventDefault(); st.textContent = '';
-  const a = u.value.trim() ? '' : 'Enter your username.';
-  const b = p.value.length < 6 ? 'Password must be at least 6 characters.' : '';
-  bad(u, a, 'eu'); bad(p, b, 'ep');
-  if (a || b) { (a ? u : p).focus(); return; }
-  const go = $('go'); go.disabled = true; go.textContent = 'Signing in…';
-  setTimeout(() => { go.disabled = false; go.textContent = 'Get Started'; saveAcc(u.value.trim()); location.href = 'welcome.html'; }, 600);
-};
-$('fg').onclick = e => { e.preventDefault(); st.textContent = 'Reset password belum tersedia di demo ini.'; };
-$('gg').onclick = () => { st.textContent = 'Google sign-in belum terhubung di demo ini.'; };
-</script>
 </body>
 </html>
