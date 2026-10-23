@@ -1,2 +1,5 @@
 backend/.env
 mcp/node_modules/
+
+# graphify cache
+graphify-out/cache/
