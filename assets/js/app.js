@@ -154,7 +154,7 @@ $('gg').onclick = () => { st.textContent = 'Google sign-in belum terhubung di de
   const plus = n => { const d = new Date(T0); d.setDate(d.getDate() + n); return fmt(d); };
   const diff = t => Math.round((parse(t.due) - T0) / 864e5);
   const auto = t => diff(t) < 0 ? 'overdue' : diff(t) <= URGENT_DAYS ? 'urgent' : 'ongoing';
-  // t.st = status yang dipilih manual lewat menu; tanpa itu status mengikuti tenggat
+  //status yang dipilih manual lewat menu; tanpa itu status mengikuti tenggat
   const status = t => t.st || (t.done ? 'done' : auto(t));
 
   let tasks = rd(TK, null);
@@ -230,7 +230,7 @@ const SIDEBAR = `<aside class="side">
     </section>
 
     <div class="foot">
-      <button class="item" id="setting" title="Setting"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span class="lbl">Setting</span></button>
+      <button class="item" id="settings" title="Settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span class="lbl">Settings</span></button>
       <button class="item" id="collapse" aria-label="Collapse sidebar" title="Collapse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg><span class="lbl" id="collapseLbl">Collapse</span></button>
     </div>
 
@@ -327,7 +327,7 @@ document.querySelectorAll('[data-nav]').forEach(b => b.onclick = () => {
 });
 $('p4').onclick = () => { const o = $('p4').getAttribute('aria-expanded') === 'true'; $('p4').setAttribute('aria-expanded', !o); $('p4sub').hidden = o; };
 document.querySelectorAll('[data-dummy]').forEach(b => b.onclick = () => toast('Project contoh. Hanya Kelompok 4 PBL yang aktif.'));
-$('setting').onclick = () => toast('Setting belum tersedia.');
+$('settings').onclick = () => toast('Settings belum tersedia.');
 
 
 // Modal tambah tugas
@@ -350,6 +350,7 @@ const logo = document.querySelector('.logo');
 logo.setAttribute('role', 'link'); logo.tabIndex = 0; logo.title = 'Ke halaman Welcome';
 logo.onclick = () => { location.href = ROUTES.dashboard; };
 logo.onkeydown = e => { if (e.key === 'Enter') logo.onclick(); };
+
 // Halaman to-do: buka submenu project dan tandai "To-do list"
 if (/todo\.html$/.test(location.pathname)) {
   $('p4').setAttribute('aria-expanded', 'true'); $('p4sub').hidden = false;
