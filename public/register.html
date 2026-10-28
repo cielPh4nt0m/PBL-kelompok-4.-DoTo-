@@ -98,8 +98,8 @@ $('f').onsubmit = ev => {
     })
     .catch(err => { go.disabled = false; go.textContent = 'Get Started'; st.textContent = err.message; });
 };
-$('fg').onclick = ev => { ev.preventDefault(); st.textContent = 'Reset password belum tersedia di demo ini.'; };
-$('gg').onclick = () => { st.textContent = 'Google sign-in belum terhubung di demo ini.'; };
+$('fg').onclick = ev => { ev.preventDefault(); st.textContent = 'Fitur reset password belum diaktifkan.'; };
+$('gg').onclick = () => { st.textContent = 'Google Sign-In belum dikonfigurasi.'; };
 </script>
 </body>
 </html>

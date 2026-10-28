@@ -60,41 +60,6 @@ async function loadSegmentsForActiveProject() {
   }
 }
 
-function seedMessages(projKey = 'K4', segName = 'To Do') {
-  return [
-    {
-      id: newId(),
-      role: 'user',
-      content: 'buatkan task follow-up client X prioritas tinggi',
-    },
-    {
-      id: newId(),
-      role: 'assistant',
-      content: `Oke, ini task yang siap saya buat di proyek ${projKey} (klik Accept untuk mengeksekusi ke database):`,
-      proposedAction: {
-        id: newId(),
-        type: 'create_task',
-        summary: `Create a new task in ${projKey}`,
-        payload: {
-          projectKey: projKey,
-          segmentName: segName,
-          title: 'Follow-up client X',
-          description: 'Dibuat melalui Asisten AI Doto',
-          priority: 'high',
-          status: 'todo',
-        },
-        fields: [
-          { label: 'Project', value: projKey },
-          { label: 'Title', value: 'Follow-up client X' },
-          { label: 'Priority', value: 'high' },
-          { label: 'Segment', value: segName },
-          { label: 'Status', value: 'todo' },
-        ],
-      },
-    },
-  ];
-}
-
 function detectPriority(text) {
   const lower = text.toLowerCase();
   if (/\b(urgent|mendesak|darurat|kritis)\b/.test(lower)) return 'urgent';
@@ -532,7 +497,7 @@ function render() {
 initLayout('ai')
   .then(async () => {
     await ensureActiveProject();
-    messages = seedMessages(activeProjectKey, activeSegments[0] || 'To Do');
+    messages = [];
     render();
   })
   .catch((e) => showPageError(content, e));

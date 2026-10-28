@@ -85,8 +85,8 @@ $('f').onsubmit = e => {
 
 // Sudah login? Langsung ke halaman proyek.
 fetch('api/me').then(res => { if (res.ok) location.replace('projects.html'); });
-$('fg').onclick = e => { e.preventDefault(); st.textContent = 'Reset password belum tersedia di demo ini.'; };
-$('gg').onclick = () => { st.textContent = 'Google sign-in belum terhubung di demo ini.'; };
+$('fg').onclick = e => { e.preventDefault(); st.textContent = 'Fitur reset password belum diaktifkan.'; };
+$('gg').onclick = () => { st.textContent = 'Google Sign-In belum dikonfigurasi.'; };
 </script>
 </body>
 </html>
