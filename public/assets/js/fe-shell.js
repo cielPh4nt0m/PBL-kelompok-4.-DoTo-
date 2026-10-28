@@ -164,7 +164,10 @@ const SEED_TASKS = [
 ];
 
 let currentUser = null;
-let activeProject = { key: 'K4', name: 'Kelompok 4 PBL' };
+const urlParams = new URLSearchParams(location.search);
+let requestedKey = (urlParams.get('key') || '').trim().toUpperCase();
+let allProjects = [];
+let activeProject = { key: requestedKey || 'K4', name: 'Kelompok 4 PBL' };
 let defaultSegmentName = 'To Do';
 let tasks = [];
 let lastEditedMs = Date.now();
@@ -176,12 +179,15 @@ async function ensureProjectAndTasks() {
   if (!k4) {
     try {
       k4 = await api.post('/projects', { key: 'K4', name: 'Kelompok 4 PBL' });
+      projects = await api.get('/projects');
     } catch {
       k4 = projects[0] || null;
     }
   }
-  if (!k4) return;
-  activeProject = k4;
+  allProjects = projects;
+  const target = (requestedKey && projects.find((p) => p.key.toUpperCase() === requestedKey)) || k4 || projects[0];
+  if (!target) return;
+  activeProject = target;
 
   let board = await api.get(`/projects/${encodeURIComponent(activeProject.key)}/board?includeArchived=true`);
   if (!board.segments || board.segments.length === 0) {
@@ -340,20 +346,20 @@ function buildSidebar() {
       <button class="item" data-nav="ai" title="Agen AI"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 2h2v3h-2z"/><circle cx="12" cy="2.5" r="1.5"/><path d="M5 6h14a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3z"/><circle cx="8.5" cy="12" r="2" fill="#fff"/><circle cx="15.5" cy="12" r="2" fill="#fff"/><rect x="8" y="16" width="8" height="2" rx="1" fill="#fff"/></svg><span class="lbl">Agen AI</span></button>
     </nav>
 
-    <section class="projects hide-c" aria-label="Projects">
+    <section class="projects hide-c" aria-label="Projects" id="sidebarProjects">
       <h2>Projects</h2>
-      <div class="prow">
-        <button class="proj" id="p4" aria-expanded="false" aria-controls="p4sub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Kelompok 4 PBL</button>
-        <button class="add" id="addBtn" aria-label="Tambah tugas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span>Tambah tugas</span></button>
+      <div id="projectListNav">
+        <div class="prow">
+          <button class="proj" id="p4" aria-expanded="false" aria-controls="p4sub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span id="activeProjName">Kelompok 4 PBL</span></button>
+          <button class="add" id="addBtn" aria-label="Tambah tugas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span>Tambah tugas</span></button>
+        </div>
+        <ul class="psub sublist" id="p4sub" hidden>
+          <li><button class="subi" data-sub="todo">To-do list</button></li>
+          <li><button class="subi" data-sub="board">Kanban Board</button></li>
+          <li><button class="subi" data-sub="ai">Asisten AI</button></li>
+        </ul>
       </div>
-      <ul class="psub sublist" id="p4sub" hidden>
-        <li><button class="subi" data-sub="todo">To-do list</button></li>
-        <li><button class="subi" data-sub="board">Kanban Board</button></li>
-        <li><button class="subi" data-sub="ai">Asisten AI</button></li>
-      </ul>
-      <div class="prow"><button class="proj dummy" data-dummy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Agenda Lomba UI/UX</button></div>
-      <div class="prow"><button class="proj dummy" data-dummy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Polinema Mengajar</button></div>
-      <div class="prow"><button class="proj dummy" data-dummy><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Draft Proyek</button></div>
+      <div id="otherProjectsNav"></div>
     </section>
 
     <div class="foot">
@@ -580,7 +586,7 @@ async function init() {
     b.onclick = () => {
       const sub = b.dataset.sub;
       if (sub === 'todo') {
-        if (!/todo\.html$/i.test(location.pathname)) location.href = 'todo.html';
+        location.href = `todo.html?key=${encodeURIComponent(activeProject.key)}`;
       } else if (sub === 'board') {
         location.href = `board.html?key=${encodeURIComponent(activeProject.key)}`;
       } else if (sub === 'ai') {
@@ -593,6 +599,25 @@ async function init() {
   renderAccount();
 
   await ensureProjectAndTasks();
+
+  if ($('activeProjName')) $('activeProjName').textContent = activeProject.name;
+  const otherNav = $('otherProjectsNav');
+  if (otherNav) {
+    const others = allProjects.filter((p) => p.key !== activeProject.key);
+    otherNav.innerHTML = others
+      .map(
+        (p) =>
+          `<div class="prow"><button class="proj" data-proj-key="${esc(p.key)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>${esc(p.name)}</button></div>`
+      )
+      .join('');
+    otherNav.querySelectorAll('[data-proj-key]').forEach((b) => {
+      b.onclick = () => {
+        const k = b.dataset.projKey;
+        const page = /todo\.html$/i.test(location.pathname) ? 'todo.html' : 'welcome.html';
+        location.href = `${page}?key=${encodeURIComponent(k)}`;
+      };
+    });
+  }
 
   initWelcomePage();
   initTodoPage();
@@ -617,14 +642,14 @@ function initWelcomePage() {
     const pct = total ? Math.round((c.done / total) * 100) : 0;
     dash.innerHTML = `
       <section class="stats" style="margin-top:24px">
-        <a class="stat overdue" href="todo.html" style="text-decoration:none"><b>${c.overdue}</b><span>Overdue</span></a>
-        <a class="stat urgent" href="todo.html" style="text-decoration:none"><b>${c.urgent}</b><span>Urgent</span></a>
-        <a class="stat ongoing" href="todo.html" style="text-decoration:none"><b>${c.ongoing}</b><span>Ongoing</span></a>
-        <a class="stat done" href="todo.html" style="text-decoration:none"><b>${c.done}</b><span>Done</span></a>
+        <a class="stat overdue" href="todo.html?key=${encodeURIComponent(activeProject.key)}" style="text-decoration:none"><b>${c.overdue}</b><span>Overdue</span></a>
+        <a class="stat urgent" href="todo.html?key=${encodeURIComponent(activeProject.key)}" style="text-decoration:none"><b>${c.urgent}</b><span>Urgent</span></a>
+        <a class="stat ongoing" href="todo.html?key=${encodeURIComponent(activeProject.key)}" style="text-decoration:none"><b>${c.ongoing}</b><span>Ongoing</span></a>
+        <a class="stat done" href="todo.html?key=${encodeURIComponent(activeProject.key)}" style="text-decoration:none"><b>${c.done}</b><span>Done</span></a>
       </section>
-      <div class="prog"><div class="track"><div class="fill" style="width:${pct}%"></div></div><span>${pct}% selesai dari ${total} tugas</span></div>
+      <div class="prog"><div class="track"><div class="fill" style="width:${pct}%"></div></div><span>${pct}% selesai dari ${total} tugas (${esc(activeProject.name)})</span></div>
       <div class="project-grid" style="margin-top:18px">
-        <a class="project-card g2 lift" href="todo.html">
+        <a class="project-card g2 lift" href="todo.html?key=${encodeURIComponent(activeProject.key)}">
           <span class="key">${esc(activeProject.key)}</span>
           <h3>${esc(activeProject.name)} — To-do List</h3>
           <p>Lihat tabel tugas, tenggat waktu, filter status, dan progres tim →</p>
@@ -641,7 +666,7 @@ function initWelcomePage() {
         </a>
         <a class="project-card g2 lift" href="projects.html">
           <span class="key">ALL</span>
-          <h3>Semua Proyek &amp; Workspace</h3>
+          <h3>Semua Proyek (${allProjects.length})</h3>
           <p>Kelola seluruh proyek tim dan pengaturan token API →</p>
         </a>
       </div>
