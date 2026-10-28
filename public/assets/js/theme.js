@@ -53,9 +53,9 @@
     },
   };
 
-  // Halaman tanpa topbar (login/register): tombol mengambang di pojok kanan atas.
+  // Halaman tanpa topbar maupun sidebar (login/register): tombol mengambang di pojok kanan atas.
   document.addEventListener('DOMContentLoaded', function () {
-    if (!document.body.classList.contains('app')) {
+    if (!document.body.classList.contains('app') && !document.body.classList.contains('app-page')) {
       document.body.append(window.DotoTheme.button('theme-fab'));
     }
   });

@@ -11,4 +11,24 @@ if (str_starts_with($path, '/api/')) {
     return true;
 }
 
+// Alias case-insensitive untuk halaman HTML lama (mis. /Login.html, /Todo.html, /Welcome.html)
+$aliases = [
+    '/login.html' => __DIR__ . '/login.html',
+    '/todo.html' => __DIR__ . '/todo.html',
+    '/welcome.html' => __DIR__ . '/welcome.html',
+    '/register.html' => __DIR__ . '/register.html',
+    '/projects.html' => __DIR__ . '/projects.html',
+    '/board.html' => __DIR__ . '/board.html',
+    '/task.html' => __DIR__ . '/task.html',
+    '/ai.html' => __DIR__ . '/ai.html',
+    '/tokens.html' => __DIR__ . '/tokens.html',
+];
+
+$lower = strtolower($path);
+if (isset($aliases[$lower]) && $path !== $lower && is_file($aliases[$lower])) {
+    header('Content-Type: text/html; charset=utf-8');
+    readfile($aliases[$lower]);
+    return true;
+}
+
 return false;

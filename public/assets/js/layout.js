@@ -5,6 +5,8 @@ import { h } from './dom.js';
 const LOGO = `<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4fe3f0"/><stop offset=".55" stop-color="#3a8be6"/><stop offset="1" stop-color="#6a3fa8"/></linearGradient></defs><rect x="2" y="2" width="36" height="36" rx="11" fill="url(#lg)"/><path d="M14 10h7a10 10 0 0 1 0 20h-7z" fill="#0f1e3d" opacity=".85"/><path d="M18 15l7 5-7 5z" fill="#fff"/></svg>`;
 
 const LINKS = [
+  ['welcome', 'welcome.html', 'Welcome'],
+  ['todo', 'todo.html', 'To-do List'],
   ['projects', 'projects.html', 'Projects'],
   ['ai', 'ai.html', 'AI'],
   ['tokens', 'tokens.html', 'Tokens'],
@@ -23,7 +25,7 @@ export async function initLayout(active) {
     throw err;
   }
 
-  const brand = h('a', { class: 'brand', href: 'projects.html' });
+  const brand = h('a', { class: 'brand', href: 'welcome.html' });
   brand.innerHTML = `${LOGO}<div><h1>Doto</h1><p>Doto : Manajemen Tugas Tim &amp; Agen AI</p></div>`;
 
   const logout = h('button', {

@@ -9,11 +9,11 @@ export class ApiError extends Error {
   }
 }
 
-async function request(method, path, body) {
+async function request(method, path, body, extraHeaders = {}) {
   const res = await fetch(`api${path}`, {
     method,
     credentials: 'same-origin',
-    headers: { 'Content-Type': 'application/json', 'X-Client-Channel': 'web' },
+    headers: { 'Content-Type': 'application/json', 'X-Client-Channel': 'web', ...extraHeaders },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
 
@@ -36,9 +36,18 @@ export function errorText(err) {
   return err?.message ?? 'Something went wrong.';
 }
 
+export function apiWithHeaders(extraHeaders) {
+  return {
+    get: (path) => request('GET', path, undefined, extraHeaders),
+    post: (path, body) => request('POST', path, body ?? {}, extraHeaders),
+    patch: (path, body) => request('PATCH', path, body, extraHeaders),
+    del: (path) => request('DELETE', path, undefined, extraHeaders),
+  };
+}
+
 export const api = {
-  get: (path) => request('GET', path),
-  post: (path, body) => request('POST', path, body ?? {}),
-  patch: (path, body) => request('PATCH', path, body),
-  del: (path) => request('DELETE', path),
+  get: (path, extraHeaders) => request('GET', path, undefined, extraHeaders),
+  post: (path, body, extraHeaders) => request('POST', path, body ?? {}, extraHeaders),
+  patch: (path, body, extraHeaders) => request('PATCH', path, body, extraHeaders),
+  del: (path, extraHeaders) => request('DELETE', path, undefined, extraHeaders),
 };
