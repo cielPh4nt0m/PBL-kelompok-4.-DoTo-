@@ -44,20 +44,4 @@ final class ProjectRepository
             'created_at' => $row['created_at'],
         ]);
     }
-
-    /**
-     * Atomically increments next_seq and returns the sequence number that
-     * should be assigned to the task being created (the pre-increment value).
-     */
-    public static function incrementNextSeqAndGet(\PDO $pdo, string $projectId): int
-    {
-        $pdo->prepare('UPDATE projects SET next_seq = next_seq + 1 WHERE id = :id')
-            ->execute(['id' => $projectId]);
-
-        $stmt = $pdo->prepare('SELECT next_seq FROM projects WHERE id = :id');
-        $stmt->execute(['id' => $projectId]);
-        $newNextSeq = (int) $stmt->fetchColumn();
-
-        return $newNextSeq - 1;
-    }
 }

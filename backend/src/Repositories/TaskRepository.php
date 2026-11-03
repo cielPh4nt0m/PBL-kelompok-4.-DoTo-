@@ -36,8 +36,9 @@ final class TaskRepository
             'id' => $row['id'],
             'project_id' => $row['project_id'],
             'segment_id' => $row['segment_id'],
-            'seq' => $row['seq'],
-            'display_id' => $row['display_id'],
+            // Trigger BEFORE INSERT menetapkan kedua nilai ini secara atomik.
+            'seq' => 0,
+            'display_id' => '',
             'title' => $row['title'],
             'description' => $row['description'] ?? null,
             'status' => $row['status'],

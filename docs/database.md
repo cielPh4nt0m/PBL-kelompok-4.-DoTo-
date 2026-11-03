@@ -1,10 +1,11 @@
 # Desain Database DoTo
 
-Dokumen ini berisi desain data DoTo dalam dua tingkat: **CDM** (Conceptual Data Model) dan **PDM** (Physical Data Model). Sumber kebenarannya tetap [`backend/database/schema.sql`](../backend/database/schema.sql); kalau skema berubah, perbarui juga dokumen ini.
+Dokumen ini berisi desain data DoTo dalam dua tingkat: **CDM** (Conceptual Data Model) dan **PDM** (Physical Data Model). Sumber kebenarannya adalah [`backend/database/schema.sql`](../backend/database/schema.sql) dan SQL di [`backend/database/triggers/`](../backend/database/triggers/); kalau skema berubah, perbarui juga dokumen ini.
 
 Konvensi umum:
 
-- Semua ID berupa UUID v4 yang disimpan sebagai `CHAR(36)`.
+- ID dari aplikasi berupa UUID v4 yang disimpan sebagai `CHAR(36)`; audit status yang
+  dibuat langsung oleh trigger memakai `UUID()` dari MySQL/MariaDB.
 - Semua timestamp berupa milidetik sejak epoch yang disimpan sebagai `BIGINT`.
 - DBMS: MySQL/MariaDB, engine InnoDB, charset `utf8mb4`.
 - Versi PostgreSQL (tidak dipakai aplikasi, untuk tugas basis data) ada di [`backend/database/schema-postgres.sql`](../backend/database/schema-postgres.sql), lengkap dengan view, function/procedure, dan data dummy.
@@ -17,6 +18,8 @@ CDM menggambarkan entitas, atribut, dan hubungan antarentitas tanpa detail imple
 erDiagram
     USER ||--o{ API_TOKEN : "memiliki"
     USER ||--o{ PROJECT : "membuat"
+    PROJECT ||--o{ PROJECT_MEMBER : "memiliki anggota"
+    USER ||--o{ PROJECT_MEMBER : "bergabung"
     PROJECT ||--o{ SEGMENT : "terdiri dari"
     PROJECT ||--o{ TASK : "berisi"
     SEGMENT ||--o{ TASK : "mengelompokkan"
@@ -25,6 +28,8 @@ erDiagram
     TASK ||--o{ TASK_TAG : "diberi label"
     TASK ||--o{ TASK_HISTORY : "tercatat di"
     USER ||--o{ TASK_HISTORY : "melakukan"
+    TASK ||--o| TASK_ARCHIVE_QUEUE : "dijadwalkan"
+    TASK ||--o{ TASK_ASSIGNMENT_HISTORY : "riwayat penugasan"
 
     USER {
         identifier id PK
@@ -84,9 +89,23 @@ erDiagram
         text comment
         datetime created_at
     }
+    PROJECT_MEMBER {
+        identifier project_id PK
+        identifier user_id PK
+        datetime joined_at
+    }
+    TASK_ARCHIVE_QUEUE {
+        identifier task_id PK
+        datetime scheduled_for
+        string state
+    }
+    TASK_ASSIGNMENT_HISTORY {
+        integer id PK
+        identifier task_id FK
+        identifier old_assignee_id
+        identifier new_assignee_id
+    }
 ```
-
-Versi gambar: [PNG](img/cdm.png) · [SVG](img/cdm.svg)
 
 | Entitas | Keterangan |
 |---|---|
@@ -97,6 +116,9 @@ Versi gambar: [PNG](img/cdm.png) · [SVG](img/cdm.svg)
 | TASK | Tugas dengan ID tampilan `KEY-n` (mis. `WEB-1`), status, prioritas, assignee opsional. |
 | TASK_TAG | Label/tag pada tugas. Entitas lemah: hanya ada sebagai bagian dari TASK. |
 | TASK_HISTORY | Riwayat perubahan dan komentar pada tugas, termasuk dari mana perubahan datang (web, CLI, atau agent AI). |
+| PROJECT_MEMBER | Keanggotaan untuk memvalidasi penanggung jawab tugas per proyek. |
+| TASK_ARCHIVE_QUEUE | Jadwal arsip; terpisah dari waktu arsip yang benar-benar sudah terjadi. |
+| TASK_ASSIGNMENT_HISTORY | Audit penugasan pada tingkat database, termasuk SQL langsung. |
 
 Kardinalitas:
 
@@ -112,6 +134,10 @@ Kardinalitas:
 | TASK diberi label TASK_TAG | 1 : 0..N | Label unik per tugas. |
 | TASK tercatat di TASK_HISTORY | 1 : 0..N | |
 | USER melakukan TASK_HISTORY | 1 : 0..N | User pemilik sesi/token yang melakukan aksi. |
+| PROJECT memiliki PROJECT_MEMBER | 1 : 0..N | Pembuat proyek otomatis menjadi anggota. |
+| USER bergabung lewat PROJECT_MEMBER | 1 : 0..N | Seorang user dapat menjadi anggota banyak proyek. |
+| TASK mempunyai TASK_ARCHIVE_QUEUE | 1 : 0..1 | Jadwal dapat dibatalkan atau ditandai sudah diarsipkan. |
+| TASK mempunyai TASK_ASSIGNMENT_HISTORY | 1 : 0..N | Mencatat pergantian assignee. |
 
 ## PDM (Physical Data Model)
 
@@ -121,6 +147,8 @@ PDM menggambarkan tabel fisik sesuai `schema.sql`, lengkap dengan tipe data, pri
 erDiagram
     users ||--o{ api_tokens : "user_id"
     users ||--o{ projects : "created_by"
+    projects ||--o{ project_members : "project_id"
+    users ||--o{ project_members : "user_id"
     projects ||--o{ segments : "project_id"
     projects ||--o{ tasks : "project_id"
     segments ||--o{ tasks : "segment_id"
@@ -129,6 +157,8 @@ erDiagram
     tasks ||--o{ task_tags : "task_id"
     tasks ||--o{ task_history : "task_id"
     users ||--o{ task_history : "actor_user_id"
+    tasks ||--o| task_archive_queue : "task_id"
+    tasks ||--o{ task_assignment_history : "task_id"
 
     users {
         CHAR(36) id PK
@@ -188,7 +218,7 @@ erDiagram
     task_history {
         CHAR(36) id PK
         CHAR(36) task_id FK
-        CHAR(36) actor_user_id FK
+        CHAR(36) actor_user_id FK "NULL"
         VARCHAR(10) actor_channel
         VARCHAR(100) agent_name "NULL"
         VARCHAR(30) action
@@ -198,9 +228,25 @@ erDiagram
         TEXT comment "NULL"
         BIGINT created_at
     }
+    project_members {
+        CHAR(36) project_id PK, FK
+        CHAR(36) user_id PK, FK
+        BIGINT joined_at
+    }
+    task_archive_queue {
+        CHAR(36) task_id PK, FK
+        BIGINT scheduled_for "NULL"
+        VARCHAR(20) state
+        BIGINT updated_at
+    }
+    task_assignment_history {
+        BIGINT id PK
+        CHAR(36) task_id FK
+        CHAR(36) old_assignee_id "NULL"
+        CHAR(36) new_assignee_id "NULL"
+        BIGINT created_at
+    }
 ```
-
-Versi gambar: [PNG](img/pdm.png) · [SVG](img/pdm.svg)
 
 Kolom tanpa keterangan `NULL` bersifat `NOT NULL`.
 
@@ -215,26 +261,39 @@ Kolom tanpa keterangan `NULL` bersifat `NOT NULL`.
 | api_tokens | `api_tokens_user_fk` | FK | `user_id` | `users(id)` |
 | projects | `projects_key_unique` | UNIQUE | `key` | |
 | projects | `projects_created_by_fk` | FK | `created_by` | `users(id)` |
+| project_members | `PRIMARY` | PK | `project_id, user_id` | |
+| project_members | `project_members_project_fk` | FK | `project_id` | `projects(id)` |
+| project_members | `project_members_user_fk` | FK | `user_id` | `users(id)` |
 | segments | `segments_project_id_name_unique` | UNIQUE | `project_id, name` | |
 | segments | `segments_project_fk` | FK | `project_id` | `projects(id)` |
 | tasks | `tasks_display_id_unique` | UNIQUE | `display_id` | |
 | tasks | `tasks_project_id_seq_unique` | UNIQUE | `project_id, seq` | |
 | tasks | `tasks_board_idx` | INDEX | `project_id, segment_id, status` | |
+| tasks | `tasks_assignee_member_idx` | INDEX | `project_id, assignee_id` | |
 | tasks | `tasks_project_fk` | FK | `project_id` | `projects(id)` |
 | tasks | `tasks_segment_fk` | FK | `segment_id` | `segments(id)` |
 | tasks | `tasks_assignee_fk` | FK | `assignee_id` | `users(id)` |
+| tasks | `tasks_assignee_member_fk` | FK | `project_id, assignee_id` | `project_members(project_id, user_id)` |
 | tasks | `tasks_created_by_fk` | FK | `created_by` | `users(id)` |
 | task_tags | `task_tags_task_id_label_unique` | UNIQUE | `task_id, label` | |
 | task_tags | `task_tags_task_fk` | FK | `task_id` | `tasks(id)` |
 | task_history | `task_history_task_idx` | INDEX | `task_id, created_at` | |
 | task_history | `task_history_task_fk` | FK | `task_id` | `tasks(id)` |
 | task_history | `task_history_actor_fk` | FK | `actor_user_id` | `users(id)` |
+| task_archive_queue | `task_archive_queue_due_idx` | INDEX | `state, scheduled_for` | |
+| task_archive_queue | `task_archive_queue_task_fk` | FK | `task_id` | `tasks(id)` |
+| task_assignment_history | `task_assignment_history_task_idx` | INDEX | `task_id, created_at` | |
+| task_assignment_history | `task_assignment_history_task_fk` | FK | `task_id` | `tasks(id)` |
 
 Catatan:
 
 - `task_tags` tidak punya primary key; keunikan baris dijamin oleh unique key `(task_id, label)`.
 - Semua foreign key memakai aksi default (`RESTRICT`), jadi baris induk tidak bisa dihapus selama masih direferensikan.
 - `tasks.project_id` sebenarnya bisa diturunkan dari `segments.project_id`, tetapi disimpan langsung di `tasks` (denormalisasi) dan dipakai oleh unique key `(project_id, seq)` serta index board.
+- `task_archive_queue` menyimpan jadwal turunan agar pekerjaan arsip bisa diamati;
+  `tasks.archived_at` tetap berarti waktu arsip sebenarnya.
+- Keanggotaan membatasi siapa yang boleh menjadi assignee, bukan hak melihat atau
+  mengubah proyek. Akses proyek secara umum masih mengikuti aturan aplikasi.
 
 ### Nilai enum
 
@@ -244,8 +303,9 @@ Beberapa kolom `VARCHAR` hanya menerima nilai tertentu. Validasinya dilakukan di
 |---|---|---|
 | `tasks.status` | `idea`, `todo`, `in_progress`, `needs_review`, `done` | `idea` |
 | `tasks.priority` | `low`, `medium`, `high`, `urgent` | `medium` |
-| `task_history.actor_channel` | `web`, `cli`, `agent` | |
+| `task_history.actor_channel` | `web`, `cli`, `agent`, `sql` | `sql` untuk SQL langsung |
 | `task_history.action` | `created`, `status_changed`, `priority_changed`, `assignee_changed`, `segment_changed`, `field_updated`, `comment`, `archived` | |
+| `task_archive_queue.state` | `scheduled`, `cancelled`, `archived` | |
 
 ## View
 
@@ -254,7 +314,7 @@ View didefinisikan di bagian akhir `schema.sql` dengan `CREATE OR REPLACE VIEW`,
 | View | Sumber | Kolom tambahan | Dipakai aplikasi |
 |---|---|---|---|
 | `v_task_detail` | `tasks` ⨝ `projects`, `segments`, `users` (pembuat), ⟕ `users` (assignee) | `project_key`, `project_name`, `segment_name`, `assignee_email`, `assignee_name`, `assignee_username`, `creator_username` | Ya: semua query baca di `TaskRepository` (detail, board, search) |
-| `v_task_history_detail` | `task_history` ⨝ `tasks`, `users` (pelaku) | `task_display_id`, `actor_username`, `actor_name` | Ya: `TaskHistoryRepository::findByTaskId` dan komentar baru |
+| `v_task_history_detail` | `task_history` ⨝ `tasks` ⟕ `users` (pelaku opsional) | `task_display_id`, `actor_username`, `actor_name` | Ya: `TaskHistoryRepository::findByTaskId` dan komentar baru |
 | `v_project_summary` | `projects` ⟕ `tasks`, dikelompokkan per proyek | `segment_count`, `total_tasks`, `idea_count`, `todo_count`, `in_progress_count`, `needs_review_count`, `done_count`, `archived_count` | Tidak, untuk laporan/rekap |
 | `v_user_workload` | `users` ⟕ `tasks` aktif (belum `done`, belum diarsipkan) | `active_tasks`, jumlah per status, `high_priority_count` (`high` + `urgent`) | Tidak, untuk laporan/rekap |
 
@@ -274,3 +334,38 @@ WHERE project_key = 'WEB' AND archived_at IS NULL;
 SELECT * FROM v_project_summary;
 SELECT * FROM v_user_workload ORDER BY active_tasks DESC;
 ```
+
+## Trigger MySQL/MariaDB
+
+`php -d extension=pdo_mysql backend/database/migrate.php` membuat tabel, melakukan
+backfill anggota sekali (dicatat di `schema_migrations`) dan antrean dari data lama, lalu memasang ulang tepat empat
+trigger dari `backend/database/triggers/`. Migrasi dapat dijalankan berulang.
+Jalankan saat tidak ada penulisan tugas bersamaan karena pemasangan ulang trigger
+memakai `DROP TRIGGER` diikuti `CREATE TRIGGER`.
+
+| Trigger pada `tasks` | Dampak lintas tabel |
+|---|---|
+| `trg_generate_task_display_id` (BEFORE INSERT) | Mengambil dan menaikkan `projects.next_seq`, mengisi `seq`/`display_id`, memeriksa `project_members` dan `segments`. |
+| `trg_log_task_status_change` (AFTER UPDATE) | Menulis satu baris `task_history` saat status berubah. Aktor API dikirim lewat variabel sesi SQL; SQL langsung dicatat sebagai `sql` tanpa mengarang identitas user. |
+| `trg_validate_task_assignment` (BEFORE UPDATE) | Menolak assignee nonanggota, mengunci identitas/nomor tiket, dan menulis `task_assignment_history` saat assignee berubah. |
+| `trg_handle_task_completion` (BEFORE UPDATE) | Membuat/membatalkan jadwal di `task_archive_queue` dan menandai antrean ketika tugas benar-benar diarsipkan. |
+
+Trigger jadwal **tidak mengarsipkan tugas berdasarkan waktu**. Pekerjaan arsip
+tetap dilakukan oleh `TaskService::archiveEligibleTasks()` saat board dibuka
+atau oleh `backend/bin/archive-cron.php`. Kolom `tasks.archived_at` tidak diisi
+ketika tugas baru selesai. Tugas baru harus dibuat dengan status aktif; ubah
+status menjadi `done` setelah dibuat agar trigger menjadwalkan arsip.
+
+Pembuat proyek otomatis menjadi anggota. Migrasi mendaftarkan pembuat proyek,
+pembuat tugas, dan assignee dari data lama. Setelah itu pembuat proyek dapat
+mengelola anggota melalui `GET/POST /api/projects/:key/members` dan
+`DELETE /api/projects/:key/members/:userId`. Penghapusan anggota yang masih
+memiliki tugas ditolak; SQL langsung yang mengubah tabel keanggotaan perlu
+dikelola dengan disiplin yang sama.
+
+Untuk uji integrasi, gunakan database sementara bernama `doto_trigger_scratch`,
+jalankan migrasi dengan variabel `DB_NAME`, `DB_HOST`, `DB_PORT`, `DB_USER`, dan
+`DB_PASS` yang sesuai, lalu jalankan
+`php -d extension=pdo_mysql backend/tests/trigger_integration.php` dengan
+variabel yang sama. Tes menolak nama database `doto` agar tidak menulis data
+aplikasi lokal.

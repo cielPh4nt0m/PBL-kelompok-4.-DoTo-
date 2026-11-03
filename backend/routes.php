@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Controllers\AuthController;
 use App\Controllers\MeController;
 use App\Controllers\ProjectController;
+use App\Controllers\ProjectMemberController;
 use App\Controllers\SegmentController;
 use App\Controllers\TaskController;
 use App\Controllers\TokenController;
@@ -24,6 +25,9 @@ return function (Router $router): void {
     $router->add('POST', '/api/projects', [ProjectController::class, 'create']);
     $router->add('GET', '/api/projects/:key', [ProjectController::class, 'get']);
     $router->add('GET', '/api/projects/:key/board', [ProjectController::class, 'board']);
+    $router->add('GET', '/api/projects/:key/members', [ProjectMemberController::class, 'list']);
+    $router->add('POST', '/api/projects/:key/members', [ProjectMemberController::class, 'add']);
+    $router->add('DELETE', '/api/projects/:key/members/:userId', [ProjectMemberController::class, 'remove']);
 
     $router->add('GET', '/api/projects/:key/segments', [SegmentController::class, 'list']);
     $router->add('POST', '/api/projects/:key/segments', [SegmentController::class, 'create']);

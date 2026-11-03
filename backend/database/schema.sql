@@ -37,6 +37,16 @@ CREATE TABLE IF NOT EXISTS projects (
     CONSTRAINT projects_created_by_fk FOREIGN KEY (created_by) REFERENCES users (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS project_members (
+    project_id CHAR(36) NOT NULL,
+    user_id CHAR(36) NOT NULL,
+    joined_at BIGINT NOT NULL,
+    PRIMARY KEY (project_id, user_id),
+    KEY project_members_user_idx (user_id),
+    CONSTRAINT project_members_project_fk FOREIGN KEY (project_id) REFERENCES projects (id),
+    CONSTRAINT project_members_user_fk FOREIGN KEY (user_id) REFERENCES users (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS segments (
     id CHAR(36) NOT NULL PRIMARY KEY,
     project_id CHAR(36) NOT NULL,
@@ -67,9 +77,12 @@ CREATE TABLE IF NOT EXISTS tasks (
     UNIQUE KEY tasks_display_id_unique (display_id),
     UNIQUE KEY tasks_project_id_seq_unique (project_id, seq),
     KEY tasks_board_idx (project_id, segment_id, status),
+    KEY tasks_assignee_member_idx (project_id, assignee_id),
     CONSTRAINT tasks_project_fk FOREIGN KEY (project_id) REFERENCES projects (id),
     CONSTRAINT tasks_segment_fk FOREIGN KEY (segment_id) REFERENCES segments (id),
     CONSTRAINT tasks_assignee_fk FOREIGN KEY (assignee_id) REFERENCES users (id),
+    CONSTRAINT tasks_assignee_member_fk FOREIGN KEY (project_id, assignee_id)
+        REFERENCES project_members (project_id, user_id),
     CONSTRAINT tasks_created_by_fk FOREIGN KEY (created_by) REFERENCES users (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -83,7 +96,7 @@ CREATE TABLE IF NOT EXISTS task_tags (
 CREATE TABLE IF NOT EXISTS task_history (
     id CHAR(36) NOT NULL PRIMARY KEY,
     task_id CHAR(36) NOT NULL,
-    actor_user_id CHAR(36) NOT NULL,
+    actor_user_id CHAR(36) NULL,
     actor_channel VARCHAR(10) NOT NULL,
     agent_name VARCHAR(100) NULL,
     action VARCHAR(30) NOT NULL,
@@ -95,6 +108,27 @@ CREATE TABLE IF NOT EXISTS task_history (
     KEY task_history_task_idx (task_id, created_at),
     CONSTRAINT task_history_task_fk FOREIGN KEY (task_id) REFERENCES tasks (id),
     CONSTRAINT task_history_actor_fk FOREIGN KEY (actor_user_id) REFERENCES users (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Jadwal arsip, terpisah dari tasks.archived_at yang berarti waktu arsip sebenarnya.
+CREATE TABLE IF NOT EXISTS task_archive_queue (
+    task_id CHAR(36) NOT NULL PRIMARY KEY,
+    scheduled_for BIGINT NULL,
+    state VARCHAR(20) NOT NULL,
+    updated_at BIGINT NOT NULL,
+    KEY task_archive_queue_due_idx (state, scheduled_for),
+    CONSTRAINT task_archive_queue_task_fk FOREIGN KEY (task_id) REFERENCES tasks (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Audit penugasan pada tingkat database, termasuk perubahan yang tidak lewat API.
+CREATE TABLE IF NOT EXISTS task_assignment_history (
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    task_id CHAR(36) NOT NULL,
+    old_assignee_id CHAR(36) NULL,
+    new_assignee_id CHAR(36) NULL,
+    created_at BIGINT NOT NULL,
+    KEY task_assignment_history_task_idx (task_id, created_at),
+    CONSTRAINT task_assignment_history_task_fk FOREIGN KEY (task_id) REFERENCES tasks (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- View. Dibuat ulang setiap migrasi (CREATE OR REPLACE), jadi aman dijalankan berulang.
@@ -126,7 +160,7 @@ SELECT
     u.name AS actor_name
 FROM task_history h
 JOIN tasks t ON t.id = h.task_id
-JOIN users u ON u.id = h.actor_user_id;
+LEFT JOIN users u ON u.id = h.actor_user_id;
 
 -- Ringkasan per proyek: jumlah segment dan tugas aktif per status.
 CREATE OR REPLACE VIEW v_project_summary AS

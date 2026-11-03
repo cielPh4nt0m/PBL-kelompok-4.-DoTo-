@@ -16,7 +16,7 @@ DoTo bisa diakses lewat tiga jalur:
 public/      web root: halaman HTML, assets, dan api/index.php (front controller)
 backend/     kode PHP native (tidak bisa diakses langsung dari browser)
   src/         Controllers → Services → Repositories (PDO MySQL)
-  database/    setup.sql, schema.sql, migrate.php
+  database/    setup.sql, schema.sql, triggers/, migrate.php
   bin/         archive-cron.php
 cli/doto.js  CLI (Node ≥ 20, tanpa dependency)
 mcp/         MCP server (Node ≥ 20)
@@ -51,6 +51,12 @@ php -d extension=pdo_mysql backend/database/migrate.php
 ```
 
 > Flag `-d extension=pdo_mysql` diperlukan kalau `pdo_mysql` belum aktif di `php.ini` (mis. PHP bawaan Arch Linux). Di XAMPP ekstensi ini sudah aktif, jadi flag-nya boleh dihapus.
+
+Migrasi ini juga memasang empat trigger MySQL/MariaDB. Untuk database lama,
+pembuat proyek, pembuat tugas, dan assignee yang sudah ada didaftarkan sebagai
+anggota proyek. Jalankan migrasi saat tidak ada penulisan tugas bersamaan;
+detail trigger dan uji integrasi ada di [`docs/database.md`](docs/database.md#trigger-mysqlmariadb).
+Anggota dapat dikelola oleh pembuat proyek lewat tombol **Members** pada board.
 
 ### 3. Jalankan server
 
@@ -131,8 +137,11 @@ Header opsional `X-Client-Channel: web|cli|agent` dan `X-Agent-Name` dicatat di 
 | GET/POST | /projects | daftar / buat proyek `{key, name}` |
 | GET | /projects/:key | |
 | GET | /projects/:key/board | `?includeArchived=true` |
+| GET | /projects/:key/members | daftar anggota proyek |
+| POST | /projects/:key/members | pembuat proyek menambah anggota terdaftar `{email}` |
+| DELETE | /projects/:key/members/:userId | pembuat proyek menghapus anggota tanpa tugas |
 | GET/POST | /projects/:key/segments | `{name}` |
-| POST | /projects/:key/tasks | `{segmentName, title, description?, status?, priority?, tags?, assigneeEmail?}` |
+| POST | /projects/:key/tasks | `{segmentName, title, description?, status?, priority?, tags?, assigneeEmail?}`; status awal tidak boleh `done` |
 | GET | /tasks/search | `?q&project&status&assignee&includeArchived` |
 | GET/PATCH | /tasks/:id | PATCH: `{title?, description?, segmentId?, links?, tags?}` |
 | PATCH | /tasks/:id/status | `{status}` |

@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Auth\AuthContext;
 use App\Database;
 use App\Http\NotFoundException;
+use App\Http\ValidationException;
 use App\Repositories\ProjectRepository;
 use App\Repositories\SegmentRepository;
 use App\Repositories\TaskHistoryRepository;
@@ -127,14 +128,18 @@ final class TaskService
      */
     public static function createTask(array $project, array $segment, array $input, AuthContext $actor): array
     {
+        if (($input['status'] ?? null) === 'done') {
+            throw new ValidationException('Buat tugas aktif dahulu, lalu ubah status menjadi done');
+        }
         $assigneeId = $actor->user['id'];
         if (!empty($input['assigneeEmail'])) {
             $assigneeId = UserService::getUserOrThrow($input['assigneeEmail'])['id'];
         }
+        if (!ProjectMemberService::isMember($project['id'], $assigneeId)) {
+            throw new ValidationException('Assignee bukan anggota proyek');
+        }
 
         return Database::transaction(function (\PDO $pdo) use ($project, $segment, $input, $actor, $assigneeId) {
-            $seq = ProjectRepository::incrementNextSeqAndGet($pdo, $project['id']);
-            $displayId = $project['key'] . '-' . $seq;
             $now = Database::nowMs();
             $taskId = Uuid::v4();
 
@@ -142,8 +147,6 @@ final class TaskService
                 'id' => $taskId,
                 'project_id' => $project['id'],
                 'segment_id' => $segment['id'],
-                'seq' => $seq,
-                'display_id' => $displayId,
                 'title' => $input['title'],
                 'description' => $input['description'] ?? null,
                 'status' => $input['status'] ?? Enums::DEFAULT_STATUS,
@@ -160,9 +163,13 @@ final class TaskService
                 TaskTagRepository::insertMany($pdo, $taskId, $input['tags']);
             }
 
-            self::recordHistory($pdo, $taskId, $actor, 'created', newValue: $displayId, createdAt: $now);
+            $createdTask = TaskRepository::findById($pdo, $taskId);
+            if ($createdTask === null || (int) $createdTask['seq'] < 1 || $createdTask['display_id'] === '') {
+                throw new \RuntimeException('Trigger nomor tiket DoTo belum terpasang');
+            }
+            self::recordHistory($pdo, $taskId, $actor, 'created', newValue: $createdTask['display_id'], createdAt: $now);
 
-            return self::toTaskDTO($pdo, TaskRepository::findById($pdo, $taskId));
+            return self::toTaskDTO($pdo, $createdTask);
         });
     }
 
@@ -174,8 +181,15 @@ final class TaskService
 
         return Database::transaction(function (\PDO $pdo) use ($task, $status, $actor) {
             $now = Database::nowMs();
-            TaskRepository::updateStatus($pdo, $task['id'], $status, $now, $now);
-            self::recordHistory($pdo, $task['id'], $actor, 'status_changed', 'status', $task['status'], $status, $now);
+            $pdo->prepare(
+                'SET @doto_actor_user_id = ?, @doto_actor_channel = ?, @doto_agent_name = ?'
+            )->execute([$actor->user['id'], $actor->channel, $actor->agentName]);
+            try {
+                // Trigger mencatat status beserta aktor yang benar pada koneksi ini.
+                TaskRepository::updateStatus($pdo, $task['id'], $status, $now, $now);
+            } finally {
+                $pdo->exec('SET @doto_actor_user_id = NULL, @doto_actor_channel = NULL, @doto_agent_name = NULL');
+            }
 
             return self::toTaskDTO($pdo, TaskRepository::findById($pdo, $task['id']));
         });
@@ -199,6 +213,9 @@ final class TaskService
     public static function reassignTask(array $task, string $assigneeEmail, AuthContext $actor): array
     {
         $newAssignee = UserService::getUserOrThrow($assigneeEmail);
+        if (!ProjectMemberService::isMember($task['project_id'], $newAssignee['id'])) {
+            throw new ValidationException('Assignee bukan anggota proyek');
+        }
 
         if ($task['assignee_id'] === $newAssignee['id']) {
             return self::toTaskDTO(Database::connection(), $task);

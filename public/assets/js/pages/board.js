@@ -101,10 +101,12 @@ async function render() {
         h('p', { class: 'eyebrow' }, h('a', { href: 'projects.html', style: 'color:inherit' }, 'Projects'), ` / ${board.project.key}`),
         h('h1', {}, board.project.name),
         h('p', { class: 'sub' }, `${total} task${total === 1 ? '' : 's'} across ${board.segments.length} segment${board.segments.length === 1 ? '' : 's'}. Done tasks are archived after ${board.project.archiveAfterHours} hours.`)),
-      h('label', { class: 'check g2', style: 'padding:8px 12px' },
-        h('input', { type: 'checkbox', checked: includeArchived,
-          onchange: (e) => { includeArchived = e.target.checked; render(); } }),
-        'Show archived')),
+      h('div', { class: 'row-form' },
+        h('a', { class: 'btn btn-outline btn-inline', href: `members.html?key=${encodeURIComponent(key)}` }, 'Members'),
+        h('label', { class: 'check g2', style: 'padding:8px 12px' },
+          h('input', { type: 'checkbox', checked: includeArchived,
+            onchange: (e) => { includeArchived = e.target.checked; render(); } }),
+          'Show archived'))),
     h('div', { class: 'board' }, board.segments.map(segmentColumn), addSegmentColumn()));
   content.querySelector('.board').scrollLeft = scrollLeft;
 }

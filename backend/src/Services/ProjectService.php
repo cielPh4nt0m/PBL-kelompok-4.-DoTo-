@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Database;
 use App\Http\ConflictException;
 use App\Http\NotFoundException;
+use App\Repositories\ProjectMemberRepository;
 use App\Repositories\ProjectRepository;
 use App\Support\Uuid;
 
@@ -32,7 +33,10 @@ final class ProjectService
             'created_at' => Database::nowMs(),
         ];
 
-        ProjectRepository::insert($pdo, $row);
+        Database::transaction(function (\PDO $tx) use ($row, $createdBy): void {
+            ProjectRepository::insert($tx, $row);
+            ProjectMemberRepository::add($tx, $row['id'], $createdBy, $row['created_at']);
+        });
 
         return $row;
     }
