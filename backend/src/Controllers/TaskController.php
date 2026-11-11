@@ -28,6 +28,7 @@ final class TaskController
         $input = [
             'title' => Validator::requireString($body, 'title'),
             'description' => Validator::optionalString($body, 'description'),
+            'dueDate' => Validator::optionalString($body, 'dueDate'),
             'status' => Validator::optionalEnum($body, 'status', Enums::TASK_STATUSES),
             'priority' => Validator::optionalEnum($body, 'priority', Enums::TASK_PRIORITIES),
             'tags' => Validator::optionalArrayOfString($body, 'tags'),
@@ -75,6 +76,9 @@ final class TaskController
         }
         if (array_key_exists('description', $body)) {
             $input['description'] = Validator::optionalString($body, 'description');
+        }
+        if (array_key_exists('dueDate', $body)) {
+            $input['dueDate'] = Validator::optionalString($body, 'dueDate');
         }
         if (array_key_exists('segmentId', $body)) {
             $input['segmentId'] = Validator::requireString($body, 'segmentId');

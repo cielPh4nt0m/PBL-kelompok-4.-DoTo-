@@ -71,4 +71,15 @@ final class Config
     {
         return self::get('COOKIE_SECURE', 'false') === 'true';
     }
+
+    public static function googleClientId(): string
+    {
+        return trim(self::get('GOOGLE_CLIENT_ID', '') ?? '', " \t\n\r\0\x0B'\"");
+    }
+
+    public static function googleApiKey(): string
+    {
+        $key = self::get('GOOGLE_API_KEY') ?? self::get('GEMINI_API_KEY') ?? '';
+        return trim($key, " \t\n\r\0\x0B'\"");
+    }
 }

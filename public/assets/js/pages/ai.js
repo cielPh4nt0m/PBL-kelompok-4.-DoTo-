@@ -3,6 +3,7 @@
 import { api, apiWithHeaders, errorText } from '../api.js';
 import { h, STATUS_LABEL } from '../dom.js';
 import { initLayout, showPageError } from '../layout.js';
+import { packDescription } from '../meta.js';
 
 const content = document.getElementById('content');
 const agentApi = apiWithHeaders({
@@ -352,12 +353,14 @@ async function resolve(action, decision) {
       const projKey = p.projectKey || activeProjectKey;
       await loadSegmentsForActiveProject();
       const segName = activeSegments.includes(p.segmentName) ? p.segmentName : (activeSegments[0] || 'To Do');
+      const desc = p.target ? packDescription(p.description || '', { to: p.target, by: 'AI Assistant' }) : p.description;
       const created = await agentApi.post(`/projects/${encodeURIComponent(projKey)}/tasks`, {
         segmentName: segName,
         title: p.title,
-        description: p.description,
+        description: desc,
+        dueDate: p.dueDate || undefined,
         priority: p.priority,
-        status: p.status,
+        status: p.status === 'done' ? 'todo' : (p.status || 'todo'),
         ...(p.assigneeEmail ? { assigneeEmail: p.assigneeEmail } : {}),
       });
       resultLabel = `Accepted · Created ${created.displayId}`;
@@ -374,12 +377,28 @@ async function resolve(action, decision) {
       });
       resultLabel = `Accepted · ${updated.displayId} (${updated.priority})`;
       link = `task.html?id=${encodeURIComponent(updated.displayId)}`;
+    } else if (action.type === 'update_due_date') {
+      const updated = await agentApi.patch(`/tasks/${encodeURIComponent(p.displayId)}`, {
+        dueDate: p.dueDate || null,
+      });
+      resultLabel = `Accepted · ${updated.displayId} due ${updated.dueDate || 'none'}`;
+      link = `task.html?id=${encodeURIComponent(updated.displayId)}`;
+    } else if (action.type === 'reassign_task') {
+      const updated = await agentApi.patch(`/tasks/${encodeURIComponent(p.displayId)}/assignee`, {
+        assigneeEmail: p.assigneeEmail,
+      });
+      resultLabel = `Accepted · Reassigned ${updated.displayId}`;
+      link = `task.html?id=${encodeURIComponent(updated.displayId)}`;
     } else if (action.type === 'add_comment') {
       await agentApi.post(`/tasks/${encodeURIComponent(p.displayId)}/comments`, {
         comment: p.comment,
       });
       resultLabel = `Accepted · Commented on ${p.displayId}`;
       link = `task.html?id=${encodeURIComponent(p.displayId)}`;
+    }
+
+    if (window.DotoNotify && typeof window.DotoNotify.emit === 'function') {
+      window.DotoNotify.emit('agentDone', 'Agen AI selesai menjalankan aksi', resultLabel, link || 'ai.html');
     }
 
     resolved = {
@@ -428,16 +447,59 @@ function messageBubble(m) {
     m.proposedAction ? actionCard(m.proposedAction) : null);
 }
 
+function mapBackendProposal(p) {
+  const payload = p.payload || {};
+  const fields = Object.entries(payload)
+    .filter(([, v]) => v !== undefined && v !== null && v !== '')
+    .map(([k, v]) => ({ label: k, value: String(v) }));
+  return {
+    id: newId(),
+    type: p.kind,
+    summary: p.title || p.detail || p.kind,
+    payload,
+    fields: fields.length ? fields : [{ label: 'Detail', value: p.detail || '-' }],
+  };
+}
+
+async function askBackendOrFallback(text) {
+  try {
+    const history = messages
+      .filter((m) => !m.isThinking && !m.isError && m.content)
+      .slice(-6)
+      .map((m) => ({ role: m.role, content: m.content }));
+    const res = await api.post('/ai/chat', {
+      projectKey: activeProjectKey,
+      message: text,
+      history,
+    });
+    if (res && typeof res.reply === 'string') {
+      const firstProposal = Array.isArray(res.proposals) && res.proposals.length > 0
+        ? mapBackendProposal(res.proposals[0])
+        : undefined;
+      if (firstProposal && window.DotoNotify && typeof window.DotoNotify.emit === 'function') {
+        window.DotoNotify.emit('agentApproval', 'Agen AI membutuhkan persetujuan', firstProposal.summary, 'ai.html');
+      }
+      return {
+        content: res.reply,
+        proposedAction: firstProposal,
+      };
+    }
+  } catch {
+    // Fallback ke rule-based parser lokal bila endpoint offline
+  }
+  return generateReply(text);
+}
+
 async function send(text) {
   const trimmed = text.trim();
   if (!trimmed) return;
-  const thinking = { id: newId(), role: 'assistant', content: 'AI is thinking…', isThinking: true };
+  const thinking = { id: newId(), role: 'assistant', content: 'Asisten AI sedang berpikir…', isThinking: true };
   messages = [...messages, { id: newId(), role: 'user', content: trimmed }, thinking];
   draft = '';
   render();
 
   try {
-    const reply = await generateReply(trimmed);
+    const reply = await askBackendOrFallback(trimmed);
     messages = messages.map((m) => (m.id === thinking.id ? { id: m.id, role: 'assistant', ...reply } : m));
   } catch (err) {
     messages = messages.map((m) =>

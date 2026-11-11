@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Controllers\AiController;
 use App\Controllers\AuthController;
 use App\Controllers\MeController;
 use App\Controllers\ProjectController;
@@ -12,14 +13,27 @@ use App\Controllers\TokenController;
 use App\Router;
 
 return function (Router $router): void {
+    $router->add('GET', '/api/config/public', [AuthController::class, 'publicConfig']);
+
     $router->add('POST', '/api/auth/register', [AuthController::class, 'register']);
     $router->add('POST', '/api/auth/login', [AuthController::class, 'login']);
+    $router->add('POST', '/api/auth/google', [AuthController::class, 'google']);
     $router->add('POST', '/api/auth/logout', [AuthController::class, 'logout']);
 
+    $router->add('GET', '/api/users/check', [MeController::class, 'check']);
+
     $router->add('GET', '/api/me', [MeController::class, 'me']);
+    $router->add('PATCH', '/api/me', [MeController::class, 'update']);
+    $router->add('POST', '/api/me/email/verify', [MeController::class, 'verifyEmail']);
+    $router->add('POST', '/api/me/password', [MeController::class, 'changePassword']);
+    $router->add('GET', '/api/me/notification-preferences', [MeController::class, 'getNotificationPreferences']);
+    $router->add('PUT', '/api/me/notification-preferences', [MeController::class, 'saveNotificationPreferences']);
+
     $router->add('GET', '/api/me/tokens', [TokenController::class, 'list']);
     $router->add('POST', '/api/me/tokens', [TokenController::class, 'create']);
     $router->add('DELETE', '/api/tokens/:id', [TokenController::class, 'revoke']);
+
+    $router->add('POST', '/api/ai/chat', [AiController::class, 'chat']);
 
     $router->add('GET', '/api/projects', [ProjectController::class, 'list']);
     $router->add('POST', '/api/projects', [ProjectController::class, 'create']);

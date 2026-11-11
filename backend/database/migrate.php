@@ -21,6 +21,50 @@ if ($sql === false) {
 // Hapus komentar baris, lalu jalankan per statement.
 $sql = preg_replace('/^\s*--.*$/m', '', $sql);
 $pdo = Database::connection();
+
+// Pastikan kolom baru pada users dan tasks sudah tersedia sebelum CREATE OR REPLACE VIEW dijalankan.
+$ensureColumn = static function (\PDO $pdo, string $table, string $column, string $definition): void {
+    $stmt = $pdo->prepare(
+        'SELECT COUNT(*) FROM information_schema.COLUMNS
+         WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table AND COLUMN_NAME = :col'
+    );
+    $stmt->execute(['table' => $table, 'col' => $column]);
+    if ((int) $stmt->fetchColumn() === 0) {
+        $pdo->exec("ALTER TABLE `$table` ADD COLUMN `$column` $definition");
+    }
+};
+
+$tableExists = static function (\PDO $pdo, string $table): bool {
+    $stmt = $pdo->prepare(
+        'SELECT COUNT(*) FROM information_schema.TABLES
+         WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table'
+    );
+    $stmt->execute(['table' => $table]);
+    return (int) $stmt->fetchColumn() > 0;
+};
+
+if ($tableExists($pdo, 'users')) {
+    $ensureColumn($pdo, 'users', 'role', 'VARCHAR(40) NULL');
+    $ensureColumn($pdo, 'users', 'bio', 'VARCHAR(200) NULL');
+    $ensureColumn($pdo, 'users', 'team_key', 'VARCHAR(16) NULL');
+    $ensureColumn($pdo, 'users', 'email_verified', 'TINYINT(1) NOT NULL DEFAULT 0');
+    $ensureColumn($pdo, 'users', 'avatar_data', 'MEDIUMTEXT NULL');
+    $ensureColumn($pdo, 'users', 'google_sub', 'VARCHAR(128) NULL');
+
+    $googleIdx = $pdo->query(
+        "SELECT COUNT(*) FROM information_schema.STATISTICS
+         WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'users'
+           AND INDEX_NAME = 'users_google_sub_unique'"
+    )->fetchColumn();
+    if ((int) $googleIdx === 0) {
+        $pdo->exec('ALTER TABLE users ADD UNIQUE KEY users_google_sub_unique (google_sub)');
+    }
+}
+
+if ($tableExists($pdo, 'tasks')) {
+    $ensureColumn($pdo, 'tasks', 'due_date', 'DATE NULL');
+}
+
 foreach (array_filter(array_map('trim', explode(';', $sql))) as $statement) {
     $pdo->exec($statement);
 }

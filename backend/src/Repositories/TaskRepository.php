@@ -26,10 +26,10 @@ final class TaskRepository
     {
         $stmt = $pdo->prepare(
             'INSERT INTO tasks
-                (id, project_id, segment_id, seq, display_id, title, description, status, priority,
+                (id, project_id, segment_id, seq, display_id, title, description, due_date, status, priority,
                  assignee_id, created_by, links, status_changed_at, archived_at, created_at, updated_at)
              VALUES
-                (:id, :project_id, :segment_id, :seq, :display_id, :title, :description, :status, :priority,
+                (:id, :project_id, :segment_id, :seq, :display_id, :title, :description, :due_date, :status, :priority,
                  :assignee_id, :created_by, :links, :status_changed_at, NULL, :created_at, :updated_at)'
         );
         $stmt->execute([
@@ -41,6 +41,7 @@ final class TaskRepository
             'display_id' => '',
             'title' => $row['title'],
             'description' => $row['description'] ?? null,
+            'due_date' => $row['due_date'] ?? null,
             'status' => $row['status'],
             'priority' => $row['priority'],
             'assignee_id' => $row['assignee_id'] ?? null,

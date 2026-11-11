@@ -53,6 +53,15 @@ final class Authenticator
         return new AuthContext($user, $channel, $agentName);
     }
 
+    public static function resolveOptionalUser(Request $req): ?AuthContext
+    {
+        try {
+            return self::resolveUser($req);
+        } catch (UnauthorizedException) {
+            return null;
+        }
+    }
+
     public static function startSession(): void
     {
         if (session_status() === PHP_SESSION_ACTIVE) {

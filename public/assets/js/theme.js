@@ -60,3 +60,29 @@
     }
   });
 })();
+
+// Fade-out saat berpindah halaman (setengah durasi fade-in body: .45s; ubah juga page-out di design.css).
+// Semua klik <a> internal otomatis ikut; navigasi lewat JS memakai window.dotoGo(url).
+(function () {
+  var LEAVE_MS = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 450;
+  var leaving = false;
+  window.dotoGo = function (url, replace) {
+    if (leaving) return;
+    leaving = true;
+    document.body.classList.add('page-leave');
+    setTimeout(function () { if (replace) location.replace(url); else location.href = url; }, LEAVE_MS);
+  };
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if ((a.target && a.target !== '_self') || a.hasAttribute('download')) return;
+    var u = new URL(a.href, location.href);
+    if (u.origin !== location.origin || (u.pathname === location.pathname && u.search === location.search && u.hash)) return;
+    e.preventDefault();
+    window.dotoGo(a.href);
+  });
+  // Tombol Back (bfcache): halaman yang kembali tidak boleh tertinggal transparan.
+  addEventListener('pageshow', function (e) {
+    if (e.persisted) { leaving = false; document.body.classList.remove('page-leave'); }
+  });
+})();

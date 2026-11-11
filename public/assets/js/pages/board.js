@@ -1,10 +1,13 @@
 import { api, errorText } from '../api.js';
 import { h, param, STATUSES, STATUS_LABEL, statusSelect } from '../dom.js';
 import { initLayout, showPageError } from '../layout.js';
+import { packDescription, dateFromToday } from '../meta.js';
 
 const content = document.getElementById('content');
 const key = (param('key') ?? '').toUpperCase();
 let includeArchived = false;
+let meName = 'Tim';
+let targetNames = ['Dosen Pembina', 'Semua tim'];
 let openFormSegment = null; // id segment yang sedang menampilkan form "+ Task"
 
 function taskCard(task) {
@@ -15,7 +18,8 @@ function taskCard(task) {
         h('span', { class: 'mono' }, task.displayId),
         h('span', { class: `pill ${task.priority}` }, task.priority)),
       h('p', {}, task.title),
-      h('span', { class: 'who' }, task.assigneeUsername ? `@${task.assigneeUsername}` : 'unassigned')),
+      h('span', { class: 'who' }, task.assigneeUsername ? `@${task.assigneeUsername}` : 'unassigned'),
+      task.dueDate ? h('span', { class: 'who' }, ` · Tenggat ${task.dueDate}`) : null),
     statusSelect(task.status, async (status) => {
       try {
         await api.patch(`/tasks/${encodeURIComponent(task.displayId)}/status`, { status });
@@ -33,6 +37,8 @@ function addTaskControl(segment) {
   }
 
   const title = h('input', { placeholder: 'Task title', 'aria-label': 'Task title' });
+  const due = h('input', { type: 'date', 'aria-label': 'Due date (default 2 minggu)', title: 'Tenggat (default 2 minggu)', value: dateFromToday() });
+  const target = h('select', { 'aria-label': 'Target', title: 'Target' }, targetNames.map((n) => h('option', { value: n }, n)));
   const err = h('p', { class: 'form-error', role: 'alert' });
   queueMicrotask(() => title.focus());
   return h('form', {
@@ -40,7 +46,11 @@ function addTaskControl(segment) {
       e.preventDefault();
       if (!title.value.trim()) return title.focus();
       try {
-        await api.post(`/projects/${encodeURIComponent(key)}/tasks`, { segmentName: segment.name, title: title.value.trim() });
+        await api.post(`/projects/${encodeURIComponent(key)}/tasks`, {
+          segmentName: segment.name, title: title.value.trim(),
+          dueDate: due.value || dateFromToday(),
+          description: packDescription('', { to: target.value, by: meName }),
+        });
         openFormSegment = null;
         await render();
       } catch (ex) {
@@ -51,6 +61,7 @@ function addTaskControl(segment) {
   h('div', { class: 'row-form', style: 'margin-top:8px' },
     title,
     h('button', { class: 'btn btn-primary btn-inline', type: 'submit' }, 'Add')),
+  h('div', { class: 'row-form', style: 'margin-top:6px' }, due, target),
   h('button', { class: 'btn-danger', type: 'button', style: 'margin-top:6px',
     onclick: () => { openFormSegment = null; render(); } }, 'Cancel'),
   err);
@@ -91,6 +102,8 @@ function addSegmentColumn() {
 async function render() {
   const board = await api.get(`/projects/${encodeURIComponent(key)}/board${includeArchived ? '?includeArchived=true' : ''}`);
   document.title = `Doto – ${board.project.name}`;
+  const members = await api.get(`/projects/${encodeURIComponent(key)}/members`).catch(() => []);
+  targetNames = ['Dosen Pembina', 'Semua tim', ...members.map((u) => u.name || u.username)];
   const total = board.segments.reduce((n, s) => n + s.tasks.length, 0);
   // Simpan posisi scroll horizontal supaya board tidak loncat ke kiri setelah re-render.
   const scrollLeft = content.querySelector('.board')?.scrollLeft ?? 0;
@@ -114,5 +127,5 @@ async function render() {
 if (!key) {
   location.replace('projects.html');
 } else {
-  initLayout('projects').then(render).catch((e) => showPageError(content, e));
+  initLayout('projects').then((me) => { meName = me?.username ?? 'Tim'; return render(); }).catch((e) => showPageError(content, e));
 }

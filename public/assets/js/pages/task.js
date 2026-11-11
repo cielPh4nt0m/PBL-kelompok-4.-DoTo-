@@ -1,6 +1,7 @@
 import { api, errorText } from '../api.js';
 import { h, param, formatDate, PRIORITIES, statusSelect } from '../dom.js';
 import { initLayout, showPageError } from '../layout.js';
+import { stripMeta } from '../meta.js';
 
 const content = document.getElementById('content');
 const id = param('id') ?? '';
@@ -63,6 +64,9 @@ async function render() {
   const prioritySelect = h('select', { 'aria-label': 'Priority', onchange: (e) => update('/priority', { priority: e.target.value }) },
     PRIORITIES.map((p) => h('option', { value: p, selected: p === task.priority }, p)));
 
+  const dueInput = h('input', { type: 'date', 'aria-label': 'Due date', value: task.dueDate ?? '',
+    onchange: (e) => update('', { dueDate: e.target.value || null }) });
+
   content.replaceChildren(
     h('div', { class: 'page-head' },
       h('div', {},
@@ -77,7 +81,7 @@ async function render() {
       h('div', {},
         h('section', { class: 'panel g1' },
           h('h2', {}, 'Description'),
-          h('p', { class: `task-desc${task.description ? '' : ' muted'}` }, task.description || 'No description.')),
+          h('p', { class: `task-desc${stripMeta(task.description) ? '' : ' muted'}` }, stripMeta(task.description) || 'No description.')),
         h('section', { class: 'panel g1' },
           h('h2', {}, 'Activity'),
           history.length ? h('ul', { class: 'timeline' }, history.map(historyItem)) : h('p', { class: 'empty' }, 'No activity yet.'),
@@ -86,6 +90,7 @@ async function render() {
         h('div', { class: 'field-list' },
           h('div', {}, h('label', {}, 'Status'), statusSelect(task.status, (status) => update('/status', { status }))),
           h('div', {}, h('label', {}, 'Priority'), prioritySelect),
+          h('div', {}, h('label', {}, 'Due date'), dueInput),
           h('div', {},
             h('label', {}, 'Assignee'),
             h('p', { style: 'margin:0 0 8px;font-size:.9rem;font-weight:600' },

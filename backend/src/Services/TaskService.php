@@ -45,6 +45,7 @@ final class TaskService
             'displayId' => $row['display_id'],
             'title' => $row['title'],
             'description' => $row['description'],
+            'dueDate' => $row['due_date'] ?? null,
             'status' => $row['status'],
             'priority' => $row['priority'],
             'assigneeId' => $row['assignee_id'],
@@ -124,7 +125,7 @@ final class TaskService
     }
 
     /**
-     * @param array{title:string,description?:?string,status?:?string,priority?:?string,tags?:?string[],assigneeEmail?:?string} $input
+     * @param array{title:string,description?:?string,dueDate?:?string,status?:?string,priority?:?string,tags?:?string[],assigneeEmail?:?string} $input
      */
     public static function createTask(array $project, array $segment, array $input, AuthContext $actor): array
     {
@@ -139,7 +140,9 @@ final class TaskService
             throw new ValidationException('Assignee bukan anggota proyek');
         }
 
-        return Database::transaction(function (\PDO $pdo) use ($project, $segment, $input, $actor, $assigneeId) {
+        $dueDate = !empty($input['dueDate']) ? $input['dueDate'] : date('Y-m-d', strtotime('+14 days'));
+
+        return Database::transaction(function (\PDO $pdo) use ($project, $segment, $input, $actor, $assigneeId, $dueDate) {
             $now = Database::nowMs();
             $taskId = Uuid::v4();
 
@@ -149,6 +152,7 @@ final class TaskService
                 'segment_id' => $segment['id'],
                 'title' => $input['title'],
                 'description' => $input['description'] ?? null,
+                'due_date' => $dueDate,
                 'status' => $input['status'] ?? Enums::DEFAULT_STATUS,
                 'priority' => $input['priority'] ?? Enums::DEFAULT_PRIORITY,
                 'assignee_id' => $assigneeId,
@@ -260,6 +264,15 @@ final class TaskService
                 self::recordHistory($pdo, $task['id'], $actor, 'field_updated', 'description', $task['description'], $input['description'], $now);
             }
 
+            if (array_key_exists('dueDate', $input)) {
+                $newDue = ($input['dueDate'] !== null && trim($input['dueDate']) !== '') ? trim($input['dueDate']) : null;
+                $oldDue = $task['due_date'] ?? null;
+                if ($newDue !== $oldDue) {
+                    $columns['due_date'] = $newDue;
+                    self::recordHistory($pdo, $task['id'], $actor, 'field_updated', 'dueDate', $oldDue, $newDue, $now);
+                }
+            }
+
             if (array_key_exists('segmentId', $input) && $input['segmentId'] !== $task['segment_id']) {
                 $segment = SegmentService::getSegmentByIdOrThrow($input['segmentId']);
                 if ($segment['project_id'] !== $task['project_id']) {
@@ -329,6 +342,8 @@ final class TaskService
                 'comment' => $comment,
                 'created_at' => $now,
             ]);
+
+            TaskRepository::updateFields($pdo, $task['id'], [], $now);
 
             $stmt = $pdo->prepare('SELECT * FROM v_task_history_detail WHERE id = :id');
             $stmt->execute(['id' => $id]);

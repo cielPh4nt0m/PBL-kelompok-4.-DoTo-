@@ -7,9 +7,16 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     password_hash VARCHAR(255) NULL,
+    role VARCHAR(40) NULL,
+    bio VARCHAR(200) NULL,
+    team_key VARCHAR(16) NULL,
+    email_verified TINYINT(1) NOT NULL DEFAULT 0,
+    avatar_data MEDIUMTEXT NULL,
+    google_sub VARCHAR(128) NULL,
     created_at BIGINT NOT NULL,
     UNIQUE KEY users_username_unique (username),
-    UNIQUE KEY users_email_unique (email)
+    UNIQUE KEY users_email_unique (email),
+    UNIQUE KEY users_google_sub_unique (google_sub)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS api_tokens (
@@ -69,6 +76,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     priority VARCHAR(10) NOT NULL DEFAULT 'medium',
     assignee_id CHAR(36) NULL,
     created_by CHAR(36) NOT NULL,
+    due_date DATE NULL,
     links TEXT NULL,
     status_changed_at BIGINT NOT NULL,
     archived_at BIGINT NULL,
@@ -129,6 +137,13 @@ CREATE TABLE IF NOT EXISTS task_assignment_history (
     created_at BIGINT NOT NULL,
     KEY task_assignment_history_task_idx (task_id, created_at),
     CONSTRAINT task_assignment_history_task_fk FOREIGN KEY (task_id) REFERENCES tasks (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS notification_preferences (
+    user_id CHAR(36) NOT NULL PRIMARY KEY,
+    prefs JSON NOT NULL,
+    updated_at BIGINT NOT NULL,
+    CONSTRAINT fk_notif_prefs_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- View. Dibuat ulang setiap migrasi (CREATE OR REPLACE), jadi aman dijalankan berulang.
