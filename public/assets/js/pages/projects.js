@@ -11,6 +11,13 @@ function projectCard(p) {
     h('p', {}, 'Open board →'));
 }
 
+function projectRow(p) {
+  return h('a', { class: 'project-row', href: `board.html?key=${encodeURIComponent(p.key)}` },
+    h('span', { class: 'key' }, p.key),
+    h('b', {}, p.name),
+    h('span', { class: 'go' }, 'Open board →'));
+}
+
 async function render() {
   const projects = await api.get('/projects');
 
@@ -56,7 +63,9 @@ async function render() {
       h('section', { class: 'panel g1' },
         h('h2', {}, 'All projects'),
         projects.length
-          ? h('div', { class: 'project-grid' }, projects.map(projectCard))
+          ? (window.DotoPrefs && window.DotoPrefs.get().taskView === 'list'
+            ? h('div', { class: 'project-list' }, projects.map(projectRow))
+            : h('div', { class: 'project-grid' }, projects.map(projectCard)))
           : h('p', { class: 'empty' }, 'No projects yet. Create the first one →')),
       h('aside', { class: 'panel g1' }, h('h2', {}, 'New project'), form)));
 }

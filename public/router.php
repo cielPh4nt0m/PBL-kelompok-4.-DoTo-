@@ -22,6 +22,15 @@ $aliases = [
     '/task.html' => __DIR__ . '/task.html',
     '/ai.html' => __DIR__ . '/ai.html',
     '/tokens.html' => __DIR__ . '/tokens.html',
+    '/calendar.html' => __DIR__ . '/calendar.html',
+    '/members.html' => __DIR__ . '/members.html',
+    '/settings.html' => __DIR__ . '/settings.html',
+    '/profile.html' => __DIR__ . '/profile.html',
+    '/notifications.html' => __DIR__ . '/notifications.html',
+    '/security.html' => __DIR__ . '/security.html',
+    '/appearance.html' => __DIR__ . '/appearance.html',
+    '/compact.html' => __DIR__ . '/compact.html',
+    '/ai-preferences.html' => __DIR__ . '/ai-preferences.html',
 ];
 
 $lower = strtolower($path);

@@ -3,6 +3,7 @@
 // Pengaturan disimpan per akun di localStorage (backend: lihat BACKEND-NOTIFICATION-SPEC.md).
 import { api } from './api.js';
 import { unpackMeta } from './meta.js';
+import { loadAiPrefs, addLog, myActiveTasks, dueEnd } from './ai-prefs.js';
 
 const g = (id, title, sub, items) => ({ id, title, sub, items: items.map(([k, label, on]) => ({ k, label, on: Boolean(on) })) });
 export const GROUPS = [
@@ -112,6 +113,25 @@ export function startNotifier(user, opts = {}) {
     if (pending) notify('dlPending', 'Tugas belum selesai', `Kamu masih punya ${pending} tugas yang belum selesai.`, 'calendar.html', `pend:${today}`);
   }
 
+  // Pengingat AI (AI Preferences > "Pengingat melalui AI"): satu notifikasi ringkasan, paling sering 1x per 30 menit, sekali per tugas
+  function checkAiReminders(all) {
+    const ap = loadAiPrefs(uid);
+    if (ap.behavior.reminder === 'off' || !ap.perms.read || !loadPrefs(uid).g.ai || permission() !== 'granted') return;
+    const now = Date.now();
+    const lastKey = `doto-ai-rem-last:${uid}`;
+    if (now - rd(lastKey, 0) < 30 * 6e4) return;
+    const win = Number(ap.behavior.reminder) * 6e4;
+    const key = (d) => `air:${d.displayId}:${d.dueDate}:${ap.behavior.reminder}`;
+    const due = myActiveTasks(all, user).filter((d) => { const left = dueEnd(d) - now; return left > 0 && left <= win && !seen[key(d)]; }).sort((a, b) => dueEnd(a) - dueEnd(b));
+    if (!due.length) return;
+    due.forEach((d) => { seen[key(d)] = now; });
+    wr(dedupKey, seen);
+    wr(lastKey, now);
+    const body = due.length === 1 ? `${due[0].displayId} · ${due[0].title}` : `${due.length} tugas mendekati deadline: ${due.slice(0, 2).map((d) => d.displayId).join(', ')}${due.length > 2 ? `, +${due.length - 2} lainnya` : ''}`;
+    show('Pengingat Agen AI', body, `air:${now}`, due.length === 1 ? url(due[0]) : 'calendar.html');
+    addLog(uid, { kind: 'auto', title: 'Pengingat deadline (notifikasi Chrome)', detail: body, output: true });
+  }
+
   function classify(d, mine, h, hist) {
     if (h.actorChannel === 'agent') {
       if (mine && h.action === 'status_changed' && ['done', 'needs_review'].includes(h.newValue)) notify('agentDone', 'Agen AI selesai mengerjakan tugas', `${d.displayId} · ${d.title}`, url(d), `ag:${h.id}`);
@@ -181,6 +201,7 @@ export function startNotifier(user, opts = {}) {
     try {
       const all = await api.get('/tasks/search?includeArchived=false');
       checkDeadlines(all.filter(isMine));
+      checkAiReminders(all);
       await diffTasks(all);
       if (round++ % 5 === 0) await diffTeam(); // anggota tim dicek tiap ~2,5 menit
     } catch { /* jaringan/backend mati: coba lagi pada putaran berikutnya */ } finally { busy = false; }

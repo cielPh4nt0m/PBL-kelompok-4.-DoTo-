@@ -69,7 +69,15 @@ final class Config
 
     public static function cookieSecure(): bool
     {
-        return self::get('COOKIE_SECURE', 'false') === 'true';
+        $val = strtolower(trim(self::get('COOKIE_SECURE', 'auto') ?? 'auto', " \t\n\r\0\x0B'\""));
+        if ($val === 'true' || $val === '1') {
+            return true;
+        }
+        if ($val === 'false' || $val === '0') {
+            return false;
+        }
+        return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || strtolower((string) ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '')) === 'https';
     }
 
     public static function googleClientId(): string
@@ -79,7 +87,28 @@ final class Config
 
     public static function googleApiKey(): string
     {
-        $key = self::get('GOOGLE_API_KEY') ?? self::get('GEMINI_API_KEY') ?? '';
+        $provider = self::aiProvider();
+        $key = $provider === 'vertex'
+            ? (self::get('GOOGLE_API_KEY') ?? self::get('GEMINI_API_KEY') ?? '')
+            : (self::get('GEMINI_API_KEY') ?? self::get('GOOGLE_API_KEY') ?? '');
         return trim($key, " \t\n\r\0\x0B'\"");
+    }
+
+    public static function aiProvider(): string
+    {
+        $raw = strtolower(trim(self::get('AI_PROVIDER', 'gemini') ?? 'gemini', " \t\n\r\0\x0B'\""));
+        return $raw === 'vertex' ? 'vertex' : 'gemini';
+    }
+
+    public static function aiModel(): string
+    {
+        $raw = trim(self::get('AI_MODEL', 'gemini-4-hydrogen') ?? 'gemini-4-hydrogen', " \t\n\r\0\x0B'\"");
+        return $raw !== '' ? $raw : 'gemini-4-hydrogen';
+    }
+
+    public static function aiThinkingLevel(): string
+    {
+        $raw = strtoupper(trim(self::get('AI_THINKING_LEVEL', 'MEDIUM') ?? 'MEDIUM', " \t\n\r\0\x0B'\""));
+        return $raw !== '' ? $raw : 'MEDIUM';
     }
 }

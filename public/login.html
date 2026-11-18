@@ -122,10 +122,11 @@ function initGoogleGsi() {
   });
   const wrap = $('ggBtnWrap');
   if (wrap) {
+    const btnW = wrap.clientWidth > 0 ? Math.min(300, wrap.clientWidth) : 280;
     window.google.accounts.id.renderButton(wrap, {
       theme: 'outline',
       size: 'large',
-      width: 300,
+      width: btnW,
       text: 'signin_with',
       shape: 'pill',
     });
@@ -134,9 +135,11 @@ function initGoogleGsi() {
   return true;
 }
 
+let configLoaded = false;
 fetch('api/config/public')
   .then(r => r.json())
   .then(cfg => {
+    configLoaded = true;
     if (cfg && cfg.googleClientId) {
       googleClientId = cfg.googleClientId;
       if (!initGoogleGsi()) {
@@ -145,13 +148,15 @@ fetch('api/config/public')
       }
     }
   })
-  .catch(() => {});
+  .catch(() => { configLoaded = true; });
 
 $('gg').onclick = () => {
   if (initGoogleGsi() || googleInitialized) {
     window.google.accounts.id.prompt();
+  } else if (configLoaded && !googleClientId) {
+    st.textContent = 'Google Sign-In belum dikonfigurasi pada server (GOOGLE_CLIENT_ID kosong).';
   } else {
-    st.textContent = 'Memuat layanan Google Sign-In… Pastikan koneksi internet aktif.';
+    st.textContent = 'Memuat layanan Google Sign-In… Pastikan koneksi internet & Origin Google Cloud Console aktif.';
   }
 };
 </script>

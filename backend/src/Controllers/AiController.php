@@ -41,15 +41,25 @@ final class AiController
         $members = ProjectMemberService::list($project);
 
         $apiKey = Config::googleApiKey();
+        $provider = Config::aiProvider();
+        $model = Config::aiModel();
+        $thinkingLevel = Config::aiThinkingLevel();
+        $providerLabel = ($provider === 'vertex' ? 'Vertex AI' : 'AI Studio') . " ({$model})";
+        $diagnostic = '';
+
         if ($apiKey !== '' && function_exists('curl_init')) {
-            $llmResult = self::callGemini($apiKey, $project, $board, $members, $auth->user, $message, $history);
-            if ($llmResult !== null) {
+            $llmResult = self::callGemini($apiKey, $provider, $model, $thinkingLevel, $project, $board, $members, $auth->user, $message, $history);
+            if ($llmResult['ok']) {
                 return Response::json([
                     'reply' => $llmResult['reply'],
                     'proposals' => $llmResult['proposals'],
                     'mode' => 'llm',
+                    'provider' => $providerLabel,
                 ]);
             }
+            $diagnostic = $llmResult['diagnostic'];
+        } elseif ($apiKey === '') {
+            $diagnostic = 'API key Gemini belum dikonfigurasi.';
         }
 
         $fallback = self::fallbackSmartAssistant($project, $board, $members, $auth->user, $message);
@@ -57,21 +67,26 @@ final class AiController
             'reply' => $fallback['reply'],
             'proposals' => $fallback['proposals'],
             'mode' => 'fallback',
+            'provider' => 'smart-rule',
+            'diagnostic' => $diagnostic,
         ]);
     }
 
     /**
-     * @return array{reply:string,proposals:array}|null
+     * @return array{ok:bool,reply?:string,proposals?:array,diagnostic?:string}
      */
     private static function callGemini(
         string $apiKey,
+        string $provider,
+        string $model,
+        string $thinkingLevel,
         array $project,
         array $board,
         array $members,
         array $currentUser,
         string $message,
         array $history
-    ): ?array {
+    ): array {
         $segments = array_map(static fn (array $s) => $s['segment']['name'], $board['segments']);
         if ($segments === []) {
             $segments = ['To Do'];
@@ -162,42 +177,74 @@ PROMPT;
             'parts' => [['text' => $message]],
         ];
 
-        $isVertexKey = str_starts_with($apiKey, 'AQ.');
-        $endpoint = $isVertexKey
-            ? 'https://aiplatform.googleapis.com/v1beta1/publishers/google/models/gemini-2.5-flash:generateContent?key=' . urlencode($apiKey)
-            : 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' . urlencode($apiKey);
+        $base = $provider === 'vertex'
+            ? 'https://aiplatform.googleapis.com/v1beta1/publishers/google/models/'
+            : 'https://generativelanguage.googleapis.com/v1beta/models/';
+        $endpoint = $base . rawurlencode($model) . ':generateContent';
+
+        $genConfig = [
+            'temperature' => 0.25,
+            'responseMimeType' => 'application/json',
+        ];
+        if ($thinkingLevel !== '' && $thinkingLevel !== 'OFF' && $thinkingLevel !== 'NONE') {
+            $genConfig['thinkingConfig'] = ['thinkingLevel' => $thinkingLevel];
+        }
 
         $reqBody = [
             'systemInstruction' => [
                 'parts' => [['text' => $systemPrompt]],
             ],
             'contents' => $contents,
-            'generationConfig' => [
-                'temperature' => 0.25,
-                'responseMimeType' => 'application/json',
-            ],
+            'generationConfig' => $genConfig,
         ];
 
         $ch = curl_init($endpoint);
         curl_setopt_array($ch, [
             CURLOPT_POST => true,
-            CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'x-goog-api-key: ' . $apiKey,
+            ],
             CURLOPT_POSTFIELDS => json_encode($reqBody, JSON_UNESCAPED_UNICODE),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 25,
         ]);
         $raw = curl_exec($ch);
+        $curlErr = curl_error($ch);
         $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
         if (!is_string($raw) || $httpCode < 200 || $httpCode >= 300) {
-            return null;
+            $errMsg = '';
+            if (is_string($raw)) {
+                $errJson = json_decode($raw, true);
+                $errMsg = (string) ($errJson['error']['message'] ?? '');
+            }
+            if ($errMsg === '' && $curlErr !== '') {
+                $errMsg = $curlErr;
+            }
+            $errMsg = str_replace($apiKey, '[redacted]', substr($errMsg, 0, 140));
+            return [
+                'ok' => false,
+                'diagnostic' => $httpCode > 0 ? "HTTP {$httpCode}" . ($errMsg !== '' ? ": {$errMsg}" : '') : "Koneksi gagal: {$errMsg}",
+            ];
         }
 
         $resp = json_decode($raw, true);
-        $text = $resp['candidates'][0]['content']['parts'][0]['text'] ?? null;
-        if (!is_string($text) || trim($text) === '') {
-            return null;
+        $parts = $resp['candidates'][0]['content']['parts'] ?? [];
+        $text = '';
+        if (is_array($parts)) {
+            foreach ($parts as $part) {
+                if (!is_array($part) || !empty($part['thought'])) {
+                    continue;
+                }
+                if (isset($part['text']) && is_string($part['text'])) {
+                    $text .= $part['text'];
+                }
+            }
+        }
+        if (trim($text) === '') {
+            return ['ok' => false, 'diagnostic' => 'Respons model kosong.'];
         }
 
         $clean = trim($text);
@@ -207,6 +254,7 @@ PROMPT;
         $parsed = json_decode($clean, true);
         if (!is_array($parsed) || empty($parsed['reply'])) {
             return [
+                'ok' => true,
                 'reply' => $clean,
                 'proposals' => [],
             ];
@@ -227,6 +275,7 @@ PROMPT;
         }
 
         return [
+            'ok' => true,
             'reply' => (string) $parsed['reply'],
             'proposals' => $proposals,
         ];

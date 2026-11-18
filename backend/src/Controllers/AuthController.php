@@ -19,10 +19,14 @@ final class AuthController
     {
         $clientId = Config::googleClientId();
         $apiKey = Config::googleApiKey();
+        $provider = Config::aiProvider();
         return Response::json([
             'googleClientId' => $clientId !== '' ? $clientId : null,
             'aiEnabled' => true,
-            'aiProvider' => $apiKey !== '' ? 'gemini-vertex' : 'smart-rule',
+            'aiProvider' => $apiKey !== ''
+                ? ($provider === 'vertex' ? 'gemini-vertex' : 'gemini-aistudio')
+                : 'smart-rule',
+            'aiModel' => $apiKey !== '' ? Config::aiModel() : null,
         ]);
     }
 

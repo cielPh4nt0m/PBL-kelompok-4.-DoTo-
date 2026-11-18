@@ -2,7 +2,7 @@
 // Hanya untuk perangkat dengan mouse/trackpad, dan mati kalau user memilih
 // "kurangi animasi". Gaya ada di design.css (.cursor-glow).
 (function () {
-  if (matchMedia('(hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)').matches) return;
+  if (document.documentElement.dataset.motion === 'reduce' || matchMedia('(hover: none), (pointer: coarse), (prefers-reduced-motion: reduce)').matches) return;
 
   var glow = document.createElement('div');
   glow.className = 'cursor-glow';

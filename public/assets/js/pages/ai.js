@@ -4,6 +4,7 @@ import { api, apiWithHeaders, errorText } from '../api.js';
 import { h, STATUS_LABEL } from '../dom.js';
 import { initLayout, showPageError } from '../layout.js';
 import { packDescription } from '../meta.js';
+import { loadAiPrefs, addLog, updateLog, myActiveTasks, buildAutoMessages, notice } from '../ai-prefs.js';
 
 const content = document.getElementById('content');
 const agentApi = apiWithHeaders({
@@ -28,6 +29,10 @@ let activeSegments = ['To Do'];
 let messages = [];
 let resolved = {}; // actionId -> { state: 'running'|'accepted'|'rejected'|'error', label?: string, link?: string, error?: string }
 let draft = '';
+let me = null; // akun yang login
+let aiPrefs = null; // AI Preferences milik akun ini
+const logIds = {}; // actionId -> id entri riwayat
+const lang = () => { try { return localStorage.getItem('doto-lang') === 'en' ? 'en' : 'id'; } catch { return 'id'; } };
 
 async function ensureActiveProject() {
   projects = await api.get('/projects');
@@ -334,8 +339,122 @@ async function generateReply(text) {
   };
 }
 
+// ---- AI Preferences: izin & pesan otomatis ----
+const READ_RE = /\b(ringkas|summar|rekap|status board|minggu ini|overview|macet|stuck|progress|progres|belum selesai|lama|tertunda|stagnan)\b/i;
+function readGate(text) {
+  if (aiPrefs.perms.read) return null;
+  const lower = text.toLowerCase();
+  if (extractDisplayId(text)) return null; // perintah tulis yang menyebut ID task
+  return READ_RE.test(lower) || /^\s*(cari|search|find|temukan)\b/i.test(lower)
+    ? { content: notice('readOff', lang()), proposedActions: [] }
+    : null;
+}
+function logAction(action, status) {
+  logIds[action.id] = addLog(me.id, {
+    kind: 'action',
+    status,
+    title: action.summary,
+    taskId: (action.payload || {}).displayId || '',
+    detail: (action.fields || []).map((f) => `${f.label}: ${f.value}`).join(' · '),
+  });
+}
+function applyPerms(reply) {
+  const rawActions = Array.isArray(reply.proposedActions) && reply.proposedActions.length
+    ? reply.proposedActions
+    : (reply.proposedAction ? [reply.proposedAction] : []);
+  if (rawActions.length === 0) return reply;
+
+  const p = aiPrefs.perms;
+  if (!p.modify) {
+    const blocks = rawActions.map((a) => {
+      logAction(a, 'diblokir');
+      const lines = (a.fields || []).map((f) => `• ${f.label}: ${f.value}`).join('\n');
+      return rawActions.length > 1 ? `${a.summary}\n${lines}` : lines;
+    }).join('\n\n');
+    return {
+      ...reply,
+      content: `${reply.content}\n${blocks}\n\n${notice('modifyOff', lang())}`,
+      proposedAction: undefined,
+      proposedActions: [],
+    };
+  }
+
+  let content = reply.content;
+  let teamNoticed = false;
+  const myEmail = (me?.email || '').toLowerCase();
+  const myNames = [me?.username, me?.name].filter(Boolean).map((x) => String(x).toLowerCase());
+  const keptActions = [];
+
+  for (const a of rawActions) {
+    const payload = a.payload || {};
+    if (!p.team && a.type === 'reassign_task') {
+      const targetEmail = String(payload.assigneeEmail || '').toLowerCase();
+      if (!myEmail || targetEmail !== myEmail) {
+        logAction(a, 'diblokir');
+        if (!teamNoticed) {
+          content += `\n(${notice('teamOff', lang())})`;
+          teamNoticed = true;
+        }
+        continue;
+      }
+    }
+    if (!p.team && a.type === 'create_task') {
+      const hasOtherEmail = Boolean(payload.assigneeEmail && String(payload.assigneeEmail).toLowerCase() !== myEmail);
+      const targetName = String(payload.target || '').trim().toLowerCase();
+      const hasOtherTarget = Boolean(targetName && !myNames.includes(targetName));
+      if (hasOtherEmail || hasOtherTarget) {
+        if (hasOtherEmail) {
+          delete payload.assigneeEmail;
+          a.fields = (a.fields || []).map((f) =>
+            (f.label === 'Assignee' || f.label === 'assigneeEmail' ? { ...f, value: '(current user)' } : f));
+        }
+        if (hasOtherTarget) {
+          delete payload.target;
+          a.fields = (a.fields || []).filter((f) => f.label !== 'target');
+        }
+        if (!teamNoticed) {
+          content += `\n(${notice('teamOff', lang())})`;
+          teamNoticed = true;
+        }
+      }
+    }
+    logAction(a, p.confirm ? 'menunggu' : 'otomatis');
+    keptActions.push(a);
+  }
+
+  if (p.confirm && keptActions.length > 0 && window.DotoNotify && typeof window.DotoNotify.emit === 'function') {
+    window.DotoNotify.emit('agentApproval', 'Agen AI membutuhkan persetujuan', keptActions[0].summary, 'ai.html');
+  }
+
+  return {
+    ...reply,
+    content,
+    proposedAction: undefined,
+    proposedActions: keptActions,
+    autoRun: !p.confirm && keptActions.length > 0,
+  };
+}
+async function openSession() {
+  addLog(me.id, { kind: 'session', title: lang() === 'en' ? 'Chat session opened' : 'Sesi chat dibuka' });
+  const b = aiPrefs.behavior;
+  if (!(b.summary || b.suggestions || b.reminder !== 'off')) return;
+  if (!aiPrefs.perms.read) {
+    messages.push({ id: newId(), role: 'assistant', content: notice('readOff', lang()), auto: true });
+    return;
+  }
+  try {
+    const all = await api.get('/tasks/search?includeArchived=false');
+    const projectsMap = Object.fromEntries(projects.map((p) => [p.id, p.name]));
+    buildAutoMessages({ tasks: myActiveTasks(all, me), projects: projectsMap, prefs: aiPrefs, lang: lang() }).forEach((m) => {
+      messages.push({ id: newId(), role: 'assistant', content: m.text, auto: true });
+      addLog(me.id, { kind: 'auto', title: m.title, detail: m.text, output: true });
+    });
+  } catch { /* pesan otomatis bersifat tambahan: gagal tidak mengganggu chat */ }
+}
+
 async function resolve(action, decision) {
   if (decision === 'rejected') {
+    if (logIds[action.id]) updateLog(me.id, logIds[action.id], { status: 'ditolak' });
     resolved = { ...resolved, [action.id]: { state: 'rejected', label: 'Rejected' } };
     render();
     return;
@@ -401,11 +520,13 @@ async function resolve(action, decision) {
       window.DotoNotify.emit('agentDone', 'Agen AI selesai menjalankan aksi', resultLabel, link || 'ai.html');
     }
 
+    if (logIds[action.id]) updateLog(me.id, logIds[action.id], { status: 'selesai', detail: resultLabel, output: true });
     resolved = {
       ...resolved,
       [action.id]: { state: 'accepted', label: resultLabel, link },
     };
   } catch (err) {
+    if (logIds[action.id]) updateLog(me.id, logIds[action.id], { status: 'gagal', detail: errorText(err) });
     resolved = {
       ...resolved,
       [action.id]: { state: 'error', error: errorText(err) },
@@ -442,9 +563,22 @@ function messageBubble(m) {
   if (m.isError) {
     return h('div', { class: cls }, h('p', { class: 'form-error', style: 'margin:0' }, 'The AI failed to respond. Please try again.'));
   }
+  const actions = Array.isArray(m.proposedActions) && m.proposedActions.length
+    ? m.proposedActions
+    : (m.proposedAction ? [m.proposedAction] : []);
+  const modeLabel = m.role === 'assistant' && !m.isThinking && m.mode
+    ? (m.mode === 'llm'
+        ? (m.provider ? `AI · ${m.provider}` : 'AI · Live')
+        : 'Fallback · Rule-Based')
+    : '';
   return h('div', { class: cls },
+    modeLabel
+      ? h('div', { class: 'ai-meta' },
+          h('span', { class: `ai-mode-badge${m.mode === 'llm' ? '' : ' fallback'}` }, modeLabel),
+          m.diagnostic ? h('span', { class: 'ai-diag' }, m.diagnostic) : null)
+      : null,
     h('p', { style: 'white-space:pre-wrap' }, m.content),
-    m.proposedAction ? actionCard(m.proposedAction) : null);
+    actions.map((a) => actionCard(a)));
 }
 
 function mapBackendProposal(p) {
@@ -462,6 +596,7 @@ function mapBackendProposal(p) {
 }
 
 async function askBackendOrFallback(text) {
+  let backendErr = '';
   try {
     const history = messages
       .filter((m) => !m.isThinking && !m.isError && m.content)
@@ -473,21 +608,27 @@ async function askBackendOrFallback(text) {
       history,
     });
     if (res && typeof res.reply === 'string') {
-      const firstProposal = Array.isArray(res.proposals) && res.proposals.length > 0
-        ? mapBackendProposal(res.proposals[0])
-        : undefined;
-      if (firstProposal && window.DotoNotify && typeof window.DotoNotify.emit === 'function') {
-        window.DotoNotify.emit('agentApproval', 'Agen AI membutuhkan persetujuan', firstProposal.summary, 'ai.html');
-      }
+      const proposedActions = Array.isArray(res.proposals)
+        ? res.proposals.map(mapBackendProposal)
+        : [];
       return {
         content: res.reply,
-        proposedAction: firstProposal,
+        proposedActions,
+        mode: res.mode || 'llm',
+        provider: res.provider || '',
+        diagnostic: res.diagnostic || '',
       };
     }
-  } catch {
-    // Fallback ke rule-based parser lokal bila endpoint offline
+  } catch (err) {
+    backendErr = errorText(err);
   }
-  return generateReply(text);
+  const fb = await generateReply(text);
+  return {
+    ...fb,
+    proposedActions: fb.proposedAction ? [fb.proposedAction] : [],
+    mode: 'fallback',
+    diagnostic: backendErr || 'Endpoint AI tidak merespons',
+  };
 }
 
 async function send(text) {
@@ -498,8 +639,12 @@ async function send(text) {
   draft = '';
   render();
 
+  let autoActions = [];
   try {
-    const reply = await askBackendOrFallback(trimmed);
+    const reply = readGate(trimmed) || applyPerms(await askBackendOrFallback(trimmed));
+    if (reply.autoRun && Array.isArray(reply.proposedActions)) {
+      autoActions = reply.proposedActions;
+    }
     messages = messages.map((m) => (m.id === thinking.id ? { id: m.id, role: 'assistant', ...reply } : m));
   } catch (err) {
     messages = messages.map((m) =>
@@ -509,6 +654,9 @@ async function send(text) {
     );
   }
   render();
+  for (const a of autoActions) {
+    await resolve(a, 'accepted'); // "Confirm before important actions" dimatikan: langsung dijalankan
+  }
 }
 
 function render() {
@@ -557,9 +705,12 @@ function render() {
 }
 
 initLayout('ai')
-  .then(async () => {
+  .then(async (user) => {
+    me = user;
+    aiPrefs = loadAiPrefs(me.id);
     await ensureActiveProject();
     messages = [];
+    await openSession();
     render();
   })
   .catch((e) => showPageError(content, e));

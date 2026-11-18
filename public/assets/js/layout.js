@@ -15,6 +15,11 @@ const LINKS = [
   ['tokens', 'tokens.html', 'Tokens'],
 ];
 
+// Mode compact: Calendar, Projects, dan AI digabung menjadi satu menu "Workspace".
+const navLinks = () => (window.DotoPrefs && window.DotoPrefs.get().compact
+  ? [['welcome', 'welcome.html', 'Welcome'], ['compact', 'compact.html', 'Workspace'], ['tokens', 'tokens.html', 'Tokens']]
+  : LINKS);
+
 // active: kunci menu yang disorot. Mengembalikan data user yang sedang login.
 export async function initLayout(active) {
   let me;
@@ -46,7 +51,7 @@ export async function initLayout(active) {
   // Hover: gear berputar 360° searah jarum jam, pelan-cepat-pelan. Selalu selesai satu putaran penuh.
   let spinning = false;
   const spin = () => {
-    if (spinning || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (spinning || document.documentElement.dataset.motion === 'reduce' || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     spinning = true;
     const done = () => { spinning = false; };
     const anim = settings.firstElementChild.animate(
@@ -61,10 +66,18 @@ export async function initLayout(active) {
   const bar = h('header', { class: 'topbar g1' },
     brand,
     h('nav', { class: 'nav', 'aria-label': 'Main' },
-      LINKS.map(([key, href, label]) =>
+      navLinks().map(([key, href, label]) =>
         h('a', { href, 'aria-current': key === active ? 'page' : null }, label))),
     h('div', { class: 'user-chip' },
-      h('div', { class: 'avatar', 'aria-hidden': 'true' }, me.username.slice(0, 1).toUpperCase()),
+      (() => {
+        let photo = me.avatarUrl || '';
+        if (!photo) {
+          try { photo = localStorage.getItem(`doto-photo:${me.id}`) || ''; } catch { /* ignore */ }
+        }
+        const av = h('div', { class: 'avatar', 'aria-hidden': 'true' }, photo ? '' : me.username.slice(0, 1).toUpperCase());
+        if (photo) av.style.background = `center / cover url(${photo})`;
+        return av;
+      })(),
       h('span', {}, me.username)),
     settings,
     logout);

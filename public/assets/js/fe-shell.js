@@ -3,6 +3,7 @@
 import { api, errorText } from './api.js';
 import { packDescription, unpackMeta, DEFAULT_DUE_DAYS } from './meta.js';
 import { GROUPS, loadPrefs, savePrefs, permission, testNotification, startNotifier } from './notify.js';
+import { AI_DEFAULTS, loadAiPrefs, saveAiPrefs, loadLog, clearLog } from './ai-prefs.js';
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -258,7 +259,7 @@ function buildSidebar() {
 const MODAL = `<div class="scrim" id="scrim" hidden>
   <form class="modal glass" id="taskForm" novalidate role="dialog" aria-modal="true" aria-labelledby="mt">
     <h3 id="mt">Tambah tugas</h3>
-    <p class="sub2">Proyek: Kelompok 4 PBL. Tersimpan langsung di database Doto.</p>
+    <p class="sub2">Proyek: <span id="modalProjName">Kelompok 4 PBL</span>. Tersimpan langsung di database Doto.</p>
     <div class="field"><label for="tt">Judul tugas</label><input id="tt" aria-describedby="ett"><p class="error" id="ett"></p></div>
     <div class="field"><label for="td">Deskripsi</label><textarea id="td"></textarea></div>
     <div class="row2">
@@ -341,6 +342,11 @@ async function init() {
       `<div class="sep"></div>
        <button class="mi" data-act="projects"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4z"/></svg>Buka Semua Proyek (Kanban)</button>
        <button class="mi" data-act="logoutAll"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Logout dari sesi ini</button>`;
+    const miniAv = $('menu').querySelector('.av');
+    if (miniAv && photo) {
+      miniAv.textContent = '';
+      miniAv.style.background = `center / cover url(${photo})`;
+    }
     document.dispatchEvent(new CustomEvent('doto:user-changed'));
   }
 
@@ -402,6 +408,7 @@ async function init() {
   const scrim = $('scrim');
   const tf = $('taskForm');
   const openM = () => {
+    if ($('modalProjName')) $('modalProjName').textContent = activeProject?.name || 'Kelompok 4 PBL';
     scrim.hidden = false;
     if (!$('tdue').value) $('tdue').value = plusDays(DEFAULT_DUE_DAYS);
     $('tt').focus();
@@ -511,6 +518,8 @@ async function init() {
   initSettingsPage();
   initProfilePage();
   initNotificationsPage();
+  initAppearancePage();
+  initAiPrefsPage();
   initSecurityPage();
 }
 
@@ -522,7 +531,7 @@ function initWelcomePage() {
   };
   greet();
   document.addEventListener('doto:user-changed', greet);
-  $('bell').onclick = () => toast('Semua sistem & database terhubung aktif.');
+  $('bell').onclick = () => window.dotoGo('notifications.html');
 
   const dash = $('welcomeDash');
   if (!dash) return;
@@ -652,8 +661,246 @@ function initNotificationsPage() {
     paintPerm();
   };
   $('nfTestBtn').onclick = () => toast(testNotification() ? 'Notifikasi uji dikirim.' : 'Notifikasi uji gagal dikirim.');
-  $('nfBell').onclick = () => toast('Pusat notifikasi di dalam aplikasi belum tersedia.');
+  $('nfBell').onclick = () => {
+    const perm = 'Notification' in window ? Notification.permission : 'unsupported';
+    const msg = !window.isSecureContext
+      ? 'Izin notifikasi browser membutuhkan HTTPS atau localhost.'
+      : perm === 'granted'
+        ? 'Notifikasi browser aktif untuk pengingat tugas.'
+        : 'Aktifkan toggle dan izinkan notifikasi browser di halaman ini.';
+    toast(msg);
+  };
   paintPerm();
+}
+
+// Tombol tahan: harus ditekan 1,2 detik (isi progres kiri -> kanan). Sengaja TIDAK bisa lewat keyboard (Enter/Spasi).
+function holdButton(btn, ms, onDone) {
+  let timer = null;
+  const stop = () => {
+    if (timer) clearTimeout(timer);
+    timer = null;
+    btn.classList.remove('holding');
+  };
+  btn.addEventListener('pointerdown', (e) => {
+    if (e.button > 0) return;
+    stop();
+    btn.classList.add('holding');
+    timer = setTimeout(() => {
+      stop();
+      onDone();
+    }, ms);
+  });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach((ev) => btn.addEventListener(ev, stop));
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') e.preventDefault();
+  });
+  btn.addEventListener('click', (e) => e.preventDefault());
+  btn.addEventListener('contextmenu', (e) => e.preventDefault());
+}
+
+// Halaman Settings > Appearance. Pilihan hanya terlihat di Pratinjau sampai "Simpan Pengaturan" ditahan.
+// Disimpan per perangkat (localStorage lewat window.DotoPrefs di theme.js).
+function initAppearancePage() {
+  if (!$('apGrid')) return;
+  const { toast } = window.Doto;
+  const P = window.DotoPrefs;
+  const clone = (o) => JSON.parse(JSON.stringify(o));
+  let draft = clone(P.get());
+  const NAMES = { blue: 'Blue', purple: 'Purple', teal: 'Teal', orange: 'Orange', pink: 'Pink' };
+  const S = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+  const ic = {
+    light: `<svg ${S}><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>`,
+    dark: `<svg ${S}><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>`,
+    system: `<svg ${S}><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>`,
+    check: `<svg ${S}><path d="M5 12l5 5 9-10"/></svg>`,
+    list: `<svg ${S}><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>`,
+    board: `<svg ${S}><rect x="3" y="4" width="7" height="16" rx="1.5"/><rect x="14" y="4" width="7" height="10" rx="1.5"/></svg>`,
+  };
+  const THEMES = [['light', 'Light', 'lt'], ['dark', 'Dark', 'dk'], ['system', 'System', 'sy']];
+  const SAMPLE = [
+    { t: 'Desain UI Halaman Dashboard', d: 'Buat wireframe dan prototipe halaman utama aplikasi.', due: '20 Jun 2025', u: '@ocipiyik', s: 'In Progress' },
+    { t: 'Rancang API Notifikasi', d: 'Tentukan endpoint dan format data.', due: '24 Jun 2025', u: '@erhan', s: 'Todo' },
+    { t: 'Tulis Laporan Mingguan', d: 'Rangkum progres tim.', due: '27 Jun 2025', u: '@fadila', s: 'Needs Review' },
+  ];
+  const sw = (k, on) => `<button type="button" class="nf-sw" role="switch" aria-checked="${on}" data-k="${k}" aria-label="${k}"><i></i></button>`;
+
+  function renderControls() {
+    $('apThemes').innerHTML = THEMES.map(([k, label, c]) => `<button type="button" class="ap-theme" role="radio" aria-checked="${draft.theme === k}" data-theme="${k}"><span class="ap-th ${c === 'dk' ? 'dk' : c === 'sy' ? 'sy' : ''}"><i></i><b></b><b></b></span><span>${ic[k]}${label}<em class="ck">${ic.check}</em></span></button>`).join('');
+    $('apAccents').innerHTML = Object.keys(P.ACCENTS).map((k) => `<button type="button" class="ap-acc" role="radio" aria-checked="${draft.accent === k}" data-accent="${k}" style="--c:${P.ACCENTS[k]}"><i>${ic.check}</i>${NAMES[k]}</button>`).join('');
+    $('apSize').innerHTML = [['small', 'Small'], ['medium', 'Medium'], ['large', 'Large']].map(([k, l]) => `<button type="button" role="radio" aria-checked="${draft.text === k}" data-text="${k}">${l}</button>`).join('');
+    $('apView').innerHTML = [['list', 'List'], ['board', 'Board']].map(([k, l]) => `<button type="button" role="radio" aria-checked="${draft.taskView === k}" data-view="${k}">${ic[k]}${l}</button>`).join('');
+    $('apCompact').innerHTML = sw('compact', draft.compact);
+    $('apMotion').innerHTML = sw('reduceMotion', draft.reduceMotion);
+  }
+  function renderPreview() {
+    const pv = $('pv');
+    pv.dataset.theme = P.resolve(draft);
+    pv.dataset.accent = draft.accent;
+    pv.dataset.text = draft.text;
+    pv.dataset.view = draft.taskView;
+    pv.dataset.motion = draft.reduceMotion ? 'reduce' : 'full';
+    const card = (x) => `<article class="pv-task"><div><b>${x.t}</b><span class="pv-chip">${x.s}</span></div><p>${x.d}</p><footer><span class="d">Due: ${x.due}</span><span>${x.u}</span></footer></article>`;
+    $('pvTasks').innerHTML = draft.taskView === 'list' ? SAMPLE.map(card).join('') : card(SAMPLE[0]);
+    $('pvAcc').textContent = `${NAMES[draft.accent]} (aktif)`;
+    $('apDirty').hidden = JSON.stringify(draft) === JSON.stringify(P.get());
+  }
+  const renderAll = () => {
+    renderControls();
+    renderPreview();
+  };
+
+  $('apGrid').addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b || b.classList.contains('hold')) return;
+    if (b.dataset.theme) draft.theme = b.dataset.theme;
+    else if (b.dataset.accent) draft.accent = b.dataset.accent;
+    else if (b.dataset.text) draft.text = b.dataset.text;
+    else if (b.dataset.view) draft.taskView = b.dataset.view;
+    else if (b.dataset.k) draft[b.dataset.k] = b.getAttribute('aria-checked') !== 'true';
+    else return;
+    renderAll();
+  });
+  holdButton($('apSave'), 1200, () => {
+    P.set(draft);
+    renderAll();
+    toast('Pengaturan disimpan.');
+  });
+  holdButton($('apReset'), 1200, () => {
+    draft = clone(P.DEFAULTS);
+    P.set(draft);
+    renderAll();
+    toast('Pengaturan dikembalikan ke default.');
+  });
+  $('apBell').onclick = () => window.dotoGo('notifications.html');
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', renderPreview);
+  renderAll();
+}
+
+// Halaman Settings > AI Preferences (per akun). Perubahan baru berlaku setelah "Simpan Preferensi" ditahan 1,2 detik.
+function initAiPrefsPage() {
+  if (!$('aipGrid')) return;
+  const { toast, esc } = window.Doto;
+  const uid = currentUser.id;
+  const clone = (o) => JSON.parse(JSON.stringify(o));
+  let draft = loadAiPrefs(uid);
+  const open = new Set(); // panel riwayat yang sedang terbuka
+  const S = 'width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+  const ic = {
+    chat: `<svg ${S}><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>`,
+    shield: `<svg ${S}><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>`,
+    chip: `<svg ${S}><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>`,
+    pulse: `<svg ${S}><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>`,
+    eye: `<svg ${S}><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>`,
+    users: `<svg ${S}><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0"/><circle cx="17" cy="9" r="2.5"/></svg>`,
+    edit: `<svg ${S}><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>`,
+    trash: `<svg ${S}><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>`,
+    lock: `<svg ${S}><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`,
+    spark: `<svg ${S}><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg>`,
+    pin: `<svg ${S}><path d="M12 21s7-6 7-12a7 7 0 0 0-14 0c0 6 7 12 7 12z"/><circle cx="12" cy="9" r="2"/></svg>`,
+    bell: `<svg ${S}><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg>`,
+    list: `<svg ${S}><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>`,
+    db: `<svg ${S}><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>`,
+    clock: `<svg ${S}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`,
+  };
+  const sw = (k, on, label) => `<button type="button" class="nf-sw" role="switch" aria-checked="${on}" aria-label="${esc(label)}" data-k="${k}"><i></i></button>`;
+  const seg = (name, opts, cur) => `<div class="ap-seg" role="radiogroup">${opts.map(([v, l]) => `<button type="button" role="radio" aria-checked="${cur === v}" data-seg="${name}" data-v="${v}">${l}</button>`).join('')}</div>`;
+  const card = (n, title, sub, icon, body) => `<section class="aip-card"><header><span class="nf-ico">${icon}</span><div><h2>${n}. ${title}</h2><small>${sub}</small></div></header><div class="aip-body">${body}</div></section>`;
+  const when = (ts) => new Date(ts).toLocaleString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  const li = (e) => `<li><small>${when(e.ts)}</small><b>${esc(e.title || '')}</b>${e.status ? `<span class="aip-st st-${e.status}">${e.status}</span>` : ''}${e.detail ? `<small class="aip-d">${esc(e.detail)}</small>` : ''}</li>`;
+  const list = (items, empty) => (items.length ? `<ul class="aip-list">${items.map(li).join('')}</ul>` : `<p class="cal-empty">${empty}</p>`);
+
+  function activityRows() {
+    const log = loadLog(uid);
+    const acts = log.filter((e) => e.kind === 'action');
+    const outs = log.filter((e) => e.output);
+    const count = (s) => acts.filter((e) => e.status === s).length;
+    const rows = [
+      ['hist', 'clock', 'Riwayat Aktivitas Agen AI', 'Lihat log tindakan yang dilakukan AI dalam sesi chat Anda.', list(log.slice(0, 30), 'Belum ada aktivitas AI.')],
+      ['stat', 'pulse', 'Status Pekerjaan AI', 'Periksa tugas yang sedang dan telah diproses oleh AI.',
+        `<p class="aip-sum">Menunggu ${count('menunggu')} · Selesai ${count('selesai') + count('otomatis')} · Ditolak ${count('ditolak')} · Gagal ${count('gagal')} · Diblokir ${count('diblokir')}</p>${list(acts.slice(0, 20), 'Belum ada tugas yang diproses AI.')}`],
+      ['res', 'list', 'Hasil Pekerjaan AI', 'Tinjau output dan rekomendasi yang dihasilkan AI.', list(outs.slice(0, 20), 'Belum ada hasil pekerjaan AI.')],
+      ['info', 'db', 'Informasi Penggunaan Data', 'Pelajari data apa saja yang digunakan untuk melatih dan menjalankan AI.',
+        '<p>Agen AI hanya memakai data proyek dan tugas yang Anda izinkan di bagian AI Permissions untuk menyusun ringkasan, saran, dan pengingat.</p><p>Preferensi dan riwayat aktivitas ini milik akun Anda dan tidak dibagikan di luar proyek tanpa izin eksplisit.</p><p>Pada versi prototype ini semuanya tersimpan di browser Anda. Setelah backend tersedia, penyimpanan berpindah ke server akun Anda.</p>'],
+      ['ret', 'trash', 'Retensi & Penghapusan Riwayat', 'Keterangan fitur ini bergantung pada kebijakan tim dan dukungan platform.',
+        `<label class="ap-lab" for="aipRet">Simpan riwayat selama</label><select id="aipRet" class="aip-sel" data-sel="retention">${[['7', '7 hari'], ['30', '30 hari'], ['90', '90 hari'], ['forever', 'Selamanya']].map(([v, l]) => `<option value="${v}"${draft.retention === v ? ' selected' : ''}>${l}</option>`).join('')}</select><p class="aip-sum">${log.length} entri tersimpan. Entri yang lebih lama dari pilihan ini dihapus otomatis setelah disimpan.</p><button type="button" class="ap-btn aip-del hold" id="aipDel" title="Tekan dan tahan">${ic.trash}<span>Hapus semua riwayat</span></button><p class="ap-note">Tekan dan tahan 1,2 detik.</p>`],
+    ];
+    return rows.map(([k, i, t, d, body]) => `<details class="aip-act" data-d="${k}"${open.has(k) ? ' open' : ''}><summary>${ic[i]}<div><b>${t}</b><small>${d}</small></div></summary><div class="aip-panel">${body}</div></details>`).join('');
+  }
+
+  function render() {
+    const p = draft;
+    const perm = (k, icon, title, desc) => `<div class="aip-row">${ic[icon]}<div><b>${title}</b><small>${desc}</small></div>${sw(`perm:${k}`, p.perms[k], title)}</div>`;
+    $('aipLeft').innerHTML =
+      card(1, 'Response Preferences', 'Mengatur cara AI berkomunikasi dengan pengguna.', ic.chat,
+        `<div class="aip-f"><div class="ap-lab">Response Style</div><div class="aip-opts" role="radiogroup">${[['concise', 'Concise', 'Singkat & langsung'], ['detailed', 'Detailed', 'Lengkap & terperinci']].map(([v, t, d]) => `<button type="button" class="aip-opt" role="radio" aria-checked="${p.style === v}" data-seg="style" data-v="${v}"><b>${t}</b><small>${d}</small></button>`).join('')}</div></div>
+         <div class="aip-f"><div class="ap-lab">Tone</div>${seg('tone', [['professional', 'Professional'], ['friendly', 'Friendly']], p.tone)}</div>
+         <div class="aip-f"><div class="ap-lab">Response Format</div>${seg('format', [['paragraph', 'Paragraph'], ['bullets', 'Bullet Points']], p.format)}</div>`) +
+      card(3, 'AI Behavior', 'Mengatur bagaimana Agen AI membantu pekerjaan.', ic.chip,
+        `<div class="aip-row">${ic.spark}<div><b>Task Summary</b><small>Ringkasan otomatis tugas-tugas aktif</small></div>${sw('beh:summary', p.behavior.summary, 'Task Summary')}</div>
+         <div class="aip-row">${ic.pin}<div><b>Task Suggestions</b><small>Saran tugas berdasarkan konteks proyek</small></div>${sw('beh:suggestions', p.behavior.suggestions, 'Task Suggestions')}</div>
+         <div class="aip-f"><div class="ap-lab">${ic.list}Prioritas Rekomendasi Tugas</div>${seg('priority', [['deadline', 'Deadline'], ['priority', 'Prioritas'], ['workload', 'Workload']], p.behavior.priority)}</div>
+         <div class="aip-f"><label class="ap-lab" for="aipRem">${ic.bell}Preferensi Pengingat melalui AI</label><select id="aipRem" class="aip-sel" data-sel="reminder">${[['off', 'Tidak ada pengingat'], ['30', '30 menit sebelum deadline'], ['60', '1 jam sebelum deadline'], ['180', '3 jam sebelum deadline'], ['1440', '1 hari sebelum deadline']].map(([v, l]) => `<option value="${v}"${p.behavior.reminder === v ? ' selected' : ''}>${l}</option>`).join('')}</select><p class="ap-hint">Misalnya, AI membantu menyarankan tugas yang harus dikerjakan lebih dulu.</p></div>`);
+    $('aipRight').innerHTML =
+      card(2, 'AI Permissions', 'Mengatur batas akses dan tindakan Agen AI.', ic.shield,
+        perm('read', 'eye', 'Read project & task data', 'AI dapat membaca informasi proyek yang diizinkan.') +
+        perm('team', 'users', 'Access team information', 'AI dapat melihat informasi tim yang diperlukan.') +
+        perm('modify', 'edit', 'Create or modify tasks', 'AI dapat mengusulkan atau melakukan perubahan tugas sesuai izin.') +
+        perm('delete', 'trash', 'Delete task permission', 'AI tidak dapat menghapus tugas tanpa konfirmasi eksplisit.') +
+        perm('confirm', 'lock', 'Confirm before important actions', 'Minta persetujuan sebelum menghapus atau mengubah data penting.') +
+        '<p class="aip-note warn">Akses mengikuti role, izin proyek, dan kebijakan tim.</p>') +
+      card(4, 'AI Activity & Privacy', 'Pantau dan kelola aktivitas serta data Agen AI.', ic.pulse,
+        `<div class="aip-acts">${activityRows()}</div><p class="aip-note ok">Data aktivitas AI tidak digunakan untuk keperluan di luar proyek Anda tanpa izin eksplisit.</p>`);
+    $('aipDirty').hidden = JSON.stringify(draft) === JSON.stringify(loadAiPrefs(uid));
+    if ($('aipDel')) {
+      holdButton($('aipDel'), 1200, () => {
+        clearLog(uid);
+        toast('Semua riwayat AI dihapus.');
+        render();
+      });
+    }
+  }
+
+  $('aipGrid').addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b || b.classList.contains('hold')) return;
+    if (b.dataset.seg) {
+      const k = b.dataset.seg;
+      if (k === 'priority') draft.behavior.priority = b.dataset.v;
+      else draft[k] = b.dataset.v;
+    } else if (b.dataset.k) {
+      const [grp, key] = b.dataset.k.split(':');
+      const target = grp === 'perm' ? draft.perms : draft.behavior;
+      target[key] = b.getAttribute('aria-checked') !== 'true';
+    } else return;
+    render();
+  });
+  $('aipGrid').addEventListener('change', (e) => {
+    const s = e.target.dataset && e.target.dataset.sel;
+    if (s === 'reminder') draft.behavior.reminder = e.target.value;
+    else if (s === 'retention') draft.retention = e.target.value;
+    else return;
+    render();
+  });
+  $('aipGrid').addEventListener('toggle', (e) => {
+    const d = e.target && e.target.dataset && e.target.dataset.d;
+    if (!d) return;
+    if (e.target.open) open.add(d);
+    else open.delete(d);
+  }, true);
+  holdButton($('aipSave'), 1200, () => {
+    saveAiPrefs(uid, draft);
+    draft = loadAiPrefs(uid);
+    render();
+    toast('Preferensi AI disimpan.');
+  });
+  holdButton($('aipReset'), 1200, () => {
+    draft = clone(AI_DEFAULTS);
+    saveAiPrefs(uid, draft);
+    render();
+    toast('Preferensi AI dikembalikan ke default.');
+  });
+  $('aipBell').onclick = () => window.dotoGo('notifications.html');
+  render();
 }
 
 const PF_I18N = {
@@ -966,7 +1213,7 @@ function initProfilePage() {
       : `<p class="cal-empty" style="padding:12px">${esc(tr('noProj'))}</p>`;
     buildTeams();
   });
-  $('pfBell').onclick = () => toast('Notifikasi belum tersedia.');
+  $('pfBell').onclick = () => window.dotoGo('notifications.html');
   fill();
   setEditing(false);
 }
@@ -1055,14 +1302,15 @@ function initSecurityPage() {
 }
 
 // Halaman Settings: daftar kategori + pencarian pengaturan.
+// Saat halaman tiap kategori sudah dibuat, isi alamatnya di SETTINGS_PAGES (null = belum tersedia).
 function initSettingsPage() {
   if (!$('setList')) return;
   const { toast } = window.Doto;
   const SETTINGS_PAGES = {
     profile: 'profile.html',
     notifications: 'notifications.html',
-    appearance: '#theme',
-    ai: 'ai.html',
+    appearance: 'appearance.html',
+    ai: 'ai-preferences.html',
     security: 'security.html',
   };
   const norm = (s) => String(s ?? '').toLowerCase();
@@ -1070,16 +1318,7 @@ function initSettingsPage() {
 
   rows.forEach((r) => {
     r.onclick = () => {
-      const key = r.dataset.key;
-      if (key === 'appearance') {
-        if (window.DotoTheme && typeof window.DotoTheme.toggle === 'function') {
-          window.DotoTheme.toggle();
-          const cur = window.DotoTheme.get() === 'dark' ? 'Gelap (Dark)' : 'Terang (Light)';
-          toast(`Tema diubah ke mode ${cur}.`);
-        }
-        return;
-      }
-      const to = SETTINGS_PAGES[key];
+      const to = SETTINGS_PAGES[r.dataset.key];
       if (to) window.dotoGo(to);
       else toast(`${r.querySelector('b').textContent} belum tersedia.`);
     };
@@ -1104,7 +1343,7 @@ function initSettingsPage() {
     }
   };
 
-  // Bahasa: baru menyimpan pilihan (terjemahan antarmuka belum ada)
+  // Bahasa: berlaku langsung pada halaman Profil
   const paintLang = (l) => document.querySelectorAll('#setLang button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === l)));
   let lang = 'id';
   try { lang = localStorage.getItem('doto-lang') || 'id'; } catch { /* abaikan */ }
@@ -1114,9 +1353,9 @@ function initSettingsPage() {
     if (!b) return;
     try { localStorage.setItem('doto-lang', b.dataset.lang); } catch { /* abaikan */ }
     paintLang(b.dataset.lang);
-    toast('Pilihan bahasa disimpan. Terjemahan antarmuka menyusul.');
+    toast(b.dataset.lang === 'en' ? 'Language set to English (applied to Profile).' : 'Bahasa diatur ke Bahasa Indonesia.');
   };
-  $('setBell').onclick = () => toast('Notifikasi belum tersedia.');
+  $('setBell').onclick = () => window.dotoGo('notifications.html');
 }
 
 init().catch((err) => {
