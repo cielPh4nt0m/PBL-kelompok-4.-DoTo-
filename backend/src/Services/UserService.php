@@ -298,7 +298,7 @@ final class UserService
     private static function ensureUserInK4Project(\PDO $pdo, string $userId): void
     {
         $project = \App\Repositories\ProjectRepository::findByKey($pdo, 'K4');
-        if ($project !== null) {
+        if ($project !== null && !\App\Repositories\ProjectMemberRepository::isMember($pdo, $project['id'], $userId)) {
             \App\Repositories\ProjectMemberRepository::add($pdo, $project['id'], $userId, Database::nowMs());
         }
     }

@@ -26,7 +26,7 @@ final class ProjectMemberRepository
 
     public static function add(\PDO $pdo, string $projectId, string $userId, int $joinedAt): void
     {
-        $pdo->prepare('INSERT INTO project_members (project_id, user_id, joined_at) VALUES (?, ?, ?)')
+        $pdo->prepare('INSERT IGNORE INTO project_members (project_id, user_id, joined_at) VALUES (?, ?, ?)')
             ->execute([$projectId, $userId, $joinedAt]);
     }
 
