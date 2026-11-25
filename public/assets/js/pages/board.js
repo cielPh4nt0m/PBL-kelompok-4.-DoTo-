@@ -10,10 +10,147 @@ let meName = 'Tim';
 let targetNames = ['Dosen Pembina', 'Semua tim'];
 let openFormSegment = null; // id segment yang sedang menampilkan form "+ Task"
 
+// Drag-and-drop kartu antar status dan antar segment. Pointer Events dipakai
+// (bukan HTML5 DnD) supaya jalan juga di layar sentuh; di sentuhan drag aktif
+// setelah tahan sebentar agar geser biasa tetap men-scroll board.
+const DRAG_THRESHOLD = 6;
+const TOUCH_HOLD_MS = 280;
+const EDGE = 48;
+let drag = null;
+
+function startDrag(e, task) {
+  if (e.button !== 0 || drag || e.target.closest('select, button, input')) return;
+  drag = { task, card: e.currentTarget, x: e.clientX, y: e.clientY, startX: e.clientX, startY: e.clientY,
+    touch: e.pointerType !== 'mouse', active: false, target: null, ghost: null, timer: 0, raf: 0 };
+  if (drag.touch) drag.timer = setTimeout(activateDrag, TOUCH_HOLD_MS);
+  addEventListener('pointermove', moveDrag);
+  addEventListener('pointerup', endDrag);
+  addEventListener('pointercancel', finishDrag);
+  addEventListener('keydown', keyDrag);
+  addEventListener('touchmove', blockTouchScroll, { passive: false });
+  addEventListener('contextmenu', blockContextMenu);
+}
+
+function activateDrag() {
+  const { card } = drag;
+  const rect = card.getBoundingClientRect();
+  drag.offX = drag.startX - rect.left;
+  drag.offY = drag.startY - rect.top;
+  drag.ghost = card.cloneNode(true);
+  drag.ghost.classList.remove('dragging');
+  drag.ghost.classList.add('drag-ghost');
+  drag.ghost.style.width = `${rect.width}px`;
+  document.body.append(drag.ghost);
+  card.classList.add('dragging');
+  document.body.classList.add('is-dragging');
+  // scroll-snap mengembalikan auto-scroll kecil ke titik snap; matikan selama drag.
+  const board = content.querySelector('.board');
+  if (board) board.style.scrollSnapType = 'none';
+  drag.active = true;
+  if (drag.touch) navigator.vibrate?.(12);
+  placeGhost();
+  drag.raf = requestAnimationFrame(autoScroll);
+}
+
+function moveDrag(e) {
+  drag.x = e.clientX;
+  drag.y = e.clientY;
+  if (drag.active) return placeGhost();
+  if (Math.hypot(drag.x - drag.startX, drag.y - drag.startY) <= DRAG_THRESHOLD) return;
+  if (drag.touch) finishDrag(); // geser sebelum tahan selesai = scroll biasa
+  else activateDrag();
+}
+
+function placeGhost() {
+  drag.ghost.style.transform = `translate(${drag.x - drag.offX}px, ${drag.y - drag.offY}px) rotate(2deg)`;
+  const group = document.elementFromPoint(drag.x, drag.y)?.closest('.status-group') ?? null;
+  if (group === drag.target) return;
+  drag.target?.classList.remove('drop-target');
+  drag.target = group;
+  group?.classList.add('drop-target');
+}
+
+function autoScroll() {
+  const board = content.querySelector('.board');
+  if (board) {
+    const r = board.getBoundingClientRect();
+    if (drag.x < r.left + EDGE) board.scrollLeft -= 14;
+    else if (drag.x > r.right - EDGE) board.scrollLeft += 14;
+  }
+  if (drag.y < EDGE) scrollBy(0, -14);
+  else if (drag.y > innerHeight - EDGE) scrollBy(0, 14);
+  placeGhost();
+  drag.raf = requestAnimationFrame(autoScroll);
+}
+
+function blockTouchScroll(e) {
+  if (drag?.active) e.preventDefault();
+}
+
+function blockContextMenu(e) {
+  if (drag?.touch) e.preventDefault(); // tahan lama di HP jangan memunculkan menu tautan
+}
+
+function keyDrag(e) {
+  if (e.key === 'Escape') finishDrag();
+}
+
+function swallowClick(e) {
+  e.preventDefault();
+  e.stopPropagation();
+}
+
+function finishDrag() {
+  const done = drag;
+  if (!done) return null;
+  drag = null;
+  clearTimeout(done.timer);
+  cancelAnimationFrame(done.raf);
+  removeEventListener('pointermove', moveDrag);
+  removeEventListener('pointerup', endDrag);
+  removeEventListener('pointercancel', finishDrag);
+  removeEventListener('keydown', keyDrag);
+  removeEventListener('touchmove', blockTouchScroll);
+  removeEventListener('contextmenu', blockContextMenu);
+  done.ghost?.remove();
+  done.card.classList.remove('dragging');
+  done.target?.classList.remove('drop-target');
+  document.body.classList.remove('is-dragging');
+  const board = content.querySelector('.board');
+  if (board) board.style.scrollSnapType = '';
+  if (done.active) {
+    // Klik yang dikirim browser tepat setelah pointerup tidak boleh membuka detail tugas.
+    addEventListener('click', swallowClick, { capture: true, once: true });
+    setTimeout(() => removeEventListener('click', swallowClick, { capture: true }), 0);
+  }
+  return done;
+}
+
+async function endDrag() {
+  const done = finishDrag();
+  if (!done?.active || !done.target) return;
+  const { task, card, target } = done;
+  const { segmentId, status } = target.dataset;
+  if (segmentId === task.segmentId && status === task.status) return;
+  target.append(card); // pindah langsung di layar; render() di bawah menyinkronkan
+  const id = encodeURIComponent(task.displayId);
+  try {
+    if (segmentId !== task.segmentId) await api.patch(`/tasks/${id}`, { segmentId });
+    if (status !== task.status) await api.patch(`/tasks/${id}/status`, { status });
+  } catch (err) {
+    alert(errorText(err));
+  }
+  await render();
+}
+
 function taskCard(task) {
   const href = `task.html?id=${encodeURIComponent(task.displayId)}`;
-  return h('div', { class: `task-card g2 lift${task.archivedAt ? ' archived' : ''}` },
-    h('a', { href },
+  return h('div', {
+    class: `task-card g2 lift${task.archivedAt ? ' archived' : ''}`,
+    onpointerdown: task.archivedAt ? null : (e) => startDrag(e, task),
+    ondragstart: (e) => e.preventDefault(),
+  },
+    h('a', { href, draggable: 'false' },
       h('div', { class: 'task-card-top' },
         h('span', { class: 'mono' }, task.displayId),
         h('span', { class: `pill ${task.priority}` }, task.priority)),
@@ -72,7 +209,7 @@ function segmentColumn({ segment, tasks }) {
     h('h2', {}, segment.name, h('span', { class: 'chip' }, String(tasks.length))),
     STATUSES.map((status) => {
       const list = tasks.filter((t) => t.status === status);
-      return h('div', { class: 'status-group' },
+      return h('div', { class: 'status-group', 'data-segment-id': segment.id, 'data-status': status },
         h('h3', { class: 'label-caps' }, STATUS_LABEL[status], h('span', {}, String(list.length))),
         list.map(taskCard));
     }),
