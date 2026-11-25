@@ -1,29 +1,29 @@
-# Graph Report - PBL-kelompok-4.-DoTo-  (2026-11-18)
+# Graph Report - PBL-kelompok-4.-DoTo-  (2026-11-25)
 
 ## Corpus Check
-- 103 files · ~359,069 words
+- 104 files · ~522,411 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 883 nodes · 2051 edges · 57 communities (48 shown, 9 thin omitted)
-- Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 49 edges (avg confidence: 0.85)
+- 922 nodes · 2111 edges · 59 communities (49 shown, 10 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 61 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `cb01ef2b`
+- Built from commit: `38fe5b53`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - Request
-- h
+- public/assets/js/pages/ai.js
 - Uuid
 - DoTo
 - schema-postgres.sql
 - package.json
-- assets/js/pages/ai.js
+- h
 - doto.js
-- public/assets/js/pages/ai.js
+- Kamus Data Lengkap (Data Dictionary — 12 Tabel)
 - Database
 - TaskRepository
 - public/assets/js/fe-shell.js
@@ -47,20 +47,22 @@
 - mock-api.js
 - TaskService
 - init
-- assets/js/pages/calendar.js
-- public/assets/js/layout.js
-- initAiPrefsPage
-- Validator
+- Desain Database DoTo
+- 2. Unified Modeling Language (UML)
 - assets/js/ai-prefs.js
+- Validator
+- assets/js/pages/ai.js
 - public/assets/js/ai-prefs.js
 - initAiPrefsPage
-- public/assets/js/meta.js
-- ValidationException
+- 1. Data Flow Diagram (DFD)
+- routes.php
 - SegmentRepository
 - DoTo – versi interface saja
 - assets/js/theme.js
 - Permintaan ke Backend: AI Preferences (pengaturan, izin, dan riwayat Agen AI)
 - Permintaan ke Backend: pengaturan & pemicu notifikasi
+- Menjalankan di lokal
+- database.md
 
 ## God Nodes (most connected - your core abstractions)
 1. `Request` - 58 edges
@@ -79,33 +81,33 @@
   public/assets/js/pages/ai.js → assets/js/mock-api.js
 - `openSession()` --indirect_call--> `me()`  [INFERRED]
   assets/js/pages/ai.js → assets/js/mock-api.js
+- `initAppearancePage()` --calls--> `clone()`  [EXTRACTED]
+  assets/js/fe-shell.js → assets/js/ai-prefs.js
 - `checkAiReminders()` --calls--> `loadAiPrefs()`  [EXTRACTED]
   assets/js/notify.js → assets/js/ai-prefs.js
 - `checkAiReminders()` --calls--> `addLog()`  [EXTRACTED]
   assets/js/notify.js → assets/js/ai-prefs.js
-- `logAction()` --calls--> `addLog()`  [EXTRACTED]
-  assets/js/pages/ai.js → assets/js/ai-prefs.js
 
 ## Import Cycles
 - None detected.
 
-## Communities (57 total, 9 thin omitted)
+## Communities (59 total, 10 thin omitted)
 
 ### Community 0 - "Request"
 Cohesion: 0.14
 Nodes (5): Authenticator, ProjectMemberController, TokenController, self, Request
 
-### Community 1 - "h"
-Cohesion: 0.17
-Nodes (27): errorText(), formatDate(), h(), param(), PRIORITIES, STATUS_LABEL, STATUSES, statusSelect() (+19 more)
+### Community 1 - "public/assets/js/pages/ai.js"
+Cohesion: 0.05
+Nodes (93): NOTICE, api, ApiError, apiWithHeaders(), errorText(), request(), formatDate(), h() (+85 more)
 
 ### Community 2 - "Uuid"
-Cohesion: 0.15
+Cohesion: 0.14
 Nodes (5): ConflictException, HttpException, NotFoundException, Uuid, RuntimeException
 
 ### Community 3 - "DoTo"
-Cohesion: 0.09
-Nodes (19): CDM (Conceptual Data Model), Constraint dan index, Desain Database DoTo, Nilai enum, PDM (Physical Data Model), Trigger MySQL/MariaDB, View, Alat pengembang DoTo PBL (+11 more)
+Cohesion: 0.33
+Nodes (6): API, CLI, DoTo, Kebutuhan, MCP server (agent AI), Struktur
 
 ### Community 4 - "schema-postgres.sql"
 Cohesion: 0.29
@@ -115,25 +117,25 @@ Nodes (13): api_tokens, create_project(), create_task(), projects, segments, tas
 Cohesion: 0.12
 Nodes (16): bin, doto-mcp, dependencies, @modelcontextprotocol/sdk, zod, description, engines, node (+8 more)
 
-### Community 6 - "assets/js/pages/ai.js"
+### Community 6 - "h"
 Cohesion: 0.06
-Nodes (80): api, ApiError, apiWithHeaders(), errorText(), request(), formatDate(), h(), param() (+72 more)
+Nodes (73): api, ApiError, apiWithHeaders(), errorText(), request(), formatDate(), h(), param() (+65 more)
 
 ### Community 7 - "doto.js"
 Cohesion: 0.16
 Nodes (11): api, COMMANDS, configPath, fail(), help(), main(), PRIORITIES, readConfig() (+3 more)
 
-### Community 8 - "public/assets/js/pages/ai.js"
-Cohesion: 0.13
-Nodes (28): NOTICE, actionCard(), activeSegments, agentApi, applyPerms(), askBackendOrFallback(), content, detectPriority() (+20 more)
+### Community 8 - "Kamus Data Lengkap (Data Dictionary — 12 Tabel)"
+Cohesion: 0.15
+Nodes (13): 10. `task_archive_queue`, 11. `task_assignment_history`, 12. `schema_migrations` *(dibuat otomatis oleh `migrate.php`)*, 1. `users`, 2. `api_tokens`, 3. `notification_preferences`, 4. `projects`, 5. `project_members` (+5 more)
 
 ### Community 9 - "Database"
 Cohesion: 0.13
 Nodes (4): Database, PDO, PDO, UserService
 
 ### Community 11 - "public/assets/js/fe-shell.js"
-Cohesion: 0.11
-Nodes (22): activeProject, allProjects, COLORS, diffDays(), DotoTasks, ensureProjectAndTasks(), fmtDate(), loadMine() (+14 more)
+Cohesion: 0.10
+Nodes (24): activeProject, allProjects, COLORS, diffDays(), DotoTasks, ensureProjectAndTasks(), fmtDate(), loadMine() (+16 more)
 
 ### Community 12 - "schema.sql"
 Cohesion: 0.35
@@ -172,44 +174,44 @@ Cohesion: 0.13
 Nodes (20): buildSidebar(), colorOf(), esc(), ini(), init(), renderAccount(), toast(), initAppearancePage() (+12 more)
 
 ### Community 35 - "assets/js/fe-shell.js"
-Cohesion: 0.10
-Nodes (22): activeProject, allProjects, COLORS, diffDays(), DotoTasks, ensureProjectAndTasks(), fmtDate(), loadMine() (+14 more)
+Cohesion: 0.09
+Nodes (24): AI_DEFAULTS, activeProject, allProjects, COLORS, diffDays(), DotoTasks, ensureProjectAndTasks(), fmtDate() (+16 more)
 
 ### Community 36 - "public/assets/js/notify.js"
-Cohesion: 0.23
-Nodes (21): initNotificationsPage(), emit(), GROUP_OF, GROUPS, isOn(), loadPrefs(), permission(), rd() (+13 more)
+Cohesion: 0.25
+Nodes (20): initNotificationsPage(), emit(), GROUP_OF, isOn(), loadPrefs(), permission(), rd(), savePrefs() (+12 more)
 
 ### Community 37 - "assets/js/notify.js"
-Cohesion: 0.23
-Nodes (20): initNotificationsPage(), emit(), GROUP_OF, GROUPS, isOn(), loadPrefs(), permission(), rd() (+12 more)
+Cohesion: 0.25
+Nodes (19): initNotificationsPage(), emit(), GROUP_OF, isOn(), loadPrefs(), permission(), rd(), savePrefs() (+11 more)
 
 ### Community 38 - "mock-api.js"
-Cohesion: 0.14
-Nodes (13): actorOf(), E(), hist(), me(), mkProject(), mkSegment(), mkTask(), save() (+5 more)
+Cohesion: 0.15
+Nodes (12): actorOf(), E(), hist(), me(), mkProject(), mkSegment(), mkTask(), save() (+4 more)
 
 ### Community 39 - "TaskService"
 Cohesion: 0.19
 Nodes (5): ProjectController, SegmentController, ProjectService, SegmentService, TaskService
 
 ### Community 40 - "init"
-Cohesion: 0.17
-Nodes (18): buildSidebar(), colorOf(), esc(), ini(), init(), renderAccount(), toast(), initProfilePage() (+10 more)
+Cohesion: 0.14
+Nodes (19): buildSidebar(), colorOf(), esc(), ini(), init(), renderAccount(), toast(), initAppearancePage() (+11 more)
 
-### Community 41 - "assets/js/pages/calendar.js"
-Cohesion: 0.17
-Nodes (19): colorOf(), COLORS, diffDays(), esc(), fmtDate(), load(), parseDate(), plusDays() (+11 more)
-
-### Community 42 - "public/assets/js/layout.js"
-Cohesion: 0.17
-Nodes (15): api, ApiError, apiWithHeaders(), request(), initLayout(), LINKS, navLinks(), showPageError() (+7 more)
-
-### Community 43 - "initAiPrefsPage"
+### Community 41 - "Desain Database DoTo"
 Cohesion: 0.22
-Nodes (16): addLog(), clearLog(), clone(), loadAiPrefs(), loadLog(), logKey(), rd(), sanitize() (+8 more)
+Nodes (9): CDM (Conceptual Data Model), Constraint dan Index (32 Definisi), Daftar Entitas CDM (11 Entitas Bisnis), Desain Database DoTo, Kardinalitas Relasi CDM (15 Relasi), Nilai Enum, PDM (Physical Data Model), Trigger MySQL/MariaDB (+1 more)
 
-### Community 45 - "assets/js/ai-prefs.js"
-Cohesion: 0.21
-Nodes (15): AI_DEFAULTS, B_ENUMS, buildAutoMessages(), composeAuto(), dueEnd(), ENUMS, fmtDue(), INTRO (+7 more)
+### Community 42 - "2. Unified Modeling Language (UML)"
+Cohesion: 0.29
+Nodes (7): 2.1 Use Case Diagram, 2.2 Activity Diagram 1 — Siklus Hidup Tugas & Trigger Arsip Otomatis, 2.3 Activity Diagram 2 — Chat Asisten AI (Human-in-the-Loop), 2.4 Sequence Diagram 1 — Autentikasi Google OAuth 2.0 & Auto-Join K4, 2.5 Sequence Diagram 2 — Perubahan Status Tugas ke `done` & 3 Trigger MySQL, 2.6 Class Diagram — Arsitektur Berlapis Backend PHP Native (`App\*`), 2. Unified Modeling Language (UML)
+
+### Community 43 - "assets/js/ai-prefs.js"
+Cohesion: 0.17
+Nodes (26): addLog(), B_ENUMS, buildAutoMessages(), clearLog(), clone(), composeAuto(), dueEnd(), ENUMS (+18 more)
+
+### Community 45 - "assets/js/pages/ai.js"
+Cohesion: 0.12
+Nodes (29): keysOf(), myActiveTasks(), NOTICE, actionCard(), activeSegments, agentApi, applyPerms(), content (+21 more)
 
 ### Community 46 - "public/assets/js/ai-prefs.js"
 Cohesion: 0.23
@@ -219,9 +221,9 @@ Nodes (14): AI_DEFAULTS, B_ENUMS, buildAutoMessages(), composeAuto(), dueEnd(), 
 Cohesion: 0.29
 Nodes (15): addLog(), clearLog(), clone(), loadAiPrefs(), loadLog(), logKey(), rd(), sanitize() (+7 more)
 
-### Community 48 - "public/assets/js/meta.js"
-Cohesion: 0.24
-Nodes (12): DEFAULT_DUE_DAYS, META_END, META_MARKER, stripMeta(), unpackMeta(), esc(), fmt(), loadTasks() (+4 more)
+### Community 48 - "1. Data Flow Diagram (DFD)"
+Cohesion: 0.33
+Nodes (5): 1.1 DFD Level 0 (Diagram Konteks), 1.2 DFD Level 1 (Dekomposisi 6 Proses Utama), 1.3 DFD Level 2 — Proses 3.0 (Pengelolaan Tugas & Integrasi Trigger), 1. Data Flow Diagram (DFD), Desain Sistem DoTo (DFD & UML)
 
 ### Community 51 - "DoTo – versi interface saja"
 Cohesion: 0.22
@@ -239,25 +241,29 @@ Nodes (7): 1. Preferensi AI per akun (bukan per proyek), 2. Penegakan izin di se
 Cohesion: 0.29
 Nodes (6): 1. Simpan pengaturan per akun, 2. Syarat data agar pengecekan frontend akurat, 3. Pemicu yang belum punya sumber data, 4. Ke depan: push dari server, Permintaan ke Backend: pengaturan & pemicu notifikasi, Pesan siap kirim
 
+### Community 57 - "Menjalankan di lokal"
+Cohesion: 0.40
+Nodes (5): 1. Siapkan database, 2. Konfigurasi dan migrasi, 3. Jalankan server, 4. Archive otomatis (opsional), Menjalankan di lokal
+
 ## Knowledge Gaps
-- **148 isolated node(s):** `ENUMS`, `B_ENUMS`, `PRI`, `INTRO`, `COLORS` (+143 more)
+- **170 isolated node(s):** `ENUMS`, `B_ENUMS`, `PRI`, `INTRO`, `COLORS` (+165 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **9 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **10 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `me()` connect `mock-api.js` to `assets/js/pages/ai.js`?**
-  _High betweenness centrality (0.139) - this node is a cross-community bridge._
-- **Why does `openSession()` connect `mock-api.js` to `public/assets/js/pages/ai.js`, `public/assets/js/ai-prefs.js`, `initAiPrefsPage`?**
-  _High betweenness centrality (0.128) - this node is a cross-community bridge._
-- **Why does `openSession()` connect `assets/js/pages/ai.js` to `initAiPrefsPage`, `assets/js/ai-prefs.js`, `mock-api.js`?**
-  _High betweenness centrality (0.128) - this node is a cross-community bridge._
+- **Why does `me()` connect `mock-api.js` to `public/assets/js/pages/ai.js`, `assets/js/pages/ai.js`?**
+  _High betweenness centrality (0.133) - this node is a cross-community bridge._
+- **Why does `openSession()` connect `public/assets/js/pages/ai.js` to `public/assets/js/ai-prefs.js`, `mock-api.js`, `initAiPrefsPage`?**
+  _High betweenness centrality (0.123) - this node is a cross-community bridge._
+- **Why does `openSession()` connect `assets/js/pages/ai.js` to `assets/js/ai-prefs.js`, `mock-api.js`?**
+  _High betweenness centrality (0.122) - this node is a cross-community bridge._
 - **What connects `ENUMS`, `B_ENUMS`, `PRI` to the rest of the system?**
-  _148 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _170 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Request` be split into smaller, more focused modules?**
   _Cohesion score 0.14 - nodes in this community are weakly interconnected._
+- **Should `public/assets/js/pages/ai.js` be split into smaller, more focused modules?**
+  _Cohesion score 0.0510989010989011 - nodes in this community are weakly interconnected._
 - **Should `Uuid` be split into smaller, more focused modules?**
-  _Cohesion score 0.14619883040935672 - nodes in this community are weakly interconnected._
-- **Should `DoTo` be split into smaller, more focused modules?**
-  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1368421052631579 - nodes in this community are weakly interconnected._
