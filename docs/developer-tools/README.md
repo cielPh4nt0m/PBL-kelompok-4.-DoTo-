@@ -10,7 +10,7 @@ root repo. Konfigurasi koneksi dibaca dari `backend/.env`; variabel lingkungan
 | `backend/tests/trigger_integration.php` | Menguji nomor tiket, riwayat status, jadwal arsip, validasi anggota, dan rollback pada database sementara. Menolak database yang namanya tidak diawali `doto_trigger_scratch`. | `DB_NAME=doto_trigger_scratch ... php -d extension=pdo_mysql backend/tests/trigger_integration.php` |
 | `backend/bin/archive-cron.php` | Menjalankan pengarsipan tugas `done` yang sudah melewati retensi; trigger hanya membuat jadwal. | `php -d extension=pdo_mysql backend/bin/archive-cron.php` |
 
-> Catatan deploy VPS CBA (`103.93.160.34`): produksi memakai Nginx HTTPS `https://doto-103-93-160-34.sslip.io` dengan AI Studio `gemini-4-hydrogen` di `backend/.env` (sedangkan `backend/.env` lokal mungkin memakai key lama).
+> Catatan deploy VPS CBA (`103.93.160.34`): produksi memakai Nginx HTTPS `https://doto-103-93-160-34.sslip.io` dengan AI Studio `gemini-4-neon` (`AI_PROVIDER=gemini`, `GEMINI_API_KEY`) di `backend/.env`.
 
 Untuk database yang berisi data, buat backup terlebih dahulu dan jalankan
 migrasi saat tidak ada penulisan tugas bersamaan. Pemasangan ulang trigger

@@ -102,8 +102,8 @@ final class Config
 
     public static function aiModel(): string
     {
-        $raw = trim(self::get('AI_MODEL', 'gemini-4-hydrogen') ?? 'gemini-4-hydrogen', " \t\n\r\0\x0B'\"");
-        return $raw !== '' ? $raw : 'gemini-4-hydrogen';
+        $raw = trim(self::get('AI_MODEL', 'gemini-4-neon') ?? 'gemini-4-neon', " \t\n\r\0\x0B'\"");
+        return $raw !== '' ? $raw : 'gemini-4-neon';
     }
 
     public static function aiThinkingLevel(): string

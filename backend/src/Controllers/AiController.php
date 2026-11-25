@@ -207,7 +207,7 @@ PROMPT;
             ],
             CURLOPT_POSTFIELDS => json_encode($reqBody, JSON_UNESCAPED_UNICODE),
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 25,
+            CURLOPT_TIMEOUT => 50, // di bawah proxy_read_timeout nginx (60 s) agar fallback sempat dikirim
         ]);
         $raw = curl_exec($ch);
         $curlErr = curl_error($ch);
