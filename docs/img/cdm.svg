@@ -1,1 +1,606 @@
-<svg aria-roledescription="er" role="graphics-document document" viewBox="0 0 856.838623046875 1337" style="max-width: 856.839px; background-color: white;" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="100%" id="my-svg"><style>#my-svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}#my-svg .error-icon{fill:#552222;}#my-svg .error-text{fill:#552222;stroke:#552222;}#my-svg .edge-thickness-normal{stroke-width:1px;}#my-svg .edge-thickness-thick{stroke-width:3.5px;}#my-svg .edge-pattern-solid{stroke-dasharray:0;}#my-svg .edge-thickness-invisible{stroke-width:0;fill:none;}#my-svg .edge-pattern-dashed{stroke-dasharray:3;}#my-svg .edge-pattern-dotted{stroke-dasharray:2;}#my-svg .marker{fill:#333333;stroke:#333333;}#my-svg .marker.cross{stroke:#333333;}#my-svg svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#my-svg p{margin:0;}#my-svg .entityBox{fill:#ECECFF;stroke:#9370DB;}#my-svg .attributeBoxOdd{fill:#ffffff;stroke:#9370DB;}#my-svg .attributeBoxEven{fill:#f2f2f2;stroke:#9370DB;}#my-svg .relationshipLabelBox{fill:hsl(80, 100%, 96.2745098039%);opacity:0.7;background-color:hsl(80, 100%, 96.2745098039%);}#my-svg .relationshipLabelBox rect{opacity:0.5;}#my-svg .relationshipLine{stroke:#333333;}#my-svg .entityTitleText{text-anchor:middle;font-size:18px;fill:#333;}#my-svg #MD_PARENT_START{fill:#f5f5f5!important;stroke:#333333!important;stroke-width:1;}#my-svg #MD_PARENT_END{fill:#f5f5f5!important;stroke:#333333!important;stroke-width:1;}#my-svg :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g/><defs><marker orient="auto" markerHeight="240" markerWidth="190" refY="7" refX="0" id="MD_PARENT_START"><path d="M 18,7 L9,13 L1,7 L9,1 Z"/></marker></defs><defs><marker orient="auto" markerHeight="28" markerWidth="20" refY="7" refX="19" id="MD_PARENT_END"><path d="M 18,7 L9,13 L1,7 L9,1 Z"/></marker></defs><defs><marker orient="auto" markerHeight="18" markerWidth="18" refY="9" refX="0" id="ONLY_ONE_START"><path d="M9,0 L9,18 M15,0 L15,18" fill="none" stroke="gray"/></marker></defs><defs><marker orient="auto" markerHeight="18" markerWidth="18" refY="9" refX="18" id="ONLY_ONE_END"><path d="M3,0 L3,18 M9,0 L9,18" fill="none" stroke="gray"/></marker></defs><defs><marker orient="auto" markerHeight="18" markerWidth="30" refY="9" refX="0" id="ZERO_OR_ONE_START"><circle r="6" cy="9" cx="21" fill="white" stroke="gray"/><path d="M9,0 L9,18" fill="none" stroke="gray"/></marker></defs><defs><marker orient="auto" markerHeight="18" markerWidth="30" refY="9" refX="30" id="ZERO_OR_ONE_END"><circle r="6" cy="9" cx="9" fill="white" stroke="gray"/><path d="M21,0 L21,18" fill="none" stroke="gray"/></marker></defs><defs><marker orient="auto" markerHeight="36" markerWidth="45" refY="18" refX="18" id="ONE_OR_MORE_START"><path d="M0,18 Q 18,0 36,18 Q 18,36 0,18 M42,9 L42,27" fill="none" stroke="gray"/></marker></defs><defs><marker orient="auto" markerHeight="36" markerWidth="45" refY="18" refX="27" id="ONE_OR_MORE_END"><path d="M3,9 L3,27 M9,18 Q27,0 45,18 Q27,36 9,18" fill="none" stroke="gray"/></marker></defs><defs><marker orient="auto" markerHeight="36" markerWidth="57" refY="18" refX="18" id="ZERO_OR_MORE_START"><circle r="6" cy="18" cx="48" fill="white" stroke="gray"/><path d="M0,18 Q18,0 36,18 Q18,36 0,18" fill="none" stroke="gray"/></marker></defs><defs><marker orient="auto" markerHeight="36" markerWidth="57" refY="18" refX="39" id="ZERO_OR_MORE_END"><circle r="6" cy="18" cx="9" fill="white" stroke="gray"/><path d="M21,18 Q39,0 57,18 Q39,36 21,18" fill="none" stroke="gray"/></marker></defs><path style="stroke: gray; fill: none;" marker-start="url(#ONLY_ONE_START)" marker-end="url(#ZERO_OR_MORE_END)" d="M487.753,115.434L421.603,132.862C355.453,150.289,223.153,185.145,157.003,210.906C90.853,236.667,90.853,253.333,90.853,261.667L90.853,270" class="er relationshipLine"/><path style="stroke: gray; fill: none;" marker-start="url(#ONLY_ONE_START)" marker-end="url(#ZERO_OR_MORE_END)" d="M487.753,139.74L464.563,153.117C441.373,166.493,394.993,193.247,371.803,214.957C348.613,236.667,348.613,253.333,348.613,261.667L348.613,270" class="er relationshipLine"/><path style="stroke: gray; fill: none;" marker-start="url(#ONLY_ONE_START)" marker-end="url(#ZERO_OR_MORE_END)" d="M398.34,420L403.865,428.333C409.39,436.667,420.441,453.333,425.966,470C431.491,486.667,431.491,503.333,431.491,511.667L431.491,520" class="er relationshipLine"/><path style="stroke: gray; fill: none;" marker-start="url(#ONLY_ONE_START)" marker-end="url(#ZERO_OR_MORE_END)" d="M298.886,420L293.36,428.333C287.835,436.667,276.785,453.333,271.259,479C265.734,504.667,265.734,539.333,265.734,574C265.734,608.667,265.734,643.333,294.767,681.723C323.799,720.113,381.864,762.227,410.896,783.283L439.929,804.34" class="er relationshipLine"/><path style="stroke: gray; fill: none;" marker-start="url(#ONLY_ONE_START)" marker-end="url(#ZERO_OR_MORE_END)" d="M431.491,628L431.491,636.333C431.491,644.667,431.491,661.333,435.634,678C439.776,694.667,448.061,711.333,452.203,719.667L456.346,728" class="er relationshipLine"/><path style="stroke: gray; fill: none;" marker-start="url(#ONLY_ONE_START)" marker-end="url(#ZERO_OR_MORE_END)" d="M590.82,170L593.654,178.333C596.487,186.667,602.155,203.333,604.989,232.5C607.823,261.667,607.823,303.333,607.823,345C607.823,386.667,607.823,428.333,607.823,466.5C607.823,504.667,607.823,539.333,607.823,574C607.823,608.667,607.823,643.333,604.149,669C600.475,694.667,593.128,711.333,589.454,719.667L585.781,728" class="er relationshipLine"/><path style="stroke: gray; fill: none;" marker-start="url(#ZERO_OR_ONE_START)" marker-end="url(#ZERO_OR_MORE_END)" d="M642.877,163.033L653.701,172.528C664.526,182.022,686.174,201.011,696.999,231.339C707.823,261.667,707.823,303.333,707.823,345C707.823,386.667,707.823,428.333,707.823,466.5C707.823,504.667,707.823,539.333,707.823,574C707.823,608.667,707.823,643.333,691.512,677.434C675.202,711.535,642.581,745.069,626.27,761.836L609.96,778.604" class="er relationshipLine"/><path style="stroke: gray; fill: none;" marker-start="url(#ONLY_ONE_START)" marker-end="url(#ZERO_OR_MORE_END)" d="M464.802,1004L461.17,1012.333C457.538,1020.667,450.274,1037.333,446.643,1068C443.011,1098.667,443.011,1143.333,443.011,1165.667L443.011,1188" class="er relationshipLine"/><path style="stroke: gray; fill: none;" marker-start="url(#ONLY_ONE_START)" marker-end="url(#ZERO_OR_MORE_END)" d="M609.96,979.862L619.186,992.218C628.411,1004.575,646.863,1029.287,661.015,1049.977C675.167,1070.667,685.019,1087.333,689.944,1095.667L694.87,1104" class="er relationshipLine"/><path style="stroke: gray; fill: none;" marker-start="url(#ONLY_ONE_START)" marker-end="url(#ZERO_OR_MORE_END)" d="M642.877,134.979L670.368,149.149C697.859,163.319,752.841,191.66,780.332,226.663C807.823,261.667,807.823,303.333,807.823,345C807.823,386.667,807.823,428.333,807.823,466.5C807.823,504.667,807.823,539.333,807.823,574C807.823,608.667,807.823,643.333,807.823,692C807.823,740.667,807.823,803.333,807.823,866C807.823,928.667,807.823,991.333,805.16,1031C802.498,1070.667,797.173,1087.333,794.511,1095.667L791.848,1104" class="er relationshipLine"/><g transform="translate(487.75293731689453,20 )" id="entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8"><rect height="150" width="155.12429809570312" y="0" x="0" class="er entityBox"/><text style="dominant-baseline: middle; text-anchor: middle; font-size: 12px;" transform="translate(77.56214904785156,12)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8" class="er entityLabel">USER</text><rect height="21" width="49.4078369140625" y="24" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,34.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-1-type" class="er entityLabel">identifier</text><rect height="21" width="81.359375" y="24" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,34.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-1-name" class="er entityLabel">id</text><rect height="21" width="24.357086181640625" y="24" x="130.7672119140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(135.7672119140625,34.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-1-key" class="er entityLabel">PK</text><rect height="21" width="49.4078369140625" y="45" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,55.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-2-type" class="er entityLabel">string</text><rect height="21" width="81.359375" y="45" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,55.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-2-name" class="er entityLabel">username</text><rect height="21" width="24.357086181640625" y="45" x="130.7672119140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(135.7672119140625,55.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-2-key" class="er entityLabel">UK</text><rect height="21" width="49.4078369140625" y="66" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,76.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-3-type" class="er entityLabel">string</text><rect height="21" width="81.359375" y="66" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,76.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-3-name" class="er entityLabel">email</text><rect height="21" width="24.357086181640625" y="66" x="130.7672119140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(135.7672119140625,76.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-3-key" class="er entityLabel">UK</text><rect height="21" width="49.4078369140625" y="87" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,97.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-4-type" class="er entityLabel">string</text><rect height="21" width="81.359375" y="87" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,97.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-4-name" class="er entityLabel">name</text><rect height="21" width="24.357086181640625" y="87" x="130.7672119140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(135.7672119140625,97.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-4-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="108" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,118.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-5-type" class="er entityLabel">string</text><rect height="21" width="81.359375" y="108" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,118.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-5-name" class="er entityLabel">password_hash</text><rect height="21" width="24.357086181640625" y="108" x="130.7672119140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(135.7672119140625,118.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-5-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="129" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,139.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-6-type" class="er entityLabel">datetime</text><rect height="21" width="81.359375" y="129" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,139.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-6-name" class="er entityLabel">created_at</text><rect height="21" width="24.357086181640625" y="129" x="130.7672119140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(135.7672119140625,139.5)" y="0" x="0" id="text-entity-USER-6e7e2962-0c6f-577d-a7fd-2ce3a0cfd2c8-attr-6-key" class="er entityLabel"/></g><g transform="translate(20,270 )" id="entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af"><rect height="150" width="141.706787109375" y="0" x="0" class="er entityBox"/><text style="dominant-baseline: middle; text-anchor: middle; font-size: 12px;" transform="translate(70.8533935546875,12)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af" class="er entityLabel">API_TOKEN</text><rect height="21" width="49.4078369140625" y="24" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,34.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-1-type" class="er entityLabel">identifier</text><rect height="21" width="67.94186401367188" y="24" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,34.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-1-name" class="er entityLabel">id</text><rect height="21" width="24.357086181640625" y="24" x="117.34970092773438" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(122.34970092773438,34.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-1-key" class="er entityLabel">PK</text><rect height="21" width="49.4078369140625" y="45" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,55.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-2-type" class="er entityLabel">string</text><rect height="21" width="67.94186401367188" y="45" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,55.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-2-name" class="er entityLabel">token_hash</text><rect height="21" width="24.357086181640625" y="45" x="117.34970092773438" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(122.34970092773438,55.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-2-key" class="er entityLabel">UK</text><rect height="21" width="49.4078369140625" y="66" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,76.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-3-type" class="er entityLabel">string</text><rect height="21" width="67.94186401367188" y="66" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,76.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-3-name" class="er entityLabel">label</text><rect height="21" width="24.357086181640625" y="66" x="117.34970092773438" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(122.34970092773438,76.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-3-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="87" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,97.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-4-type" class="er entityLabel">datetime</text><rect height="21" width="67.94186401367188" y="87" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,97.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-4-name" class="er entityLabel">created_at</text><rect height="21" width="24.357086181640625" y="87" x="117.34970092773438" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(122.34970092773438,97.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-4-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="108" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,118.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-5-type" class="er entityLabel">datetime</text><rect height="21" width="67.94186401367188" y="108" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,118.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-5-name" class="er entityLabel">last_used_at</text><rect height="21" width="24.357086181640625" y="108" x="117.34970092773438" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(122.34970092773438,118.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-5-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="129" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,139.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-6-type" class="er entityLabel">datetime</text><rect height="21" width="67.94186401367188" y="129" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,139.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-6-name" class="er entityLabel">revoked_at</text><rect height="21" width="24.357086181640625" y="129" x="117.34970092773438" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(122.34970092773438,139.5)" y="0" x="0" id="text-entity-APITOKEN-69786385-8695-530f-bfd1-8dac584605af-attr-6-key" class="er entityLabel"/></g><g transform="translate(261.706787109375,270 )" id="entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8"><rect height="150" width="173.81179809570312" y="0" x="0" class="er entityBox"/><text style="dominant-baseline: middle; text-anchor: middle; font-size: 12px;" transform="translate(86.90589904785156,12)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8" class="er entityLabel">PROJECT</text><rect height="21" width="49.4078369140625" y="24" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,34.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-1-type" class="er entityLabel">identifier</text><rect height="21" width="100.046875" y="24" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,34.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-1-name" class="er entityLabel">id</text><rect height="21" width="24.357086181640625" y="24" x="149.4547119140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(154.4547119140625,34.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-1-key" class="er entityLabel">PK</text><rect height="21" width="49.4078369140625" y="45" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,55.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-2-type" class="er entityLabel">string</text><rect height="21" width="100.046875" y="45" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,55.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-2-name" class="er entityLabel">key</text><rect height="21" width="24.357086181640625" y="45" x="149.4547119140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(154.4547119140625,55.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-2-key" class="er entityLabel">UK</text><rect height="21" width="49.4078369140625" y="66" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,76.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-3-type" class="er entityLabel">string</text><rect height="21" width="100.046875" y="66" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,76.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-3-name" class="er entityLabel">name</text><rect height="21" width="24.357086181640625" y="66" x="149.4547119140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(154.4547119140625,76.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-3-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="87" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,97.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-4-type" class="er entityLabel">integer</text><rect height="21" width="100.046875" y="87" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,97.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-4-name" class="er entityLabel">next_seq</text><rect height="21" width="24.357086181640625" y="87" x="149.4547119140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(154.4547119140625,97.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-4-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="108" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,118.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-5-type" class="er entityLabel">integer</text><rect height="21" width="100.046875" y="108" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,118.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-5-name" class="er entityLabel">archive_after_hours</text><rect height="21" width="24.357086181640625" y="108" x="149.4547119140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(154.4547119140625,118.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-5-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="129" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,139.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-6-type" class="er entityLabel">datetime</text><rect height="21" width="100.046875" y="129" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,139.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-6-name" class="er entityLabel">created_at</text><rect height="21" width="24.357086181640625" y="129" x="149.4547119140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(154.4547119140625,139.5)" y="0" x="0" id="text-entity-PROJECT-7694b060-3426-5f95-980b-c6c423c4d7b8-attr-6-key" class="er entityLabel"/></g><g transform="translate(365.7341079711914,520 )" id="entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31"><rect height="108" width="131.51431274414062" y="0" x="0" class="er entityBox"/><text style="dominant-baseline: middle; text-anchor: middle; font-size: 12px;" transform="translate(65.75715637207031,12)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31" class="er entityLabel">SEGMENT</text><rect height="21" width="49.4078369140625" y="24" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,34.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-1-type" class="er entityLabel">identifier</text><rect height="21" width="58.311492919921875" y="24" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,34.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-1-name" class="er entityLabel">id</text><rect height="21" width="23.79498291015625" y="24" x="107.71932983398438" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(112.71932983398438,34.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-1-key" class="er entityLabel">PK</text><rect height="21" width="49.4078369140625" y="45" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,55.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-2-type" class="er entityLabel">string</text><rect height="21" width="58.311492919921875" y="45" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,55.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-2-name" class="er entityLabel">name</text><rect height="21" width="23.79498291015625" y="45" x="107.71932983398438" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(112.71932983398438,55.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-2-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="66" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,76.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-3-type" class="er entityLabel">integer</text><rect height="21" width="58.311492919921875" y="66" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,76.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-3-name" class="er entityLabel">position</text><rect height="21" width="23.79498291015625" y="66" x="107.71932983398438" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(112.71932983398438,76.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-3-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="87" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,97.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-4-type" class="er entityLabel">datetime</text><rect height="21" width="58.311492919921875" y="87" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,97.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-4-name" class="er entityLabel">created_at</text><rect height="21" width="23.79498291015625" y="87" x="107.71932983398438" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(112.71932983398438,97.5)" y="0" x="0" id="text-entity-SEGMENT-323cf219-7a17-5588-954a-3567ce7d4a31-attr-4-key" class="er entityLabel"/></g><g transform="translate(439.9288024902344,728 )" id="entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e"><rect height="276" width="170.03082275390625" y="0" x="0" class="er entityBox"/><text style="dominant-baseline: middle; text-anchor: middle; font-size: 12px;" transform="translate(85.01541137695312,12)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e" class="er entityLabel">TASK</text><rect height="21" width="49.4078369140625" y="24" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,34.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-1-type" class="er entityLabel">identifier</text><rect height="21" width="96.26589965820312" y="24" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,34.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-1-name" class="er entityLabel">id</text><rect height="21" width="24.357086181640625" y="24" x="145.67373657226562" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,34.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-1-key" class="er entityLabel">PK</text><rect height="21" width="49.4078369140625" y="45" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,55.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-2-type" class="er entityLabel">integer</text><rect height="21" width="96.26589965820312" y="45" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,55.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-2-name" class="er entityLabel">seq</text><rect height="21" width="24.357086181640625" y="45" x="145.67373657226562" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,55.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-2-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="66" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,76.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-3-type" class="er entityLabel">string</text><rect height="21" width="96.26589965820312" y="66" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,76.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-3-name" class="er entityLabel">display_id</text><rect height="21" width="24.357086181640625" y="66" x="145.67373657226562" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,76.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-3-key" class="er entityLabel">UK</text><rect height="21" width="49.4078369140625" y="87" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,97.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-4-type" class="er entityLabel">string</text><rect height="21" width="96.26589965820312" y="87" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,97.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-4-name" class="er entityLabel">title</text><rect height="21" width="24.357086181640625" y="87" x="145.67373657226562" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,97.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-4-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="108" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,118.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-5-type" class="er entityLabel">text</text><rect height="21" width="96.26589965820312" y="108" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,118.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-5-name" class="er entityLabel">description</text><rect height="21" width="24.357086181640625" y="108" x="145.67373657226562" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,118.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-5-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="129" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,139.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-6-type" class="er entityLabel">string</text><rect height="21" width="96.26589965820312" y="129" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,139.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-6-name" class="er entityLabel">status</text><rect height="21" width="24.357086181640625" y="129" x="145.67373657226562" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,139.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-6-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="150" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,160.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-7-type" class="er entityLabel">string</text><rect height="21" width="96.26589965820312" y="150" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,160.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-7-name" class="er entityLabel">priority</text><rect height="21" width="24.357086181640625" y="150" x="145.67373657226562" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,160.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-7-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="171" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,181.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-8-type" class="er entityLabel">text</text><rect height="21" width="96.26589965820312" y="171" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,181.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-8-name" class="er entityLabel">links</text><rect height="21" width="24.357086181640625" y="171" x="145.67373657226562" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,181.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-8-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="192" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,202.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-9-type" class="er entityLabel">datetime</text><rect height="21" width="96.26589965820312" y="192" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,202.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-9-name" class="er entityLabel">status_changed_at</text><rect height="21" width="24.357086181640625" y="192" x="145.67373657226562" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,202.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-9-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="213" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,223.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-10-type" class="er entityLabel">datetime</text><rect height="21" width="96.26589965820312" y="213" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,223.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-10-name" class="er entityLabel">archived_at</text><rect height="21" width="24.357086181640625" y="213" x="145.67373657226562" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,223.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-10-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="234" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,244.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-11-type" class="er entityLabel">datetime</text><rect height="21" width="96.26589965820312" y="234" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,244.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-11-name" class="er entityLabel">created_at</text><rect height="21" width="24.357086181640625" y="234" x="145.67373657226562" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,244.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-11-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="255" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,265.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-12-type" class="er entityLabel">datetime</text><rect height="21" width="96.26589965820312" y="255" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,265.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-12-name" class="er entityLabel">updated_at</text><rect height="21" width="24.357086181640625" y="255" x="145.67373657226562" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(150.67373657226562,265.5)" y="0" x="0" id="text-entity-TASK-5f0ceeb5-8943-5386-8f04-a46640e9fb8e-attr-12-key" class="er entityLabel"/></g><g transform="translate(393.01087951660156,1188 )" id="entity-TASKTAG-05fbfc47-5107-5ad4-aecd-5d46bad7e657"><rect height="45" width="100" y="0" x="0" class="er entityBox"/><text style="dominant-baseline: middle; text-anchor: middle; font-size: 12px;" transform="translate(50,12)" y="0" x="0" id="text-entity-TASKTAG-05fbfc47-5107-5ad4-aecd-5d46bad7e657" class="er entityLabel">TASK_TAG</text><rect height="21" width="51.85728454589844" y="24" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,34.5)" y="0" x="0" id="text-entity-TASKTAG-05fbfc47-5107-5ad4-aecd-5d46bad7e657-attr-1-type" class="er entityLabel">string</text><rect height="21" width="48.14271545410156" y="24" x="51.85728454589844" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(56.85728454589844,34.5)" y="0" x="0" id="text-entity-TASKTAG-05fbfc47-5107-5ad4-aecd-5d46bad7e657-attr-1-name" class="er entityLabel">label</text></g><g transform="translate(684.2135696411133,1104 )" id="entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476"><rect height="213" width="147.21844482421875" y="0" x="0" class="er entityBox"/><text style="dominant-baseline: middle; text-anchor: middle; font-size: 12px;" transform="translate(73.60922241210938,12)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476" class="er entityLabel">TASK_HISTORY</text><rect height="21" width="49.4078369140625" y="24" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,34.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-1-type" class="er entityLabel">identifier</text><rect height="21" width="74.015625" y="24" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,34.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-1-name" class="er entityLabel">id</text><rect height="21" width="23.79498291015625" y="24" x="123.4234619140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(128.4234619140625,34.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-1-key" class="er entityLabel">PK</text><rect height="21" width="49.4078369140625" y="45" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,55.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-2-type" class="er entityLabel">string</text><rect height="21" width="74.015625" y="45" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,55.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-2-name" class="er entityLabel">actor_channel</text><rect height="21" width="23.79498291015625" y="45" x="123.4234619140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(128.4234619140625,55.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-2-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="66" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,76.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-3-type" class="er entityLabel">string</text><rect height="21" width="74.015625" y="66" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,76.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-3-name" class="er entityLabel">agent_name</text><rect height="21" width="23.79498291015625" y="66" x="123.4234619140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(128.4234619140625,76.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-3-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="87" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,97.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-4-type" class="er entityLabel">string</text><rect height="21" width="74.015625" y="87" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,97.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-4-name" class="er entityLabel">action</text><rect height="21" width="23.79498291015625" y="87" x="123.4234619140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(128.4234619140625,97.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-4-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="108" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,118.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-5-type" class="er entityLabel">string</text><rect height="21" width="74.015625" y="108" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,118.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-5-name" class="er entityLabel">field_name</text><rect height="21" width="23.79498291015625" y="108" x="123.4234619140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(128.4234619140625,118.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-5-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="129" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,139.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-6-type" class="er entityLabel">text</text><rect height="21" width="74.015625" y="129" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,139.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-6-name" class="er entityLabel">old_value</text><rect height="21" width="23.79498291015625" y="129" x="123.4234619140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(128.4234619140625,139.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-6-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="150" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,160.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-7-type" class="er entityLabel">text</text><rect height="21" width="74.015625" y="150" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,160.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-7-name" class="er entityLabel">new_value</text><rect height="21" width="23.79498291015625" y="150" x="123.4234619140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(128.4234619140625,160.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-7-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="171" x="0" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,181.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-8-type" class="er entityLabel">text</text><rect height="21" width="74.015625" y="171" x="49.4078369140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,181.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-8-name" class="er entityLabel">comment</text><rect height="21" width="23.79498291015625" y="171" x="123.4234619140625" class="er attributeBoxEven"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(128.4234619140625,181.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-8-key" class="er entityLabel"/><rect height="21" width="49.4078369140625" y="192" x="0" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(5,202.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-9-type" class="er entityLabel">datetime</text><rect height="21" width="74.015625" y="192" x="49.4078369140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(54.4078369140625,202.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-9-name" class="er entityLabel">created_at</text><rect height="21" width="23.79498291015625" y="192" x="123.4234619140625" class="er attributeBoxOdd"/><text style="dominant-baseline: middle; font-size: 10.2px;" transform="translate(128.4234619140625,202.5)" y="0" x="0" id="text-entity-TASKHISTORY-637372a1-7442-50ac-97da-664407b66476-attr-9-key" class="er entityLabel"/></g><rect height="14" width="43.34375" y="165.81796264648438" x="253.465576171875" class="er relationshipLabelBox"/><text style="text-anchor: middle; dominant-baseline: middle; font-size: 12px;" y="172.81796264648438" x="275.137451171875" id="rel1" class="er relationshipLabel">memiliki</text><rect height="14" width="50.6875" y="184.62686157226562" x="376.5675354003906" class="er relationshipLabelBox"/><text style="text-anchor: middle; dominant-baseline: middle; font-size: 12px;" y="191.62686157226562" x="401.9112854003906" id="rel2" class="er relationshipLabel">membuat</text><rect height="14" width="53.359375" y="459.8182678222656" x="398.1664123535156" class="er relationshipLabelBox"/><text style="text-anchor: middle; dominant-baseline: middle; font-size: 12px;" y="466.8182678222656" x="424.8460998535156" id="rel3" class="er relationshipLabel">terdiri dari</text><rect height="14" width="28.6875" y="637.9135131835938" x="260.1632995605469" class="er relationshipLabelBox"/><text style="text-anchor: middle; dominant-baseline: middle; font-size: 12px;" y="644.9135131835938" x="274.5070495605469" id="rel4" class="er relationshipLabel">berisi</text><rect height="14" width="94.734375" y="672.8987426757812" x="388.7569580078125" class="er relationshipLabelBox"/><text style="text-anchor: middle; dominant-baseline: middle; font-size: 12px;" y="679.8987426757812" x="436.1241455078125" id="rel5" class="er relationshipLabel">mengelompokkan</text><rect height="14" width="50.6875" y="442.6675720214844" x="582.479248046875" class="er relationshipLabelBox"/><text style="text-anchor: middle; dominant-baseline: middle; font-size: 12px;" y="449.6675720214844" x="607.822998046875" id="rel6" class="er relationshipLabel">membuat</text><rect height="14" width="74.376953125" y="469.11602783203125" x="670.634521484375" class="er relationshipLabelBox"/><text style="text-anchor: middle; dominant-baseline: middle; font-size: 12px;" y="476.11602783203125" x="707.822998046875" id="rel7" class="er relationshipLabel">ditugaskan ke</text><rect height="14" width="58.046875" y="1087.5396728515625" x="415.4361877441406" class="er relationshipLabelBox"/><text style="text-anchor: middle; dominant-baseline: middle; font-size: 12px;" y="1094.5396728515625" x="444.4596252441406" id="rel8" class="er relationshipLabel">diberi label</text><rect height="14" width="52.703125" y="1033.5419921875" x="628.1142578125" class="er relationshipLabelBox"/><text style="text-anchor: middle; dominant-baseline: middle; font-size: 12px;" y="1040.5419921875" x="654.4658203125" id="rel9" class="er relationshipLabel">tercatat di</text><rect height="14" width="58.03125" y="573.007568359375" x="778.807373046875" class="er relationshipLabelBox"/><text style="text-anchor: middle; dominant-baseline: middle; font-size: 12px;" y="580.007568359375" x="807.822998046875" id="rel10" class="er relationshipLabel">melakukan</text></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 16.1.2 (0)
+ -->
+<!-- Title: CDM Pages: 1 -->
+<svg width="1428pt" height="1605pt"
+ viewBox="0.00 0.00 1428.00 1605.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(28.8 1575.8)">
+<title>CDM</title>
+<polygon fill="white" stroke="none" points="-28.8,28.8 -28.8,-1575.8 1398.92,-1575.8 1398.92,28.8 -28.8,28.8"/>
+<text xml:space="preserve" text-anchor="start" x="392.56" y="-1526.9" font-family="Liberation Sans" font-weight="bold" font-size="18.00" fill="#1e3a5f">Conceptual Data Model (CDM) — DoTo (11 Entitas Bisnis · 15 Relasi)</text>
+<text xml:space="preserve" text-anchor="start" x="471.69" y="-1515.55" font-family="Liberation Sans" font-size="11.00" fill="#475569">Sinkron dengan skema aktual backend/database/schema.sql (tanpa tipe fisik &amp; FK teknis)</text>
+<!-- USER -->
+<g id="node1" class="node">
+<title>USER</title>
+<polygon fill="#1e3a5f" stroke="none" points="569.88,-1484 569.88,-1506 688.88,-1506 688.88,-1484 569.88,-1484"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1484 569.88,-1506 688.88,-1506 688.88,-1484 569.88,-1484"/>
+<text xml:space="preserve" text-anchor="start" x="615.12" y="-1492.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="white">USER</text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1462 569.88,-1484 597.88,-1484 597.88,-1462 569.88,-1462"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1462 569.88,-1484 597.88,-1484 597.88,-1462 569.88,-1462"/>
+<text xml:space="preserve" text-anchor="start" x="576.75" y="-1470.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">PK</text>
+<polygon fill="white" stroke="none" points="597.88,-1462 597.88,-1484 688.88,-1484 688.88,-1462 597.88,-1462"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1462 597.88,-1484 688.88,-1484 688.88,-1462 597.88,-1462"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1469.25" font-family="Liberation Sans" font-size="10.50"> id (identifier) </text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1440 569.88,-1462 597.88,-1462 597.88,-1440 569.88,-1440"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1440 569.88,-1462 597.88,-1462 597.88,-1440 569.88,-1440"/>
+<text xml:space="preserve" text-anchor="start" x="576.38" y="-1448.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">UK</text>
+<polygon fill="white" stroke="none" points="597.88,-1440 597.88,-1462 688.88,-1462 688.88,-1440 597.88,-1440"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1440 597.88,-1462 688.88,-1462 688.88,-1440 597.88,-1440"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1447.25" font-family="Liberation Sans" font-size="10.50"> username </text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1418 569.88,-1440 597.88,-1440 597.88,-1418 569.88,-1418"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1418 569.88,-1440 597.88,-1440 597.88,-1418 569.88,-1418"/>
+<text xml:space="preserve" text-anchor="start" x="576.38" y="-1426.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">UK</text>
+<polygon fill="white" stroke="none" points="597.88,-1418 597.88,-1440 688.88,-1440 688.88,-1418 597.88,-1418"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1418 597.88,-1440 688.88,-1440 688.88,-1418 597.88,-1418"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1425.25" font-family="Liberation Sans" font-size="10.50"> email </text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1396 569.88,-1418 597.88,-1418 597.88,-1396 569.88,-1396"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1396 569.88,-1418 597.88,-1418 597.88,-1396 569.88,-1396"/>
+<polygon fill="white" stroke="none" points="597.88,-1396 597.88,-1418 688.88,-1418 688.88,-1396 597.88,-1396"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1396 597.88,-1418 688.88,-1418 688.88,-1396 597.88,-1396"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1403.25" font-family="Liberation Sans" font-size="10.50"> name </text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1374 569.88,-1396 597.88,-1396 597.88,-1374 569.88,-1374"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1374 569.88,-1396 597.88,-1396 597.88,-1374 569.88,-1374"/>
+<polygon fill="white" stroke="none" points="597.88,-1374 597.88,-1396 688.88,-1396 688.88,-1374 597.88,-1374"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1374 597.88,-1396 688.88,-1396 688.88,-1374 597.88,-1374"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1381.25" font-family="Liberation Sans" font-size="10.50"> password_hash </text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1352 569.88,-1374 597.88,-1374 597.88,-1352 569.88,-1352"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1352 569.88,-1374 597.88,-1374 597.88,-1352 569.88,-1352"/>
+<polygon fill="white" stroke="none" points="597.88,-1352 597.88,-1374 688.88,-1374 688.88,-1352 597.88,-1352"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1352 597.88,-1374 688.88,-1374 688.88,-1352 597.88,-1352"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1359.25" font-family="Liberation Sans" font-size="10.50"> role </text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1330 569.88,-1352 597.88,-1352 597.88,-1330 569.88,-1330"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1330 569.88,-1352 597.88,-1352 597.88,-1330 569.88,-1330"/>
+<polygon fill="white" stroke="none" points="597.88,-1330 597.88,-1352 688.88,-1352 688.88,-1330 597.88,-1330"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1330 597.88,-1352 688.88,-1352 688.88,-1330 597.88,-1330"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1337.25" font-family="Liberation Sans" font-size="10.50"> bio </text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1308 569.88,-1330 597.88,-1330 597.88,-1308 569.88,-1308"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1308 569.88,-1330 597.88,-1330 597.88,-1308 569.88,-1308"/>
+<polygon fill="white" stroke="none" points="597.88,-1308 597.88,-1330 688.88,-1330 688.88,-1308 597.88,-1308"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1308 597.88,-1330 688.88,-1330 688.88,-1308 597.88,-1308"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1315.25" font-family="Liberation Sans" font-size="10.50"> team_key </text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1286 569.88,-1308 597.88,-1308 597.88,-1286 569.88,-1286"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1286 569.88,-1308 597.88,-1308 597.88,-1286 569.88,-1286"/>
+<polygon fill="white" stroke="none" points="597.88,-1286 597.88,-1308 688.88,-1308 688.88,-1286 597.88,-1286"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1286 597.88,-1308 688.88,-1308 688.88,-1286 597.88,-1286"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1293.25" font-family="Liberation Sans" font-size="10.50"> email_verified </text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1264 569.88,-1286 597.88,-1286 597.88,-1264 569.88,-1264"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1264 569.88,-1286 597.88,-1286 597.88,-1264 569.88,-1264"/>
+<polygon fill="white" stroke="none" points="597.88,-1264 597.88,-1286 688.88,-1286 688.88,-1264 597.88,-1264"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1264 597.88,-1286 688.88,-1286 688.88,-1264 597.88,-1264"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1271.25" font-family="Liberation Sans" font-size="10.50"> avatar_data </text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1242 569.88,-1264 597.88,-1264 597.88,-1242 569.88,-1242"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1242 569.88,-1264 597.88,-1264 597.88,-1242 569.88,-1242"/>
+<text xml:space="preserve" text-anchor="start" x="576.38" y="-1250.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">UK</text>
+<polygon fill="white" stroke="none" points="597.88,-1242 597.88,-1264 688.88,-1264 688.88,-1242 597.88,-1242"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1242 597.88,-1264 688.88,-1264 688.88,-1242 597.88,-1242"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1249.25" font-family="Liberation Sans" font-size="10.50"> google_sub </text>
+<polygon fill="#f8fafc" stroke="none" points="569.88,-1220 569.88,-1242 597.88,-1242 597.88,-1220 569.88,-1220"/>
+<polygon fill="none" stroke="#94a3b8" points="569.88,-1220 569.88,-1242 597.88,-1242 597.88,-1220 569.88,-1220"/>
+<polygon fill="white" stroke="none" points="597.88,-1220 597.88,-1242 688.88,-1242 688.88,-1220 597.88,-1220"/>
+<polygon fill="none" stroke="#94a3b8" points="597.88,-1220 597.88,-1242 688.88,-1242 688.88,-1220 597.88,-1220"/>
+<text xml:space="preserve" text-anchor="start" x="602.88" y="-1227.25" font-family="Liberation Sans" font-size="10.50"> created_at </text>
+</g>
+<!-- API_TOKEN -->
+<g id="node2" class="node">
+<title>API_TOKEN</title>
+<polygon fill="#1e3a5f" stroke="none" points="8,-1092 8,-1114 112.75,-1114 112.75,-1092 8,-1092"/>
+<polygon fill="none" stroke="#94a3b8" points="8,-1092 8,-1114 112.75,-1114 112.75,-1092 8,-1092"/>
+<text xml:space="preserve" text-anchor="start" x="30.75" y="-1100.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="white">API_TOKEN</text>
+<polygon fill="#f8fafc" stroke="none" points="8,-1070 8,-1092 36,-1092 36,-1070 8,-1070"/>
+<polygon fill="none" stroke="#94a3b8" points="8,-1070 8,-1092 36,-1092 36,-1070 8,-1070"/>
+<text xml:space="preserve" text-anchor="start" x="14.88" y="-1078.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">PK</text>
+<polygon fill="white" stroke="none" points="36,-1070 36,-1092 112.75,-1092 112.75,-1070 36,-1070"/>
+<polygon fill="none" stroke="#94a3b8" points="36,-1070 36,-1092 112.75,-1092 112.75,-1070 36,-1070"/>
+<text xml:space="preserve" text-anchor="start" x="41" y="-1077.25" font-family="Liberation Sans" font-size="10.50"> id (identifier) </text>
+<polygon fill="#f8fafc" stroke="none" points="8,-1048 8,-1070 36,-1070 36,-1048 8,-1048"/>
+<polygon fill="none" stroke="#94a3b8" points="8,-1048 8,-1070 36,-1070 36,-1048 8,-1048"/>
+<text xml:space="preserve" text-anchor="start" x="14.5" y="-1056.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">UK</text>
+<polygon fill="white" stroke="none" points="36,-1048 36,-1070 112.75,-1070 112.75,-1048 36,-1048"/>
+<polygon fill="none" stroke="#94a3b8" points="36,-1048 36,-1070 112.75,-1070 112.75,-1048 36,-1048"/>
+<text xml:space="preserve" text-anchor="start" x="41" y="-1055.25" font-family="Liberation Sans" font-size="10.50"> token_hash </text>
+<polygon fill="#f8fafc" stroke="none" points="8,-1026 8,-1048 36,-1048 36,-1026 8,-1026"/>
+<polygon fill="none" stroke="#94a3b8" points="8,-1026 8,-1048 36,-1048 36,-1026 8,-1026"/>
+<polygon fill="white" stroke="none" points="36,-1026 36,-1048 112.75,-1048 112.75,-1026 36,-1026"/>
+<polygon fill="none" stroke="#94a3b8" points="36,-1026 36,-1048 112.75,-1048 112.75,-1026 36,-1026"/>
+<text xml:space="preserve" text-anchor="start" x="41" y="-1033.25" font-family="Liberation Sans" font-size="10.50"> label </text>
+<polygon fill="#f8fafc" stroke="none" points="8,-1004 8,-1026 36,-1026 36,-1004 8,-1004"/>
+<polygon fill="none" stroke="#94a3b8" points="8,-1004 8,-1026 36,-1026 36,-1004 8,-1004"/>
+<polygon fill="white" stroke="none" points="36,-1004 36,-1026 112.75,-1026 112.75,-1004 36,-1004"/>
+<polygon fill="none" stroke="#94a3b8" points="36,-1004 36,-1026 112.75,-1026 112.75,-1004 36,-1004"/>
+<text xml:space="preserve" text-anchor="start" x="41" y="-1011.25" font-family="Liberation Sans" font-size="10.50"> created_at </text>
+<polygon fill="#f8fafc" stroke="none" points="8,-982 8,-1004 36,-1004 36,-982 8,-982"/>
+<polygon fill="none" stroke="#94a3b8" points="8,-982 8,-1004 36,-1004 36,-982 8,-982"/>
+<polygon fill="white" stroke="none" points="36,-982 36,-1004 112.75,-1004 112.75,-982 36,-982"/>
+<polygon fill="none" stroke="#94a3b8" points="36,-982 36,-1004 112.75,-1004 112.75,-982 36,-982"/>
+<text xml:space="preserve" text-anchor="start" x="41" y="-989.25" font-family="Liberation Sans" font-size="10.50"> last_used_at </text>
+<polygon fill="#f8fafc" stroke="none" points="8,-960 8,-982 36,-982 36,-960 8,-960"/>
+<polygon fill="none" stroke="#94a3b8" points="8,-960 8,-982 36,-982 36,-960 8,-960"/>
+<polygon fill="white" stroke="none" points="36,-960 36,-982 112.75,-982 112.75,-960 36,-960"/>
+<polygon fill="none" stroke="#94a3b8" points="36,-960 36,-982 112.75,-982 112.75,-960 36,-960"/>
+<text xml:space="preserve" text-anchor="start" x="41" y="-967.25" font-family="Liberation Sans" font-size="10.50"> revoked_at </text>
+</g>
+<!-- USER&#45;&gt;API_TOKEN -->
+<g id="edge1" class="edge">
+<title>USER&#45;&gt;API_TOKEN</title>
+<path fill="none" stroke="#334155" stroke-width="1.4" d="M557.72,-1332.64C460.96,-1291.46 285.02,-1211.05 149.38,-1118 142.36,-1113.19 135.3,-1107.86 128.41,-1102.32"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="563.31,-1329.58 559.4,-1338.79 557.56,-1338 561.47,-1328.8 563.31,-1329.58"/>
+<polyline fill="none" stroke="#334155" stroke-width="1.4" points="562.27,-1334.58 557.67,-1332.62"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="128.48,-1102.38 123.62,-1092.55 124.26,-1098.9 121.12,-1096.32 121.12,-1096.32 121.12,-1096.32 124.26,-1098.9 117.9,-1099.5 128.48,-1102.38"/>
+<polygon fill="white" stroke="none" points="236.27,-1156 236.27,-1178 276.27,-1178 276.27,-1156 236.27,-1156"/>
+<text xml:space="preserve" text-anchor="start" x="238.27" y="-1168.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#1e293b">memiliki</text>
+<text xml:space="preserve" text-anchor="start" x="242.02" y="-1159.45" font-family="Liberation Sans" font-size="9.00" fill="#1e293b">1 : 0..N</text>
+</g>
+<!-- NOTIFICATION_PREFERENCE -->
+<g id="node3" class="node">
+<title>NOTIFICATION_PREFERENCE</title>
+<polygon fill="#0f766e" stroke="none" points="186.62,-1059 186.62,-1081 348.12,-1081 348.12,-1059 186.62,-1059"/>
+<polygon fill="none" stroke="#94a3b8" points="186.62,-1059 186.62,-1081 348.12,-1081 348.12,-1059 186.62,-1059"/>
+<text xml:space="preserve" text-anchor="start" x="191.62" y="-1067.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="white">NOTIFICATION_PREFERENCE</text>
+<polygon fill="#f8fafc" stroke="none" points="186.62,-1037 186.62,-1059 214.88,-1059 214.88,-1037 186.62,-1037"/>
+<polygon fill="none" stroke="#94a3b8" points="186.62,-1037 186.62,-1059 214.88,-1059 214.88,-1037 186.62,-1037"/>
+<text xml:space="preserve" text-anchor="start" x="193.62" y="-1045.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">PK</text>
+<polygon fill="white" stroke="none" points="214.88,-1037 214.88,-1059 348.12,-1059 348.12,-1037 214.88,-1037"/>
+<polygon fill="none" stroke="#94a3b8" points="214.88,-1037 214.88,-1059 348.12,-1059 348.12,-1037 214.88,-1037"/>
+<text xml:space="preserve" text-anchor="start" x="219.88" y="-1044.25" font-family="Liberation Sans" font-size="10.50"> user_id (identifier) </text>
+<polygon fill="#f8fafc" stroke="none" points="186.62,-1015 186.62,-1037 214.88,-1037 214.88,-1015 186.62,-1015"/>
+<polygon fill="none" stroke="#94a3b8" points="186.62,-1015 186.62,-1037 214.88,-1037 214.88,-1015 186.62,-1015"/>
+<polygon fill="white" stroke="none" points="214.88,-1015 214.88,-1037 348.12,-1037 348.12,-1015 214.88,-1015"/>
+<polygon fill="none" stroke="#94a3b8" points="214.88,-1015 214.88,-1037 348.12,-1037 348.12,-1015 214.88,-1015"/>
+<text xml:space="preserve" text-anchor="start" x="219.88" y="-1022.25" font-family="Liberation Sans" font-size="10.50"> prefs (konfigurasi JSON) </text>
+<polygon fill="#f8fafc" stroke="none" points="186.62,-993 186.62,-1015 214.88,-1015 214.88,-993 186.62,-993"/>
+<polygon fill="none" stroke="#94a3b8" points="186.62,-993 186.62,-1015 214.88,-1015 214.88,-993 186.62,-993"/>
+<polygon fill="white" stroke="none" points="214.88,-993 214.88,-1015 348.12,-1015 348.12,-993 214.88,-993"/>
+<polygon fill="none" stroke="#94a3b8" points="214.88,-993 214.88,-1015 348.12,-1015 348.12,-993 214.88,-993"/>
+<text xml:space="preserve" text-anchor="start" x="219.88" y="-1000.25" font-family="Liberation Sans" font-size="10.50"> updated_at </text>
+</g>
+<!-- USER&#45;&gt;NOTIFICATION_PREFERENCE -->
+<g id="edge2" class="edge">
+<title>USER&#45;&gt;NOTIFICATION_PREFERENCE</title>
+<path fill="none" stroke="#0f766e" stroke-width="1.4" d="M557.93,-1325.18C498.75,-1292.24 414.95,-1239.71 355.12,-1178 332.2,-1154.35 312.19,-1123.76 297.09,-1097.2"/>
+<polygon fill="#0f766e" stroke="#0f766e" stroke-width="1.4" points="563.7,-1322.66 558.85,-1331.41 557.1,-1330.44 561.95,-1321.69 563.7,-1322.66"/>
+<polyline fill="none" stroke="#0f766e" stroke-width="1.4" points="562.15,-1327.52 557.77,-1325.1"/>
+<polygon fill="#0f766e" stroke="#0f766e" stroke-width="1.4" points="286.4,-1088.23 295.15,-1083.38 296.12,-1085.13 287.37,-1089.98 286.4,-1088.23"/>
+<polyline fill="none" stroke="#0f766e" stroke-width="1.4" points="290.29,-1084.93 292.71,-1089.3"/>
+<ellipse fill="none" stroke="#0f766e" stroke-width="1.4" cx="294.99" cy="-1093.41" rx="4" ry="4"/>
+<polygon fill="white" stroke="none" points="355.12,-1156 355.12,-1178 400.38,-1178 400.38,-1156 355.12,-1156"/>
+<text xml:space="preserve" text-anchor="start" x="357.12" y="-1168.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#0f766e">mengatur</text>
+<text xml:space="preserve" text-anchor="start" x="364.25" y="-1159.45" font-family="Liberation Sans" font-size="9.00" fill="#0f766e">1 : 0..1</text>
+</g>
+<!-- PROJECT -->
+<g id="node4" class="node">
+<title>PROJECT</title>
+<polygon fill="#1e3a5f" stroke="none" points="764.75,-1092 764.75,-1114 904,-1114 904,-1092 764.75,-1092"/>
+<polygon fill="none" stroke="#94a3b8" points="764.75,-1092 764.75,-1114 904,-1114 904,-1092 764.75,-1092"/>
+<text xml:space="preserve" text-anchor="start" x="809.62" y="-1100.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="white">PROJECT</text>
+<polygon fill="#f8fafc" stroke="none" points="764.75,-1070 764.75,-1092 792.75,-1092 792.75,-1070 764.75,-1070"/>
+<polygon fill="none" stroke="#94a3b8" points="764.75,-1070 764.75,-1092 792.75,-1092 792.75,-1070 764.75,-1070"/>
+<text xml:space="preserve" text-anchor="start" x="771.62" y="-1078.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">PK</text>
+<polygon fill="white" stroke="none" points="792.75,-1070 792.75,-1092 904,-1092 904,-1070 792.75,-1070"/>
+<polygon fill="none" stroke="#94a3b8" points="792.75,-1070 792.75,-1092 904,-1092 904,-1070 792.75,-1070"/>
+<text xml:space="preserve" text-anchor="start" x="797.75" y="-1077.25" font-family="Liberation Sans" font-size="10.50"> id (identifier) </text>
+<polygon fill="#f8fafc" stroke="none" points="764.75,-1048 764.75,-1070 792.75,-1070 792.75,-1048 764.75,-1048"/>
+<polygon fill="none" stroke="#94a3b8" points="764.75,-1048 764.75,-1070 792.75,-1070 792.75,-1048 764.75,-1048"/>
+<text xml:space="preserve" text-anchor="start" x="771.25" y="-1056.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">UK</text>
+<polygon fill="white" stroke="none" points="792.75,-1048 792.75,-1070 904,-1070 904,-1048 792.75,-1048"/>
+<polygon fill="none" stroke="#94a3b8" points="792.75,-1048 792.75,-1070 904,-1070 904,-1048 792.75,-1048"/>
+<text xml:space="preserve" text-anchor="start" x="797.75" y="-1055.25" font-family="Liberation Sans" font-size="10.50"> key </text>
+<polygon fill="#f8fafc" stroke="none" points="764.75,-1026 764.75,-1048 792.75,-1048 792.75,-1026 764.75,-1026"/>
+<polygon fill="none" stroke="#94a3b8" points="764.75,-1026 764.75,-1048 792.75,-1048 792.75,-1026 764.75,-1026"/>
+<polygon fill="white" stroke="none" points="792.75,-1026 792.75,-1048 904,-1048 904,-1026 792.75,-1026"/>
+<polygon fill="none" stroke="#94a3b8" points="792.75,-1026 792.75,-1048 904,-1048 904,-1026 792.75,-1026"/>
+<text xml:space="preserve" text-anchor="start" x="797.75" y="-1033.25" font-family="Liberation Sans" font-size="10.50"> name </text>
+<polygon fill="#f8fafc" stroke="none" points="764.75,-1004 764.75,-1026 792.75,-1026 792.75,-1004 764.75,-1004"/>
+<polygon fill="none" stroke="#94a3b8" points="764.75,-1004 764.75,-1026 792.75,-1026 792.75,-1004 764.75,-1004"/>
+<polygon fill="white" stroke="none" points="792.75,-1004 792.75,-1026 904,-1026 904,-1004 792.75,-1004"/>
+<polygon fill="none" stroke="#94a3b8" points="792.75,-1004 792.75,-1026 904,-1026 904,-1004 792.75,-1004"/>
+<text xml:space="preserve" text-anchor="start" x="797.75" y="-1011.25" font-family="Liberation Sans" font-size="10.50"> next_seq </text>
+<polygon fill="#f8fafc" stroke="none" points="764.75,-982 764.75,-1004 792.75,-1004 792.75,-982 764.75,-982"/>
+<polygon fill="none" stroke="#94a3b8" points="764.75,-982 764.75,-1004 792.75,-1004 792.75,-982 764.75,-982"/>
+<polygon fill="white" stroke="none" points="792.75,-982 792.75,-1004 904,-1004 904,-982 792.75,-982"/>
+<polygon fill="none" stroke="#94a3b8" points="792.75,-982 792.75,-1004 904,-1004 904,-982 792.75,-982"/>
+<text xml:space="preserve" text-anchor="start" x="797.75" y="-989.25" font-family="Liberation Sans" font-size="10.50"> archive_after_hours </text>
+<polygon fill="#f8fafc" stroke="none" points="764.75,-960 764.75,-982 792.75,-982 792.75,-960 764.75,-960"/>
+<polygon fill="none" stroke="#94a3b8" points="764.75,-960 764.75,-982 792.75,-982 792.75,-960 764.75,-960"/>
+<polygon fill="white" stroke="none" points="792.75,-960 792.75,-982 904,-982 904,-960 792.75,-960"/>
+<polygon fill="none" stroke="#94a3b8" points="792.75,-960 792.75,-982 904,-982 904,-960 792.75,-960"/>
+<text xml:space="preserve" text-anchor="start" x="797.75" y="-967.25" font-family="Liberation Sans" font-size="10.50"> created_at </text>
+</g>
+<!-- USER&#45;&gt;PROJECT -->
+<g id="edge3" class="edge">
+<title>USER&#45;&gt;PROJECT</title>
+<path fill="none" stroke="#334155" stroke-width="1.4" d="M699.45,-1251.24C725.21,-1210.53 754.02,-1165 778.38,-1126.5"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="701.54,-1257.29 693.09,-1251.94 694.16,-1250.25 702.61,-1255.6 701.54,-1257.29"/>
+<polyline fill="none" stroke="#334155" stroke-width="1.4" points="696.78,-1255.46 699.46,-1251.24"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="778.23,-1126.74 787.38,-1120.69 781.15,-1122.12 783.33,-1118.68 783.33,-1118.68 783.33,-1118.68 781.15,-1122.12 779.77,-1115.88 778.23,-1126.74"/>
+<polygon fill="white" stroke="none" points="756.27,-1156 756.27,-1178 800.77,-1178 800.77,-1156 756.27,-1156"/>
+<text xml:space="preserve" text-anchor="start" x="758.27" y="-1168.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#1e293b">membuat</text>
+<text xml:space="preserve" text-anchor="start" x="764.27" y="-1159.45" font-family="Liberation Sans" font-size="9.00" fill="#1e293b">1 : 0..N</text>
+</g>
+<!-- PROJECT_MEMBER -->
+<g id="node5" class="node">
+<title>PROJECT_MEMBER</title>
+<polygon fill="#2563eb" stroke="none" points="561.62,-821 561.62,-843 703.12,-843 703.12,-821 561.62,-821"/>
+<polygon fill="none" stroke="#94a3b8" points="561.62,-821 561.62,-843 703.12,-843 703.12,-821 561.62,-821"/>
+<text xml:space="preserve" text-anchor="start" x="581.38" y="-829.02" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="white">PROJECT_MEMBER</text>
+<polygon fill="#f8fafc" stroke="none" points="561.62,-799 561.62,-821 589.62,-821 589.62,-799 561.62,-799"/>
+<polygon fill="none" stroke="#94a3b8" points="561.62,-799 561.62,-821 589.62,-821 589.62,-799 561.62,-799"/>
+<text xml:space="preserve" text-anchor="start" x="568.5" y="-807.02" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">PK</text>
+<polygon fill="white" stroke="none" points="589.62,-799 589.62,-821 703.12,-821 703.12,-799 589.62,-799"/>
+<polygon fill="none" stroke="#94a3b8" points="589.62,-799 589.62,-821 703.12,-821 703.12,-799 589.62,-799"/>
+<text xml:space="preserve" text-anchor="start" x="594.62" y="-806.25" font-family="Liberation Sans" font-size="10.50"> project_id (identifier) </text>
+<polygon fill="#f8fafc" stroke="none" points="561.62,-777 561.62,-799 589.62,-799 589.62,-777 561.62,-777"/>
+<polygon fill="none" stroke="#94a3b8" points="561.62,-777 561.62,-799 589.62,-799 589.62,-777 561.62,-777"/>
+<text xml:space="preserve" text-anchor="start" x="568.5" y="-785.02" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">PK</text>
+<polygon fill="white" stroke="none" points="589.62,-777 589.62,-799 703.12,-799 703.12,-777 589.62,-777"/>
+<polygon fill="none" stroke="#94a3b8" points="589.62,-777 589.62,-799 703.12,-799 703.12,-777 589.62,-777"/>
+<text xml:space="preserve" text-anchor="start" x="594.62" y="-784.25" font-family="Liberation Sans" font-size="10.50"> user_id (identifier) </text>
+<polygon fill="#f8fafc" stroke="none" points="561.62,-755 561.62,-777 589.62,-777 589.62,-755 561.62,-755"/>
+<polygon fill="none" stroke="#94a3b8" points="561.62,-755 561.62,-777 589.62,-777 589.62,-755 561.62,-755"/>
+<polygon fill="white" stroke="none" points="589.62,-755 589.62,-777 703.12,-777 703.12,-755 589.62,-755"/>
+<polygon fill="none" stroke="#94a3b8" points="589.62,-755 589.62,-777 703.12,-777 703.12,-755 589.62,-755"/>
+<text xml:space="preserve" text-anchor="start" x="594.62" y="-762.25" font-family="Liberation Sans" font-size="10.50"> joined_at </text>
+</g>
+<!-- USER&#45;&gt;PROJECT_MEMBER -->
+<g id="edge4" class="edge">
+<title>USER&#45;&gt;PROJECT_MEMBER</title>
+<path fill="none" stroke="#2563eb" stroke-width="1.4" d="M630.18,-1211.5C630.8,-1094.94 631.63,-939.86 632.07,-857.35"/>
+<polygon fill="#2563eb" stroke="#2563eb" stroke-width="1.4" points="635.16,-1215.2 625.16,-1215.15 625.17,-1213.15 635.17,-1213.2 635.16,-1215.2"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="1.4" points="630.15,-1216.17 630.18,-1211.17"/>
+<polygon fill="#2563eb" stroke="#2563eb" stroke-width="1.4" points="632.07,-857.4 636.62,-847.42 632.1,-851.93 632.12,-847.86 632.12,-847.86 632.12,-847.86 632.1,-851.93 627.62,-847.37 632.07,-857.4"/>
+<polygon fill="white" stroke="none" points="631.51,-1026 631.51,-1048 681.26,-1048 681.26,-1026 631.51,-1026"/>
+<text xml:space="preserve" text-anchor="start" x="633.51" y="-1038.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#2563eb">bergabung</text>
+<text xml:space="preserve" text-anchor="start" x="642.13" y="-1029.45" font-family="Liberation Sans" font-size="9.00" fill="#2563eb">1 : 0..N</text>
+</g>
+<!-- TASK -->
+<g id="node7" class="node">
+<title>TASK</title>
+<polygon fill="#1e3a5f" stroke="none" points="989,-616 989,-638 1123.75,-638 1123.75,-616 989,-616"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-616 989,-638 1123.75,-638 1123.75,-616 989,-616"/>
+<text xml:space="preserve" text-anchor="start" x="1042.5" y="-624.02" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="white">TASK</text>
+<polygon fill="#f8fafc" stroke="none" points="989,-594 989,-616 1017,-616 1017,-594 989,-594"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-594 989,-616 1017,-616 1017,-594 989,-594"/>
+<text xml:space="preserve" text-anchor="start" x="995.88" y="-602.02" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">PK</text>
+<polygon fill="white" stroke="none" points="1017,-594 1017,-616 1123.75,-616 1123.75,-594 1017,-594"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-594 1017,-616 1123.75,-616 1123.75,-594 1017,-594"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-601.25" font-family="Liberation Sans" font-size="10.50"> id (identifier) </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-572 989,-594 1017,-594 1017,-572 989,-572"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-572 989,-594 1017,-594 1017,-572 989,-572"/>
+<polygon fill="white" stroke="none" points="1017,-572 1017,-594 1123.75,-594 1123.75,-572 1017,-572"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-572 1017,-594 1123.75,-594 1123.75,-572 1017,-572"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-579.25" font-family="Liberation Sans" font-size="10.50"> seq </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-550 989,-572 1017,-572 1017,-550 989,-550"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-550 989,-572 1017,-572 1017,-550 989,-550"/>
+<text xml:space="preserve" text-anchor="start" x="995.5" y="-558.02" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">UK</text>
+<polygon fill="white" stroke="none" points="1017,-550 1017,-572 1123.75,-572 1123.75,-550 1017,-550"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-550 1017,-572 1123.75,-572 1123.75,-550 1017,-550"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-557.25" font-family="Liberation Sans" font-size="10.50"> display_id </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-528 989,-550 1017,-550 1017,-528 989,-528"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-528 989,-550 1017,-550 1017,-528 989,-528"/>
+<polygon fill="white" stroke="none" points="1017,-528 1017,-550 1123.75,-550 1123.75,-528 1017,-528"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-528 1017,-550 1123.75,-550 1123.75,-528 1017,-528"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-535.25" font-family="Liberation Sans" font-size="10.50"> title </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-506 989,-528 1017,-528 1017,-506 989,-506"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-506 989,-528 1017,-528 1017,-506 989,-506"/>
+<polygon fill="white" stroke="none" points="1017,-506 1017,-528 1123.75,-528 1123.75,-506 1017,-506"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-506 1017,-528 1123.75,-528 1123.75,-506 1017,-506"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-513.25" font-family="Liberation Sans" font-size="10.50"> description </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-484 989,-506 1017,-506 1017,-484 989,-484"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-484 989,-506 1017,-506 1017,-484 989,-484"/>
+<polygon fill="white" stroke="none" points="1017,-484 1017,-506 1123.75,-506 1123.75,-484 1017,-484"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-484 1017,-506 1123.75,-506 1123.75,-484 1017,-484"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-491.25" font-family="Liberation Sans" font-size="10.50"> status </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-462 989,-484 1017,-484 1017,-462 989,-462"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-462 989,-484 1017,-484 1017,-462 989,-462"/>
+<polygon fill="white" stroke="none" points="1017,-462 1017,-484 1123.75,-484 1123.75,-462 1017,-462"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-462 1017,-484 1123.75,-484 1123.75,-462 1017,-462"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-469.25" font-family="Liberation Sans" font-size="10.50"> priority </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-440 989,-462 1017,-462 1017,-440 989,-440"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-440 989,-462 1017,-462 1017,-440 989,-440"/>
+<polygon fill="white" stroke="none" points="1017,-440 1017,-462 1123.75,-462 1123.75,-440 1017,-440"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-440 1017,-462 1123.75,-462 1123.75,-440 1017,-440"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-447.25" font-family="Liberation Sans" font-size="10.50"> due_date </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-418 989,-440 1017,-440 1017,-418 989,-418"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-418 989,-440 1017,-440 1017,-418 989,-418"/>
+<polygon fill="white" stroke="none" points="1017,-418 1017,-440 1123.75,-440 1123.75,-418 1017,-418"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-418 1017,-440 1123.75,-440 1123.75,-418 1017,-418"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-425.25" font-family="Liberation Sans" font-size="10.50"> links </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-396 989,-418 1017,-418 1017,-396 989,-396"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-396 989,-418 1017,-418 1017,-396 989,-396"/>
+<polygon fill="white" stroke="none" points="1017,-396 1017,-418 1123.75,-418 1123.75,-396 1017,-396"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-396 1017,-418 1123.75,-418 1123.75,-396 1017,-396"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-403.25" font-family="Liberation Sans" font-size="10.50"> status_changed_at </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-374 989,-396 1017,-396 1017,-374 989,-374"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-374 989,-396 1017,-396 1017,-374 989,-374"/>
+<polygon fill="white" stroke="none" points="1017,-374 1017,-396 1123.75,-396 1123.75,-374 1017,-374"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-374 1017,-396 1123.75,-396 1123.75,-374 1017,-374"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-381.25" font-family="Liberation Sans" font-size="10.50"> archived_at </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-352 989,-374 1017,-374 1017,-352 989,-352"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-352 989,-374 1017,-374 1017,-352 989,-352"/>
+<polygon fill="white" stroke="none" points="1017,-352 1017,-374 1123.75,-374 1123.75,-352 1017,-352"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-352 1017,-374 1123.75,-374 1123.75,-352 1017,-352"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-359.25" font-family="Liberation Sans" font-size="10.50"> created_at </text>
+<polygon fill="#f8fafc" stroke="none" points="989,-330 989,-352 1017,-352 1017,-330 989,-330"/>
+<polygon fill="none" stroke="#94a3b8" points="989,-330 989,-352 1017,-352 1017,-330 989,-330"/>
+<polygon fill="white" stroke="none" points="1017,-330 1017,-352 1123.75,-352 1123.75,-330 1017,-330"/>
+<polygon fill="none" stroke="#94a3b8" points="1017,-330 1017,-352 1123.75,-352 1123.75,-330 1017,-330"/>
+<text xml:space="preserve" text-anchor="start" x="1022" y="-337.25" font-family="Liberation Sans" font-size="10.50"> updated_at </text>
+</g>
+<!-- USER&#45;&gt;TASK -->
+<g id="edge9" class="edge">
+<title>USER&#45;&gt;TASK</title>
+<path fill="none" stroke="#334155" stroke-width="1.4" d="M700.85,-1320.28C769.9,-1277.01 873.71,-1203.73 941.38,-1118 1067.18,-958.61 1079.17,-882.91 1071.38,-680 1071.03,-671 1070.59,-661.78 1070.09,-652.47"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="700.26,-1326.55 694.97,-1318.06 696.66,-1317 701.96,-1325.49 700.26,-1326.55"/>
+<polyline fill="none" stroke="#334155" stroke-width="1.4" points="696.76,-1322.83 701.01,-1320.19"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="1070.09,-652.38 1074.02,-642.14 1069.78,-646.92 1069.55,-642.86 1069.55,-642.86 1069.55,-642.86 1069.78,-646.92 1065.03,-642.65 1070.09,-652.38"/>
+<polygon fill="white" stroke="none" points="1060.97,-896 1060.97,-918 1105.47,-918 1105.47,-896 1060.97,-896"/>
+<text xml:space="preserve" text-anchor="start" x="1062.97" y="-908.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#1e293b">membuat</text>
+<text xml:space="preserve" text-anchor="start" x="1068.97" y="-899.45" font-family="Liberation Sans" font-size="9.00" fill="#1e293b">1 : 0..N</text>
+</g>
+<!-- USER&#45;&gt;TASK -->
+<g id="edge10" class="edge">
+<title>USER&#45;&gt;TASK</title>
+<path fill="none" stroke="#475569" stroke-width="1.4" stroke-dasharray="5,2" d="M710.04,-1332.4C800.92,-1295.27 947.52,-1223.41 1036.38,-1118 1163.87,-966.76 1146.14,-875.4 1115.38,-680 1113.93,-670.83 1112.16,-661.48 1110.15,-652.1"/>
+<polygon fill="#475569" stroke="#475569" stroke-width="1.4" points="699.57,-1342 695.83,-1332.72 697.69,-1331.98 701.42,-1341.26 699.57,-1342"/>
+<polyline fill="none" stroke="#475569" stroke-width="1.4" points="696.77,-1337.74 701.41,-1335.87"/>
+<ellipse fill="none" stroke="#475569" stroke-width="1.4" cx="705.77" cy="-1334.12" rx="4" ry="4"/>
+<polygon fill="#475569" stroke="#475569" stroke-width="1.4" points="1110.16,-652.13 1112.37,-641.39 1108.97,-646.8 1108.08,-642.83 1108.08,-642.83 1108.08,-642.83 1108.97,-646.8 1103.59,-643.35 1110.16,-652.13"/>
+<polygon fill="white" stroke="none" points="1136.85,-896 1136.85,-918 1200.85,-918 1200.85,-896 1136.85,-896"/>
+<text xml:space="preserve" text-anchor="start" x="1138.85" y="-908.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#475569">ditugaskan ke</text>
+<text xml:space="preserve" text-anchor="start" x="1149.73" y="-899.45" font-family="Liberation Sans" font-size="9.00" fill="#475569">0..1 : 0..N</text>
+</g>
+<!-- TASK_HISTORY -->
+<g id="node9" class="node">
+<title>TASK_HISTORY</title>
+<polygon fill="#1e3a5f" stroke="none" points="485.62,-202 485.62,-224 597.12,-224 597.12,-202 485.62,-202"/>
+<polygon fill="none" stroke="#94a3b8" points="485.62,-202 485.62,-224 597.12,-224 597.12,-202 485.62,-202"/>
+<text xml:space="preserve" text-anchor="start" x="501.62" y="-210.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="white">TASK_HISTORY</text>
+<polygon fill="#f8fafc" stroke="none" points="485.62,-180 485.62,-202 513.62,-202 513.62,-180 485.62,-180"/>
+<polygon fill="none" stroke="#94a3b8" points="485.62,-180 485.62,-202 513.62,-202 513.62,-180 485.62,-180"/>
+<text xml:space="preserve" text-anchor="start" x="492.5" y="-188.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">PK</text>
+<polygon fill="white" stroke="none" points="513.62,-180 513.62,-202 597.12,-202 597.12,-180 513.62,-180"/>
+<polygon fill="none" stroke="#94a3b8" points="513.62,-180 513.62,-202 597.12,-202 597.12,-180 513.62,-180"/>
+<text xml:space="preserve" text-anchor="start" x="518.62" y="-187.25" font-family="Liberation Sans" font-size="10.50"> id (identifier) </text>
+<polygon fill="#f8fafc" stroke="none" points="485.62,-158 485.62,-180 513.62,-180 513.62,-158 485.62,-158"/>
+<polygon fill="none" stroke="#94a3b8" points="485.62,-158 485.62,-180 513.62,-180 513.62,-158 485.62,-158"/>
+<polygon fill="white" stroke="none" points="513.62,-158 513.62,-180 597.12,-180 597.12,-158 513.62,-158"/>
+<polygon fill="none" stroke="#94a3b8" points="513.62,-158 513.62,-180 597.12,-180 597.12,-158 513.62,-158"/>
+<text xml:space="preserve" text-anchor="start" x="518.62" y="-165.25" font-family="Liberation Sans" font-size="10.50"> actor_channel </text>
+<polygon fill="#f8fafc" stroke="none" points="485.62,-136 485.62,-158 513.62,-158 513.62,-136 485.62,-136"/>
+<polygon fill="none" stroke="#94a3b8" points="485.62,-136 485.62,-158 513.62,-158 513.62,-136 485.62,-136"/>
+<polygon fill="white" stroke="none" points="513.62,-136 513.62,-158 597.12,-158 597.12,-136 513.62,-136"/>
+<polygon fill="none" stroke="#94a3b8" points="513.62,-136 513.62,-158 597.12,-158 597.12,-136 513.62,-136"/>
+<text xml:space="preserve" text-anchor="start" x="518.62" y="-143.25" font-family="Liberation Sans" font-size="10.50"> agent_name </text>
+<polygon fill="#f8fafc" stroke="none" points="485.62,-114 485.62,-136 513.62,-136 513.62,-114 485.62,-114"/>
+<polygon fill="none" stroke="#94a3b8" points="485.62,-114 485.62,-136 513.62,-136 513.62,-114 485.62,-114"/>
+<polygon fill="white" stroke="none" points="513.62,-114 513.62,-136 597.12,-136 597.12,-114 513.62,-114"/>
+<polygon fill="none" stroke="#94a3b8" points="513.62,-114 513.62,-136 597.12,-136 597.12,-114 513.62,-114"/>
+<text xml:space="preserve" text-anchor="start" x="518.62" y="-121.25" font-family="Liberation Sans" font-size="10.50"> action </text>
+<polygon fill="#f8fafc" stroke="none" points="485.62,-92 485.62,-114 513.62,-114 513.62,-92 485.62,-92"/>
+<polygon fill="none" stroke="#94a3b8" points="485.62,-92 485.62,-114 513.62,-114 513.62,-92 485.62,-92"/>
+<polygon fill="white" stroke="none" points="513.62,-92 513.62,-114 597.12,-114 597.12,-92 513.62,-92"/>
+<polygon fill="none" stroke="#94a3b8" points="513.62,-92 513.62,-114 597.12,-114 597.12,-92 513.62,-92"/>
+<text xml:space="preserve" text-anchor="start" x="518.62" y="-99.25" font-family="Liberation Sans" font-size="10.50"> field_name </text>
+<polygon fill="#f8fafc" stroke="none" points="485.62,-70 485.62,-92 513.62,-92 513.62,-70 485.62,-70"/>
+<polygon fill="none" stroke="#94a3b8" points="485.62,-70 485.62,-92 513.62,-92 513.62,-70 485.62,-70"/>
+<polygon fill="white" stroke="none" points="513.62,-70 513.62,-92 597.12,-92 597.12,-70 513.62,-70"/>
+<polygon fill="none" stroke="#94a3b8" points="513.62,-70 513.62,-92 597.12,-92 597.12,-70 513.62,-70"/>
+<text xml:space="preserve" text-anchor="start" x="518.62" y="-77.25" font-family="Liberation Sans" font-size="10.50"> old_value </text>
+<polygon fill="#f8fafc" stroke="none" points="485.62,-48 485.62,-70 513.62,-70 513.62,-48 485.62,-48"/>
+<polygon fill="none" stroke="#94a3b8" points="485.62,-48 485.62,-70 513.62,-70 513.62,-48 485.62,-48"/>
+<polygon fill="white" stroke="none" points="513.62,-48 513.62,-70 597.12,-70 597.12,-48 513.62,-48"/>
+<polygon fill="none" stroke="#94a3b8" points="513.62,-48 513.62,-70 597.12,-70 597.12,-48 513.62,-48"/>
+<text xml:space="preserve" text-anchor="start" x="518.62" y="-55.25" font-family="Liberation Sans" font-size="10.50"> new_value </text>
+<polygon fill="#f8fafc" stroke="none" points="485.62,-26 485.62,-48 513.62,-48 513.62,-26 485.62,-26"/>
+<polygon fill="none" stroke="#94a3b8" points="485.62,-26 485.62,-48 513.62,-48 513.62,-26 485.62,-26"/>
+<polygon fill="white" stroke="none" points="513.62,-26 513.62,-48 597.12,-48 597.12,-26 513.62,-26"/>
+<polygon fill="none" stroke="#94a3b8" points="513.62,-26 513.62,-48 597.12,-48 597.12,-26 513.62,-26"/>
+<text xml:space="preserve" text-anchor="start" x="518.62" y="-33.25" font-family="Liberation Sans" font-size="10.50"> comment </text>
+<polygon fill="#f8fafc" stroke="none" points="485.62,-4 485.62,-26 513.62,-26 513.62,-4 485.62,-4"/>
+<polygon fill="none" stroke="#94a3b8" points="485.62,-4 485.62,-26 513.62,-26 513.62,-4 485.62,-4"/>
+<polygon fill="white" stroke="none" points="513.62,-4 513.62,-26 597.12,-26 597.12,-4 513.62,-4"/>
+<polygon fill="none" stroke="#94a3b8" points="513.62,-4 513.62,-26 597.12,-26 597.12,-4 513.62,-4"/>
+<text xml:space="preserve" text-anchor="start" x="518.62" y="-11.25" font-family="Liberation Sans" font-size="10.50"> created_at </text>
+</g>
+<!-- USER&#45;&gt;TASK_HISTORY -->
+<g id="edge13" class="edge">
+<title>USER&#45;&gt;TASK_HISTORY</title>
+<path fill="none" stroke="#475569" stroke-width="1.4" stroke-dasharray="5,2" d="M552.97,-1282.38C502.03,-1220.77 444.38,-1130.57 444.38,-1038 444.38,-1038 444.38,-1038 444.38,-483 444.38,-399.23 468.17,-308.17 492.19,-237.59"/>
+<polygon fill="#475569" stroke="#475569" stroke-width="1.4" points="565.24,-1289.18 557.59,-1295.62 556.31,-1294.1 563.95,-1287.65 565.24,-1289.18"/>
+<polyline fill="none" stroke="#475569" stroke-width="1.4" points="562.06,-1293.17 558.84,-1289.34"/>
+<ellipse fill="none" stroke="#475569" stroke-width="1.4" cx="555.81" cy="-1285.75" rx="4" ry="4"/>
+<polygon fill="#475569" stroke="#475569" stroke-width="1.4" points="492.16,-237.67 499.67,-229.68 493.94,-232.5 495.27,-228.66 495.27,-228.66 495.27,-228.66 493.94,-232.5 491.17,-226.75 492.16,-237.67"/>
+<polygon fill="white" stroke="none" points="444.38,-788 444.38,-810 495.62,-810 495.62,-788 444.38,-788"/>
+<text xml:space="preserve" text-anchor="start" x="446.38" y="-800.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#475569">melakukan</text>
+<text xml:space="preserve" text-anchor="start" x="450.88" y="-791.45" font-family="Liberation Sans" font-size="9.00" fill="#475569">0..1 : 0..N</text>
+</g>
+<!-- PROJECT&#45;&gt;PROJECT_MEMBER -->
+<g id="edge5" class="edge">
+<title>PROJECT&#45;&gt;PROJECT_MEMBER</title>
+<path fill="none" stroke="#2563eb" stroke-width="1.4" d="M763.06,-952.68C735.24,-920.18 704.14,-883.84 679.25,-854.77"/>
+<polygon fill="#2563eb" stroke="#2563eb" stroke-width="1.4" points="769.14,-952.09 761.54,-958.59 760.24,-957.07 767.83,-950.57 769.14,-952.09"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="1.4" points="765.99,-956.1 762.74,-952.3"/>
+<polygon fill="#2563eb" stroke="#2563eb" stroke-width="1.4" points="679.21,-854.72 676.13,-844.2 675.66,-850.57 673.01,-847.48 673.01,-847.48 673.01,-847.48 675.66,-850.57 669.29,-850.05 679.21,-854.72"/>
+<polygon fill="white" stroke="none" points="733.38,-896 733.38,-918 801.88,-918 801.88,-896 733.38,-896"/>
+<text xml:space="preserve" text-anchor="start" x="735.38" y="-908.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#2563eb">beranggotakan</text>
+<text xml:space="preserve" text-anchor="start" x="753.38" y="-899.45" font-family="Liberation Sans" font-size="9.00" fill="#2563eb">1 : 0..N</text>
+</g>
+<!-- SEGMENT -->
+<g id="node6" class="node">
+<title>SEGMENT</title>
+<polygon fill="#1e3a5f" stroke="none" points="776.88,-832 776.88,-854 931.88,-854 931.88,-832 776.88,-832"/>
+<polygon fill="none" stroke="#94a3b8" points="776.88,-832 776.88,-854 931.88,-854 931.88,-832 776.88,-832"/>
+<text xml:space="preserve" text-anchor="start" x="828.5" y="-840.02" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="white">SEGMENT</text>
+<polygon fill="#f8fafc" stroke="none" points="776.88,-810 776.88,-832 804.88,-832 804.88,-810 776.88,-810"/>
+<polygon fill="none" stroke="#94a3b8" points="776.88,-810 776.88,-832 804.88,-832 804.88,-810 776.88,-810"/>
+<text xml:space="preserve" text-anchor="start" x="783.75" y="-818.02" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">PK</text>
+<polygon fill="white" stroke="none" points="804.88,-810 804.88,-832 931.88,-832 931.88,-810 804.88,-810"/>
+<polygon fill="none" stroke="#94a3b8" points="804.88,-810 804.88,-832 931.88,-832 931.88,-810 804.88,-810"/>
+<text xml:space="preserve" text-anchor="start" x="809.88" y="-817.25" font-family="Liberation Sans" font-size="10.50"> id (identifier) </text>
+<polygon fill="#f8fafc" stroke="none" points="776.88,-788 776.88,-810 804.88,-810 804.88,-788 776.88,-788"/>
+<polygon fill="none" stroke="#94a3b8" points="776.88,-788 776.88,-810 804.88,-810 804.88,-788 776.88,-788"/>
+<polygon fill="white" stroke="none" points="804.88,-788 804.88,-810 931.88,-810 931.88,-788 804.88,-788"/>
+<polygon fill="none" stroke="#94a3b8" points="804.88,-788 804.88,-810 931.88,-810 931.88,-788 804.88,-788"/>
+<text xml:space="preserve" text-anchor="start" x="809.88" y="-795.25" font-family="Liberation Sans" font-size="10.50"> name (unik per proyek) </text>
+<polygon fill="#f8fafc" stroke="none" points="776.88,-766 776.88,-788 804.88,-788 804.88,-766 776.88,-766"/>
+<polygon fill="none" stroke="#94a3b8" points="776.88,-766 776.88,-788 804.88,-788 804.88,-766 776.88,-766"/>
+<polygon fill="white" stroke="none" points="804.88,-766 804.88,-788 931.88,-788 931.88,-766 804.88,-766"/>
+<polygon fill="none" stroke="#94a3b8" points="804.88,-766 804.88,-788 931.88,-788 931.88,-766 804.88,-766"/>
+<text xml:space="preserve" text-anchor="start" x="809.88" y="-773.25" font-family="Liberation Sans" font-size="10.50"> position </text>
+<polygon fill="#f8fafc" stroke="none" points="776.88,-744 776.88,-766 804.88,-766 804.88,-744 776.88,-744"/>
+<polygon fill="none" stroke="#94a3b8" points="776.88,-744 776.88,-766 804.88,-766 804.88,-744 776.88,-744"/>
+<polygon fill="white" stroke="none" points="804.88,-744 804.88,-766 931.88,-766 931.88,-744 804.88,-744"/>
+<polygon fill="none" stroke="#94a3b8" points="804.88,-744 804.88,-766 931.88,-766 931.88,-744 804.88,-744"/>
+<text xml:space="preserve" text-anchor="start" x="809.88" y="-751.25" font-family="Liberation Sans" font-size="10.50"> created_at </text>
+</g>
+<!-- PROJECT&#45;&gt;SEGMENT -->
+<g id="edge6" class="edge">
+<title>PROJECT&#45;&gt;SEGMENT</title>
+<path fill="none" stroke="#334155" stroke-width="1.4" d="M841.56,-951.16C843.87,-923.94 846.4,-894.15 848.59,-868.27"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="846.21,-955.53 836.25,-954.68 836.42,-952.69 846.38,-953.53 846.21,-955.53"/>
+<polyline fill="none" stroke="#334155" stroke-width="1.4" points="841.15,-956.1 841.57,-951.12"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="848.59,-868.25 853.92,-858.66 849.05,-862.8 849.4,-858.75 849.4,-858.75 849.4,-858.75 849.05,-862.8 844.95,-857.9 848.59,-868.25"/>
+<polygon fill="white" stroke="none" points="846.17,-896 846.17,-918 894.42,-918 894.42,-896 846.17,-896"/>
+<text xml:space="preserve" text-anchor="start" x="848.17" y="-908.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#1e293b">terdiri dari</text>
+<text xml:space="preserve" text-anchor="start" x="856.04" y="-899.45" font-family="Liberation Sans" font-size="9.00" fill="#1e293b">1 : 0..N</text>
+</g>
+<!-- PROJECT&#45;&gt;TASK -->
+<g id="edge7" class="edge">
+<title>PROJECT&#45;&gt;TASK</title>
+<path fill="none" stroke="#334155" stroke-width="1.4" d="M906.96,-952.28C929.17,-923.72 952.24,-890.72 969.38,-858 1002.53,-794.69 1023.18,-718.79 1035.98,-652.03"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="908.53,-958.39 900.65,-952.23 901.88,-950.65 909.76,-956.81 908.53,-958.39"/>
+<polyline fill="none" stroke="#334155" stroke-width="1.4" points="903.97,-956.1 907.05,-952.16"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="1035.97,-652.11 1042.23,-643.11 1036.97,-646.74 1037.72,-642.74 1037.72,-642.74 1037.72,-642.74 1036.97,-646.74 1033.39,-641.46 1035.97,-652.11"/>
+<polygon fill="white" stroke="none" points="1013.87,-788 1013.87,-810 1046.37,-810 1046.37,-788 1013.87,-788"/>
+<text xml:space="preserve" text-anchor="start" x="1018.12" y="-800.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#1e293b">berisi</text>
+<text xml:space="preserve" text-anchor="start" x="1015.87" y="-791.45" font-family="Liberation Sans" font-size="9.00" fill="#1e293b">1 : 0..N</text>
+</g>
+<!-- SEGMENT&#45;&gt;TASK -->
+<g id="edge8" class="edge">
+<title>SEGMENT&#45;&gt;TASK</title>
+<path fill="none" stroke="#334155" stroke-width="1.4" d="M894.33,-736.09C917.46,-700.24 947.43,-653.8 975.3,-610.63"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="896.4,-742.1 888,-736.67 889.09,-734.99 897.49,-740.42 896.4,-742.1"/>
+<polyline fill="none" stroke="#334155" stroke-width="1.4" points="891.66,-740.23 894.37,-736.03"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="975.35,-610.55 984.55,-604.59 978.31,-605.96 980.52,-602.54 980.52,-602.54 980.52,-602.54 978.31,-605.96 976.99,-599.71 975.35,-610.55"/>
+<polygon fill="white" stroke="none" points="925.48,-680 925.48,-702 1005.98,-702 1005.98,-680 925.48,-680"/>
+<text xml:space="preserve" text-anchor="start" x="927.48" y="-692.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#1e293b">mengelompokkan</text>
+<text xml:space="preserve" text-anchor="start" x="951.48" y="-683.45" font-family="Liberation Sans" font-size="9.00" fill="#1e293b">1 : 0..N</text>
+</g>
+<!-- TASK_TAG -->
+<g id="node8" class="node">
+<title>TASK_TAG</title>
+<polygon fill="#475569" stroke="none" points="1212.62,-114 1212.62,-136 1362.12,-136 1362.12,-114 1212.62,-114"/>
+<polygon fill="none" stroke="#94a3b8" points="1212.62,-114 1212.62,-136 1362.12,-136 1362.12,-114 1212.62,-114"/>
+<text xml:space="preserve" text-anchor="start" x="1217.62" y="-122.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="white">TASK_TAG (Entitas Lemah)</text>
+<polygon fill="#f8fafc" stroke="none" points="1212.62,-92 1212.62,-114 1243.12,-114 1243.12,-92 1212.62,-92"/>
+<polygon fill="none" stroke="#94a3b8" points="1212.62,-92 1212.62,-114 1243.12,-114 1243.12,-92 1212.62,-92"/>
+<text xml:space="preserve" text-anchor="start" x="1220.38" y="-100.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">UK</text>
+<polygon fill="white" stroke="none" points="1243.12,-92 1243.12,-114 1362.12,-114 1362.12,-92 1243.12,-92"/>
+<polygon fill="none" stroke="#94a3b8" points="1243.12,-92 1243.12,-114 1362.12,-114 1362.12,-92 1243.12,-92"/>
+<text xml:space="preserve" text-anchor="start" x="1248.12" y="-99.25" font-family="Liberation Sans" font-size="10.50"> label (unik per tugas) </text>
+</g>
+<!-- TASK&#45;&gt;TASK_TAG -->
+<g id="edge11" class="edge">
+<title>TASK&#45;&gt;TASK_TAG</title>
+<path fill="none" stroke="#334155" stroke-width="1.4" d="M1134.35,-358.78C1180.91,-284.6 1236.6,-195.89 1266.29,-148.59"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="1136.46,-364.82 1127.99,-359.51 1129.05,-357.81 1137.52,-363.13 1136.46,-364.82"/>
+<polyline fill="none" stroke="#334155" stroke-width="1.4" points="1131.69,-363.01 1134.35,-358.78"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="1266.3,-148.57 1275.43,-142.49 1269.21,-143.94 1271.37,-140.5 1271.37,-140.5 1271.37,-140.5 1269.21,-143.94 1267.81,-137.71 1266.3,-148.57"/>
+<polygon fill="white" stroke="none" points="1192.57,-266 1192.57,-288 1243.07,-288 1243.07,-266 1192.57,-266"/>
+<text xml:space="preserve" text-anchor="start" x="1194.57" y="-278.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#1e293b">diberi label</text>
+<text xml:space="preserve" text-anchor="start" x="1203.57" y="-269.45" font-family="Liberation Sans" font-size="9.00" fill="#1e293b">1 : 0..N</text>
+</g>
+<!-- TASK&#45;&gt;TASK_HISTORY -->
+<g id="edge12" class="edge">
+<title>TASK&#45;&gt;TASK_HISTORY</title>
+<path fill="none" stroke="#334155" stroke-width="1.4" d="M977.31,-426.5C878.05,-355.57 709.2,-234.92 613.38,-166.45"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="983.31,-424.64 977.49,-432.78 975.87,-431.62 981.68,-423.48 983.31,-424.64"/>
+<polyline fill="none" stroke="#334155" stroke-width="1.4" points="981.21,-429.29 977.15,-426.39"/>
+<polygon fill="#334155" stroke="#334155" stroke-width="1.4" points="613.43,-166.49 607.91,-157.01 608.98,-163.31 605.67,-160.94 605.67,-160.94 605.67,-160.94 608.98,-163.31 602.67,-164.33 613.43,-166.49"/>
+<polygon fill="white" stroke="none" points="783.43,-266 783.43,-288 830.93,-288 830.93,-266 783.43,-266"/>
+<text xml:space="preserve" text-anchor="start" x="785.43" y="-278.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#1e293b">tercatat di</text>
+<text xml:space="preserve" text-anchor="start" x="792.93" y="-269.45" font-family="Liberation Sans" font-size="9.00" fill="#1e293b">1 : 0..N</text>
+</g>
+<!-- TASK_ARCHIVE_QUEUE -->
+<g id="node10" class="node">
+<title>TASK_ARCHIVE_QUEUE</title>
+<polygon fill="#b45309" stroke="none" points="766.88,-147 766.88,-169 899.88,-169 899.88,-147 766.88,-147"/>
+<polygon fill="none" stroke="#94a3b8" points="766.88,-147 766.88,-169 899.88,-169 899.88,-147 766.88,-147"/>
+<text xml:space="preserve" text-anchor="start" x="771.88" y="-155.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="white">TASK_ARCHIVE_QUEUE</text>
+<polygon fill="#f8fafc" stroke="none" points="766.88,-125 766.88,-147 797,-147 797,-125 766.88,-125"/>
+<polygon fill="none" stroke="#94a3b8" points="766.88,-125 766.88,-147 797,-147 797,-125 766.88,-125"/>
+<text xml:space="preserve" text-anchor="start" x="774.81" y="-133.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">PK</text>
+<polygon fill="white" stroke="none" points="797,-125 797,-147 899.88,-147 899.88,-125 797,-125"/>
+<polygon fill="none" stroke="#94a3b8" points="797,-125 797,-147 899.88,-147 899.88,-125 797,-125"/>
+<text xml:space="preserve" text-anchor="start" x="802" y="-132.25" font-family="Liberation Sans" font-size="10.50"> task_id (identifier) </text>
+<polygon fill="#f8fafc" stroke="none" points="766.88,-103 766.88,-125 797,-125 797,-103 766.88,-103"/>
+<polygon fill="none" stroke="#94a3b8" points="766.88,-103 766.88,-125 797,-125 797,-103 766.88,-103"/>
+<polygon fill="white" stroke="none" points="797,-103 797,-125 899.88,-125 899.88,-103 797,-103"/>
+<polygon fill="none" stroke="#94a3b8" points="797,-103 797,-125 899.88,-125 899.88,-103 797,-103"/>
+<text xml:space="preserve" text-anchor="start" x="802" y="-110.25" font-family="Liberation Sans" font-size="10.50"> scheduled_for </text>
+<polygon fill="#f8fafc" stroke="none" points="766.88,-81 766.88,-103 797,-103 797,-81 766.88,-81"/>
+<polygon fill="none" stroke="#94a3b8" points="766.88,-81 766.88,-103 797,-103 797,-81 766.88,-81"/>
+<polygon fill="white" stroke="none" points="797,-81 797,-103 899.88,-103 899.88,-81 797,-81"/>
+<polygon fill="none" stroke="#94a3b8" points="797,-81 797,-103 899.88,-103 899.88,-81 797,-81"/>
+<text xml:space="preserve" text-anchor="start" x="802" y="-88.25" font-family="Liberation Sans" font-size="10.50"> state </text>
+<polygon fill="#f8fafc" stroke="none" points="766.88,-59 766.88,-81 797,-81 797,-59 766.88,-59"/>
+<polygon fill="none" stroke="#94a3b8" points="766.88,-59 766.88,-81 797,-81 797,-59 766.88,-59"/>
+<polygon fill="white" stroke="none" points="797,-59 797,-81 899.88,-81 899.88,-59 797,-59"/>
+<polygon fill="none" stroke="#94a3b8" points="797,-59 797,-81 899.88,-81 899.88,-59 797,-59"/>
+<text xml:space="preserve" text-anchor="start" x="802" y="-66.25" font-family="Liberation Sans" font-size="10.50"> updated_at </text>
+</g>
+<!-- TASK&#45;&gt;TASK_ARCHIVE_QUEUE -->
+<g id="edge14" class="edge">
+<title>TASK&#45;&gt;TASK_ARCHIVE_QUEUE</title>
+<path fill="none" stroke="#b45309" stroke-width="1.4" d="M978.56,-354.59C943.97,-297.5 904.59,-232.52 875.58,-184.65"/>
+<polygon fill="#b45309" stroke="#b45309" stroke-width="1.4" points="984.79,-355.22 976.24,-360.4 975.2,-358.69 983.75,-353.51 984.79,-355.22"/>
+<polyline fill="none" stroke="#b45309" stroke-width="1.4" points="981.03,-358.67 978.44,-354.39"/>
+<polygon fill="#b45309" stroke="#b45309" stroke-width="1.4" points="864.5,-176 873.05,-170.82 874.08,-172.53 865.53,-177.71 864.5,-176"/>
+<polyline fill="none" stroke="#b45309" stroke-width="1.4" points="868.25,-172.56 870.84,-176.83"/>
+<ellipse fill="none" stroke="#b45309" stroke-width="1.4" cx="873.28" cy="-180.85" rx="4" ry="4"/>
+<polygon fill="white" stroke="none" points="938.19,-266 938.19,-288 992.44,-288 992.44,-266 938.19,-266"/>
+<text xml:space="preserve" text-anchor="start" x="940.19" y="-278.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#b45309">dijadwalkan</text>
+<text xml:space="preserve" text-anchor="start" x="951.81" y="-269.45" font-family="Liberation Sans" font-size="9.00" fill="#b45309">1 : 0..1</text>
+</g>
+<!-- TASK_ASSIGNMENT_HISTORY -->
+<g id="node11" class="node">
+<title>TASK_ASSIGNMENT_HISTORY</title>
+<polygon fill="#b45309" stroke="none" points="973.75,-147 973.75,-169 1139,-169 1139,-147 973.75,-147"/>
+<polygon fill="none" stroke="#94a3b8" points="973.75,-147 973.75,-169 1139,-169 1139,-147 973.75,-147"/>
+<text xml:space="preserve" text-anchor="start" x="978.75" y="-155.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="white">TASK_ASSIGNMENT_HISTORY</text>
+<polygon fill="#f8fafc" stroke="none" points="973.75,-125 973.75,-147 1022.62,-147 1022.62,-125 973.75,-125"/>
+<polygon fill="none" stroke="#94a3b8" points="973.75,-125 973.75,-147 1022.62,-147 1022.62,-125 973.75,-125"/>
+<text xml:space="preserve" text-anchor="start" x="991.06" y="-133.03" font-family="Liberation Sans" font-weight="bold" font-size="10.50" fill="#2563eb">PK</text>
+<polygon fill="white" stroke="none" points="1022.62,-125 1022.62,-147 1139,-147 1139,-125 1022.62,-125"/>
+<polygon fill="none" stroke="#94a3b8" points="1022.62,-125 1022.62,-147 1139,-147 1139,-125 1022.62,-125"/>
+<text xml:space="preserve" text-anchor="start" x="1027.62" y="-132.25" font-family="Liberation Sans" font-size="10.50"> id (auto number) </text>
+<polygon fill="#f8fafc" stroke="none" points="973.75,-103 973.75,-125 1022.62,-125 1022.62,-103 973.75,-103"/>
+<polygon fill="none" stroke="#94a3b8" points="973.75,-103 973.75,-125 1022.62,-125 1022.62,-103 973.75,-103"/>
+<polygon fill="white" stroke="none" points="1022.62,-103 1022.62,-125 1139,-125 1139,-103 1022.62,-103"/>
+<polygon fill="none" stroke="#94a3b8" points="1022.62,-103 1022.62,-125 1139,-125 1139,-103 1022.62,-103"/>
+<text xml:space="preserve" text-anchor="start" x="1027.62" y="-110.25" font-family="Liberation Sans" font-size="10.50"> old_assignee </text>
+<polygon fill="#f8fafc" stroke="none" points="973.75,-81 973.75,-103 1022.62,-103 1022.62,-81 973.75,-81"/>
+<polygon fill="none" stroke="#94a3b8" points="973.75,-81 973.75,-103 1022.62,-103 1022.62,-81 973.75,-81"/>
+<polygon fill="white" stroke="none" points="1022.62,-81 1022.62,-103 1139,-103 1139,-81 1022.62,-81"/>
+<polygon fill="none" stroke="#94a3b8" points="1022.62,-81 1022.62,-103 1139,-103 1139,-81 1022.62,-81"/>
+<text xml:space="preserve" text-anchor="start" x="1027.62" y="-88.25" font-family="Liberation Sans" font-size="10.50"> new_assignee </text>
+<polygon fill="#f8fafc" stroke="none" points="973.75,-59 973.75,-81 1022.62,-81 1022.62,-59 973.75,-59"/>
+<polygon fill="none" stroke="#94a3b8" points="973.75,-59 973.75,-81 1022.62,-81 1022.62,-59 973.75,-59"/>
+<polygon fill="white" stroke="none" points="1022.62,-59 1022.62,-81 1139,-81 1139,-59 1022.62,-59"/>
+<polygon fill="none" stroke="#94a3b8" points="1022.62,-59 1022.62,-81 1139,-81 1139,-59 1022.62,-59"/>
+<text xml:space="preserve" text-anchor="start" x="1027.62" y="-66.25" font-family="Liberation Sans" font-size="10.50"> created_at </text>
+</g>
+<!-- TASK&#45;&gt;TASK_ASSIGNMENT_HISTORY -->
+<g id="edge15" class="edge">
+<title>TASK&#45;&gt;TASK_ASSIGNMENT_HISTORY</title>
+<path fill="none" stroke="#b45309" stroke-width="1.4" d="M1056.38,-321.35C1056.38,-272.77 1056.38,-222.08 1056.38,-183.1"/>
+<polygon fill="#b45309" stroke="#b45309" stroke-width="1.4" points="1061.38,-325.13 1051.38,-325.13 1051.38,-323.13 1061.38,-323.13 1061.38,-325.13"/>
+<polyline fill="none" stroke="#b45309" stroke-width="1.4" points="1056.38,-326.13 1056.38,-321.13"/>
+<polygon fill="#b45309" stroke="#b45309" stroke-width="1.4" points="1056.38,-183.41 1060.88,-173.41 1056.38,-177.94 1056.38,-173.87 1056.38,-173.87 1056.38,-173.87 1056.38,-177.94 1051.88,-173.41 1056.38,-183.41"/>
+<polygon fill="white" stroke="none" points="1056.38,-266 1056.38,-288 1141.38,-288 1141.38,-266 1056.38,-266"/>
+<text xml:space="preserve" text-anchor="start" x="1058.38" y="-278.45" font-family="Liberation Sans" font-weight="bold" font-size="9.00" fill="#b45309">riwayat penugasan</text>
+<text xml:space="preserve" text-anchor="start" x="1084.62" y="-269.45" font-family="Liberation Sans" font-size="9.00" fill="#b45309">1 : 0..N</text>
+</g>
+</g>
+</svg>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1380" height="1020" viewBox="0 0 1380 1020">
+  <defs>
+    <style>
+      text { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: 700; fill: #1E3A5F; }
+      .subtitle { font-size: 12.5px; fill: #475569; }
+      .h-box { font-size: 13px; font-weight: 700; fill: #FFFFFF; }
+      .b-box { font-size: 11.5px; font-weight: 600; fill: #1E293B; }
+      .s-box { font-size: 10.5px; fill: #475569; }
+      .lbl { font-size: 10.5px; font-weight: 600; fill: #1E293B; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1E293B"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0F766E"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#B45309"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#6D28D9"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-open" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#1E293B" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#0F766E" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#B45309" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#2563EB" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#6D28D9" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-inherit" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto">
+      <path d="M 1 1 L 11 6 L 1 11 z" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.6"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="112%" height="115%">
+      <feDropShadow dx="1.5" dy="2" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="1380" height="1020" fill="#FFFFFF"/>
+  <rect x="30" y="75" width="305" height="917" fill="#EFF6FF" fill-opacity="0.35" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="30" y="75" width="305" height="44" fill="#1E3A5F"/>
+<text x="182.5" y="89.5" text-anchor="middle" dominant-baseline="central" class="h-box">Pengguna / Klien</text>
+<text x="182.5" y="104.5" text-anchor="middle" dominant-baseline="central" class="h-box">(Web, CLI, MCP)</text>
+<rect x="335" y="75" width="330" height="917" fill="#FFFFFF" fill-opacity="0.35" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="335" y="75" width="330" height="44" fill="#2563EB"/>
+<text x="500.0" y="89.5" text-anchor="middle" dominant-baseline="central" class="h-box">Backend PHP</text>
+<text x="500.0" y="104.5" text-anchor="middle" dominant-baseline="central" class="h-box">(TaskController &amp; TaskService)</text>
+<rect x="665" y="75" width="395" height="917" fill="#FFFBEB" fill-opacity="0.35" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="665" y="75" width="395" height="44" fill="#B45309"/>
+<text x="862.5" y="89.5" text-anchor="middle" dominant-baseline="central" class="h-box">Database MySQL</text>
+<text x="862.5" y="104.5" text-anchor="middle" dominant-baseline="central" class="h-box">(Tabel &amp; 4 Trigger)</text>
+<rect x="1060" y="75" width="290" height="917" fill="#F0FDFA" fill-opacity="0.35" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="1060" y="75" width="290" height="44" fill="#0F766E"/>
+<text x="1205.0" y="89.5" text-anchor="middle" dominant-baseline="central" class="h-box">System Archiver</text>
+<text x="1205.0" y="104.5" text-anchor="middle" dominant-baseline="central" class="h-box">(Cron / Lazy Board)</text>
+<polyline points="182.0,161.0 182.0,187.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="298.0,212.0 370.0,212.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="500.0,240.0 500.0,270.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="434.0,304.0 287.0,304.0" fill="none" stroke="#DC2626" stroke-width="1.65" marker-end="url(#arrow-red)"/>
+<polyline points="182.0,326.0 182.0,364.0" fill="none" stroke="#DC2626" stroke-width="1.65" marker-end="url(#arrow-red)"/>
+<polyline points="566.0,304.0 717.0,304.0" fill="none" stroke="#2563EB" stroke-width="1.65" marker-end="url(#arrow-blue)"/>
+<polyline points="862.0,336.0 862.0,412.0 632.5,412.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="500.0,439.0 500.0,496.0 302.0,496.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="137.0,523.0 137.0,592.0 364.0,592.0" fill="none" stroke="#1E3A5F" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="636.0,592.0 707.0,592.0" fill="none" stroke="#2563EB" stroke-width="1.65" marker-end="url(#arrow-blue)"/>
+<polyline points="862.0,628.0 862.0,674.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="774.0,712.0 710.0,712.0 710.0,787.0" fill="none" stroke="#B45309" stroke-width="1.65" marker-end="url(#arrow-amber)"/>
+<polyline points="677.5,814.0 227.0,814.0 227.0,523.0" fill="none" stroke="#1E293B" stroke-width="1.65" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+<polyline points="950.0,712.0 1087.5,712.0" fill="none" stroke="#0F766E" stroke-width="1.65" marker-end="url(#arrow-teal)"/>
+<polyline points="1205.0,743.0 1205.0,902.0 1017.0,902.0" fill="none" stroke="#0F766E" stroke-width="1.65" marker-end="url(#arrow-teal)"/>
+<polyline points="862.0,931.0 862.0,955.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<text x="690.0" y="30" text-anchor="middle" class="title">UML Activity Diagram — Siklus Hidup Tugas, Validasi &amp; Trigger Arsip Otomatis</text>
+<text x="690.0" y="52" text-anchor="middle" class="subtitle">Swimlane 4 Lapisan: Pengguna/Klien, Backend PHP, Database MySQL + 4 Trigger, dan System Archiver</text>
+<circle cx="182" cy="150" r="11" fill="#1E293B"/>
+<rect x="66.0" y="187.0" width="232.0" height="50.0" rx="12" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.8" filter="url(#shadow)"/><text x="182.0" y="205.2" text-anchor="middle" dominant-baseline="central" class="b-box">Kirim Data Tugas Baru</text>
+<text x="182.0" y="218.8" text-anchor="middle" dominant-baseline="central" class="b-box">(POST /projects/:key/tasks)</text>
+<rect x="370.0" y="184.0" width="260.0" height="56.0" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.8" filter="url(#shadow)"/><text x="500.0" y="205.2" text-anchor="middle" dominant-baseline="central" class="b-box">Validasi Auth, Status != &#x27;done&#x27;</text>
+<text x="500.0" y="218.8" text-anchor="middle" dominant-baseline="central" class="b-box">&amp; Cek Assignee di project_members</text>
+<polygon points="500.0,270.0 566.0,304.0 500.0,338.0 434.0,304.0" fill="#FFFBEB" stroke="#B45309" stroke-width="1.8"/><text x="500.0" y="304.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">Valid?</text>
+<rect x="77.0" y="282.0" width="210.0" height="44.0" rx="12" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.8" filter="url(#shadow)"/><text x="182.0" y="297.2" text-anchor="middle" dominant-baseline="central" class="b-box">Terima Error HTTP 400</text>
+<text x="182.0" y="310.8" text-anchor="middle" dominant-baseline="central" class="b-box">(Pesan Validasi)</text>
+<circle cx="182" cy="376" r="12" fill="#FFFFFF" stroke="#DC2626" stroke-width="2"/>
+<line x1="174" y1="368" x2="190" y2="384" stroke="#DC2626" stroke-width="2"/>
+<line x1="190" y1="368" x2="174" y2="384" stroke="#DC2626" stroke-width="2"/>
+<rect x="717.0" y="272.0" width="290.0" height="64.0" rx="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.8" filter="url(#shadow)"/><text x="862.0" y="290.5" text-anchor="middle" dominant-baseline="central" class="b-box">trg_generate_task_display_id</text>
+<text x="862.0" y="304.0" text-anchor="middle" dominant-baseline="central" class="b-box">Lock projects.next_seq, isi seq &amp;</text>
+<text x="862.0" y="317.5" text-anchor="middle" dominant-baseline="central" class="b-box">display_id, validasi segment/member</text>
+<rect x="367.5" y="385.0" width="265.0" height="54.0" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.8" filter="url(#shadow)"/><text x="500.0" y="405.2" text-anchor="middle" dominant-baseline="central" class="b-box">Insert task_tags &amp; Catat</text>
+<text x="500.0" y="418.8" text-anchor="middle" dominant-baseline="central" class="b-box">task_history (action=&#x27;created&#x27;)</text>
+<rect x="62.0" y="469.0" width="240.0" height="54.0" rx="12" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.8" filter="url(#shadow)"/><text x="182.0" y="489.2" text-anchor="middle" dominant-baseline="central" class="b-box">Ubah Status Tugas ke &#x27;done&#x27;</text>
+<text x="182.0" y="502.8" text-anchor="middle" dominant-baseline="central" class="b-box">(PATCH /tasks/:id/status)</text>
+<rect x="364.0" y="563.0" width="272.0" height="58.0" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.8" filter="url(#shadow)"/><text x="500.0" y="585.2" text-anchor="middle" dominant-baseline="central" class="b-box">SET @doto_actor_* Session Vars</text>
+<text x="500.0" y="598.8" text-anchor="middle" dominant-baseline="central" class="b-box">&amp; UPDATE tasks SET status=&#x27;done&#x27;</text>
+<rect x="707.0" y="556.0" width="310.0" height="72.0" rx="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.8" filter="url(#shadow)"/><text x="862.0" y="571.8" text-anchor="middle" dominant-baseline="central" class="b-box">3 Trigger Berurutan (MySQL):</text>
+<text x="862.0" y="585.2" text-anchor="middle" dominant-baseline="central" class="b-box">1) trg_validate_task_assignment</text>
+<text x="862.0" y="598.8" text-anchor="middle" dominant-baseline="central" class="b-box">2) trg_handle_task_completion (scheduled)</text>
+<text x="862.0" y="612.2" text-anchor="middle" dominant-baseline="central" class="b-box">3) trg_log_task_status_change</text>
+<polygon points="862.0,674.0 950.0,712.0 862.0,750.0 774.0,712.0" fill="#FFFBEB" stroke="#B45309" stroke-width="1.8"/><text x="862.0" y="705.5" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">Dibuka Ulang</text>
+<text x="862.0" y="718.5" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">Sebelum Batas?</text>
+<rect x="677.5" y="787.0" width="255.0" height="54.0" rx="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.8" filter="url(#shadow)"/><text x="805.0" y="800.5" text-anchor="middle" dominant-baseline="central" class="b-box">trg_handle_task_completion:</text>
+<text x="805.0" y="814.0" text-anchor="middle" dominant-baseline="central" class="b-box">Set task_archive_queue</text>
+<text x="805.0" y="827.5" text-anchor="middle" dominant-baseline="central" class="b-box">state=&#x27;cancelled&#x27;, scheduled_for=NULL</text>
+<rect x="1087.5" y="681.0" width="235.0" height="62.0" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="1.8" filter="url(#shadow)"/><text x="1205.0" y="698.5" text-anchor="middle" dominant-baseline="central" class="b-box">archiveEligibleTasks()</text>
+<text x="1205.0" y="712.0" text-anchor="middle" dominant-baseline="central" class="b-box">Cek status=&#x27;done&#x27; &amp;</text>
+<text x="1205.0" y="725.5" text-anchor="middle" dominant-baseline="central" class="b-box">usia &gt; archive_after_hours</text>
+<rect x="707.0" y="873.0" width="310.0" height="58.0" rx="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.8" filter="url(#shadow)"/><text x="862.0" y="888.5" text-anchor="middle" dominant-baseline="central" class="b-box">UPDATE tasks SET archived_at = now</text>
+<text x="862.0" y="902.0" text-anchor="middle" dominant-baseline="central" class="b-box">-&gt; Trigger Set queue state=&#x27;archived&#x27;</text>
+<text x="862.0" y="915.5" text-anchor="middle" dominant-baseline="central" class="b-box">&amp; Catat history (archive-job)</text>
+<circle cx="862" cy="968" r="13" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+<circle cx="862" cy="968" r="8" fill="#1E293B"/>
+<rect x="330.6" y="278.0" width="58.8" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="360.0" y="288.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#DC2626">[Tidak]</text>
+<rect x="597.8" y="278.0" width="84.4" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="640.0" y="288.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#2563EB">[Ya] INSERT</text>
+<rect x="709.0" y="386.0" width="78.0" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="748.0" y="396.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E293B">Commit 201</text>
+<rect x="320.0" y="470.0" width="110.0" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="375.0" y="480.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E293B">Tampil di Board</text>
+<rect x="204.6" y="566.0" width="90.8" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="250.0" y="576.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E3A5F">PATCH Status</text>
+<rect x="645.8" y="565.0" width="52.4" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="672.0" y="575.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#2563EB">UPDATE</text>
+<rect x="716.0" y="686.0" width="48.0" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="740.0" y="696.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">[Ya]</text>
+<rect x="377.6" y="788.0" width="154.8" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="455.0" y="798.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E293B">Kembali Aktif (Reopen)</text>
+<rect x="945.0" y="676.0" width="142.0" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="1016.0" y="686.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#0F766E">[Tidak, Lewat Batas]</text>
+<rect x="1057.0" y="876.0" width="110.0" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="1112.0" y="886.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#0F766E">Transaksi Arsip</text>
+</svg>

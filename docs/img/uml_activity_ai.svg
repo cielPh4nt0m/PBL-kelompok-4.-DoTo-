@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="870" viewBox="0 0 1400 870">
+  <defs>
+    <style>
+      text { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: 700; fill: #1E3A5F; }
+      .subtitle { font-size: 12.5px; fill: #475569; }
+      .h-box { font-size: 13px; font-weight: 700; fill: #FFFFFF; }
+      .b-box { font-size: 11.5px; font-weight: 600; fill: #1E293B; }
+      .s-box { font-size: 10.5px; fill: #475569; }
+      .lbl { font-size: 10.5px; font-weight: 600; fill: #1E293B; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1E293B"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0F766E"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#B45309"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#6D28D9"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-open" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#1E293B" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#0F766E" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#B45309" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#2563EB" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#6D28D9" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-inherit" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto">
+      <path d="M 1 1 L 11 6 L 1 11 z" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.6"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="112%" height="115%">
+      <feDropShadow dx="1.5" dy="2" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="1400" height="870" fill="#FFFFFF"/>
+  <rect x="30" y="75" width="325" height="770" fill="#EFF6FF" fill-opacity="0.35" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="30" y="75" width="325" height="44" fill="#1E3A5F"/>
+<text x="192.5" y="89.5" text-anchor="middle" dominant-baseline="central" class="h-box">Pengguna &amp; Frontend</text>
+<text x="192.5" y="104.5" text-anchor="middle" dominant-baseline="central" class="h-box">(ai.html &amp; localStorage aiPrefs)</text>
+<rect x="355" y="75" width="370" height="770" fill="#FFFFFF" fill-opacity="0.35" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="355" y="75" width="370" height="44" fill="#2563EB"/>
+<text x="540.0" y="89.5" text-anchor="middle" dominant-baseline="central" class="h-box">Backend PHP</text>
+<text x="540.0" y="104.5" text-anchor="middle" dominant-baseline="central" class="h-box">(AiController &amp; TaskService)</text>
+<rect x="725" y="75" width="330" height="770" fill="#F0FDFA" fill-opacity="0.35" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="725" y="75" width="330" height="44" fill="#0F766E"/>
+<text x="890.0" y="89.5" text-anchor="middle" dominant-baseline="central" class="h-box">Google Gemini API</text>
+<text x="890.0" y="104.5" text-anchor="middle" dominant-baseline="central" class="h-box">(AI Studio / Vertex AI)</text>
+<rect x="1055" y="75" width="315" height="770" fill="#FFFBEB" fill-opacity="0.35" stroke="#CBD5E1" stroke-width="1.5"/>
+<rect x="1055" y="75" width="315" height="44" fill="#B45309"/>
+<text x="1212.5" y="89.5" text-anchor="middle" dominant-baseline="central" class="h-box">Database MySQL</text>
+<text x="1212.5" y="104.5" text-anchor="middle" dominant-baseline="central" class="h-box">(tasks &amp; task_history)</text>
+<polyline points="192.0,161.0 192.0,186.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="308.0,212.0 416.0,212.0" fill="none" stroke="#2563EB" stroke-width="1.65" marker-end="url(#arrow-blue)"/>
+<polyline points="664.0,212.0 770.0,212.0" fill="none" stroke="#0F766E" stroke-width="1.65" marker-end="url(#arrow-teal)"/>
+<polyline points="890.0,241.0 890.0,326.0 618.0,326.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="540.0,360.0 540.0,408.0" fill="none" stroke="#B45309" stroke-width="1.65" marker-end="url(#arrow-amber)"/>
+<polyline points="462.0,326.0 192.0,326.0 192.0,406.0" fill="none" stroke="#2563EB" stroke-width="1.65" marker-end="url(#arrow-blue)"/>
+<polyline points="414.0,434.0 309.0,434.0" fill="none" stroke="#B45309" stroke-width="1.65" marker-end="url(#arrow-amber)"/>
+<polyline points="192.0,462.0 192.0,512.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="192.0,588.0 192.0,654.0" fill="none" stroke="#475569" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="274.0,550.0 408.0,550.0" fill="none" stroke="#0F766E" stroke-width="1.65" marker-end="url(#arrow-teal)"/>
+<polyline points="672.0,550.0 1083.0,550.0" fill="none" stroke="#B45309" stroke-width="1.65" marker-end="url(#arrow-amber)"/>
+<polyline points="1212.0,583.0 1212.0,678.0 670.0,678.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="540.0,704.0 540.0,778.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<polyline points="192.0,702.0 192.0,792.0 526.0,792.0" fill="none" stroke="#1E293B" stroke-width="1.65" marker-end="url(#arrow)"/>
+<text x="700.0" y="30" text-anchor="middle" class="title">UML Activity Diagram — Chat Asisten AI &amp; Eksekusi Proposal (Human-in-the-Loop)</text>
+<text x="700.0" y="52" text-anchor="middle" class="subtitle">Swimlane 4 Lapisan: Frontend (ai.html + aiPrefs), Backend (AiController), Google Gemini API, dan Database MySQL</text>
+<circle cx="192" cy="150" r="11" fill="#1E293B"/>
+<rect x="76.0" y="186.0" width="232.0" height="52.0" rx="12" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.8" filter="url(#shadow)"/><text x="192.0" y="205.2" text-anchor="middle" dominant-baseline="central" class="b-box">Kirim Prompt Chat di ai.html</text>
+<text x="192.0" y="218.8" text-anchor="middle" dominant-baseline="central" class="b-box">&amp; Cek readGate(aiPrefs.read)</text>
+<rect x="416.0" y="183.0" width="248.0" height="58.0" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.8" filter="url(#shadow)"/><text x="540.0" y="198.5" text-anchor="middle" dominant-baseline="central" class="b-box">POST /api/ai/chat</text>
+<text x="540.0" y="212.0" text-anchor="middle" dominant-baseline="central" class="b-box">Muat Proyek, Board (maks 50 tugas)</text>
+<text x="540.0" y="225.5" text-anchor="middle" dominant-baseline="central" class="b-box">&amp; Daftar Anggota Proyek</text>
+<rect x="770.0" y="183.0" width="240.0" height="58.0" rx="12" fill="#FFFFFF" stroke="#0F766E" stroke-width="1.8" filter="url(#shadow)"/><text x="890.0" y="198.5" text-anchor="middle" dominant-baseline="central" class="b-box">generateContent()</text>
+<text x="890.0" y="212.0" text-anchor="middle" dominant-baseline="central" class="b-box">Proses System Prompt + Konteks</text>
+<text x="890.0" y="225.5" text-anchor="middle" dominant-baseline="central" class="b-box">-&gt; Return JSON {reply, proposals[]}</text>
+<polygon points="540.0,292.0 618.0,326.0 540.0,360.0 462.0,326.0" fill="#FFFBEB" stroke="#B45309" stroke-width="1.8"/><text x="540.0" y="319.5" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">Respons LLM</text>
+<text x="540.0" y="332.5" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">Berhasil?</text>
+<rect x="414.0" y="408.0" width="252.0" height="52.0" rx="12" fill="#FFFBEB" stroke="#B45309" stroke-width="1.8" filter="url(#shadow)"/><text x="540.0" y="427.2" text-anchor="middle" dominant-baseline="central" class="b-box">fallbackSmartAssistant()</text>
+<text x="540.0" y="440.8" text-anchor="middle" dominant-baseline="central" class="b-box">Balasan &amp; Proposal Rule-Based</text>
+<rect x="75.0" y="406.0" width="234.0" height="56.0" rx="12" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.8" filter="url(#shadow)"/><text x="192.0" y="427.2" text-anchor="middle" dominant-baseline="central" class="b-box">Tampilkan Balasan AI &amp;</text>
+<text x="192.0" y="440.8" text-anchor="middle" dominant-baseline="central" class="b-box">Filter applyPerms(modify/team)</text>
+<polygon points="192.0,512.0 274.0,550.0 192.0,588.0 110.0,550.0" fill="#FFFBEB" stroke="#B45309" stroke-width="1.8"/><text x="192.0" y="543.5" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">Proposal Ada &amp;</text>
+<text x="192.0" y="556.5" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">Klik Accept?</text>
+<rect x="80.0" y="654.0" width="224.0" height="48.0" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="1.8" filter="url(#shadow)"/><text x="192.0" y="671.2" text-anchor="middle" dominant-baseline="central" class="b-box">Catat Status Reject / Hanya</text>
+<text x="192.0" y="684.8" text-anchor="middle" dominant-baseline="central" class="b-box">Tampilkan Jawaban Chat</text>
+<rect x="408.0" y="519.0" width="264.0" height="62.0" rx="12" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.8" filter="url(#shadow)"/><text x="540.0" y="536.5" text-anchor="middle" dominant-baseline="central" class="b-box">Eksekusi Endpoint REST Nyata</text>
+<text x="540.0" y="550.0" text-anchor="middle" dominant-baseline="central" class="b-box">(Header X-Client-Channel: agent,</text>
+<text x="540.0" y="563.5" text-anchor="middle" dominant-baseline="central" class="b-box">X-Agent-Name: doto-web-ai)</text>
+<rect x="1083.0" y="517.0" width="258.0" height="66.0" rx="12" fill="#FFFFFF" stroke="#B45309" stroke-width="1.8" filter="url(#shadow)"/><text x="1212.0" y="536.5" text-anchor="middle" dominant-baseline="central" class="b-box">Simpan Perubahan Tugas &amp;</text>
+<text x="1212.0" y="550.0" text-anchor="middle" dominant-baseline="central" class="b-box">Catat task_history dengan</text>
+<text x="1212.0" y="563.5" text-anchor="middle" dominant-baseline="central" class="b-box">channel=&#x27;agent&#x27;, agent=&#x27;doto-web-ai&#x27;</text>
+<rect x="410.0" y="652.0" width="260.0" height="52.0" rx="12" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.8" filter="url(#shadow)"/><text x="540.0" y="671.2" text-anchor="middle" dominant-baseline="central" class="b-box">Kembalikan TaskDTO Terbaru</text>
+<text x="540.0" y="684.8" text-anchor="middle" dominant-baseline="central" class="b-box">&amp; Tampilkan Tautan task.html?id=...</text>
+<circle cx="540" cy="792" r="14" fill="#FFFFFF" stroke="#1E293B" stroke-width="2"/>
+<circle cx="540" cy="792" r="8.5" fill="#1E293B"/>
+<rect x="297.4" y="176.0" width="129.2" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="362.0" y="186.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#2563EB">{message, history}</text>
+<rect x="681.2" y="176.0" width="71.6" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="717.0" y="186.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#0F766E">cURL POST</text>
+<rect x="708.2" y="298.0" width="103.6" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="760.0" y="308.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E293B">JSON / Timeout</text>
+<rect x="550.6" y="373.0" width="58.8" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="580.0" y="383.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">[Tidak]</text>
+<rect x="290.0" y="298.0" width="110.0" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="345.0" y="308.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#2563EB">[Ya] mode=&#x27;llm&#x27;</text>
+<rect x="307.0" y="402.0" width="110.0" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="362.0" y="412.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">mode=&#x27;fallback&#x27;</text>
+<rect x="193.8" y="610.0" width="116.4" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="252.0" y="620.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#475569">[Tidak / Reject]</text>
+<rect x="293.4" y="522.0" width="97.2" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="342.0" y="532.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#0F766E">[Ya / Accept]</text>
+<rect x="831.4" y="522.0" width="97.2" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="880.0" y="532.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">Transaksi SQL</text>
+<rect x="838.2" y="650.0" width="103.6" height="20.0" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/><text x="890.0" y="660.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E293B">Commit 200/201</text>
+</svg>

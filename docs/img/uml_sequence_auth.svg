@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1420" height="940" viewBox="0 0 1420 940">
+  <defs>
+    <style>
+      text { font-family: "Liberation Sans", "DejaVu Sans", Arial, sans-serif; }
+      .title { font-size: 20px; font-weight: 700; fill: #1E3A5F; }
+      .subtitle { font-size: 12.5px; fill: #475569; }
+      .h-box { font-size: 13px; font-weight: 700; fill: #FFFFFF; }
+      .b-box { font-size: 11.5px; font-weight: 600; fill: #1E293B; }
+      .s-box { font-size: 10.5px; fill: #475569; }
+      .lbl { font-size: 10.5px; font-weight: 600; fill: #1E293B; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1E293B"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0F766E"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#B45309"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#6D28D9"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#DC2626"/>
+    </marker>
+    <marker id="arrow-open" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#1E293B" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#0F766E" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#B45309" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#2563EB" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-open-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#6D28D9" stroke-width="1.6"/>
+    </marker>
+    <marker id="arrow-inherit" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto">
+      <path d="M 1 1 L 11 6 L 1 11 z" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.6"/>
+    </marker>
+    <filter id="shadow" x="-5%" y="-5%" width="112%" height="115%">
+      <feDropShadow dx="1.5" dy="2" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+  <rect width="1420" height="940" fill="#FFFFFF"/>
+  <text x="710.0" y="30" text-anchor="middle" class="title">UML Sequence Diagram 1 — Autentikasi Google OAuth 2.0 &amp; Auto-Join Proyek K4</text>
+<text x="710.0" y="52" text-anchor="middle" class="subtitle">Alur aktual POST /api/auth/google pada AuthController, UserService, Authenticator &amp; MySQL</text>
+<line x1="95" y1="126" x2="95" y2="905" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="17" y="78" width="156" height="48" rx="6" fill="#EFF6FF" stroke="#1E3A5F" stroke-width="2" filter="url(#shadow)"/>
+<text x="95.0" y="102.0" text-anchor="middle" dominant-baseline="central" class="b-box" fill="#1E3A5F">User</text>
+<line x1="295" y1="126" x2="295" y2="905" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="217" y="78" width="156" height="48" rx="6" fill="#EFF6FF" stroke="#1E3A5F" stroke-width="2" filter="url(#shadow)"/>
+<text x="295.0" y="94.8" text-anchor="middle" dominant-baseline="central" class="b-box" fill="#1E3A5F">Browser</text>
+<text x="295.0" y="109.2" text-anchor="middle" dominant-baseline="central" class="b-box" fill="#1E3A5F">(login.html)</text>
+<line x1="525" y1="126" x2="525" y2="905" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="447" y="78" width="156" height="48" rx="6" fill="#F0FDFA" stroke="#0F766E" stroke-width="2" filter="url(#shadow)"/>
+<text x="525.0" y="94.8" text-anchor="middle" dominant-baseline="central" class="b-box" fill="#0F766E">Google GSI /</text>
+<text x="525.0" y="109.2" text-anchor="middle" dominant-baseline="central" class="b-box" fill="#0F766E">tokeninfo API</text>
+<line x1="765" y1="126" x2="765" y2="905" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="687" y="78" width="156" height="48" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="765.0" y="102.0" text-anchor="middle" dominant-baseline="central" class="b-box" fill="#2563EB">AuthController</text>
+<line x1="1015" y1="126" x2="1015" y2="905" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="937" y="78" width="156" height="48" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)"/>
+<text x="1015.0" y="94.8" text-anchor="middle" dominant-baseline="central" class="b-box" fill="#2563EB">UserService &amp;</text>
+<text x="1015.0" y="109.2" text-anchor="middle" dominant-baseline="central" class="b-box" fill="#2563EB">Authenticator</text>
+<line x1="1300" y1="126" x2="1300" y2="905" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="6,5"/>
+<rect x="1222" y="78" width="156" height="48" rx="6" fill="#FFFBEB" stroke="#B45309" stroke-width="2" filter="url(#shadow)"/>
+<text x="1300.0" y="94.8" text-anchor="middle" dominant-baseline="central" class="b-box" fill="#B45309">MySQL DB</text>
+<text x="1300.0" y="109.2" text-anchor="middle" dominant-baseline="central" class="b-box" fill="#B45309">(users, members)</text>
+<rect x="965" y="434" width="420" height="194" fill="#F8FAFC" fill-opacity="0.7" stroke="#1E3A5F" stroke-width="1.5"/>
+<polygon points="965,434 1015,434 1015,452 1005,458 965,458" fill="#1E3A5F"/>
+<text x="987" y="446" text-anchor="middle" dominant-baseline="central" class="h-box" style="font-size:11px">alt</text>
+<line x1="965" y1="532" x2="1385" y2="532" stroke="#1E3A5F" stroke-width="1.2" stroke-dasharray="5,4"/>
+<rect x="288" y="155" width="14" height="717" fill="#EFF6FF" stroke="#1E3A5F" stroke-width="1.5"/>
+<rect x="518" y="185" width="14" height="55" fill="#F0FDFA" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="758" y="270" width="14" height="565" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<rect x="518" y="300" width="14" height="62" fill="#F0FDFA" stroke="#0F766E" stroke-width="1.5"/>
+<rect x="1008" y="395" width="14" height="400" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5"/>
+<rect x="1293" y="445" width="14" height="260" fill="#FFFBEB" stroke="#B45309" stroke-width="1.5"/>
+<line x1="102" y1="168" x2="288" y2="168" stroke="#1E3A5F" stroke-width="1.65" marker-end="url(#arrow)"/>
+<line x1="302" y1="200" x2="518" y2="200" stroke="#0F766E" stroke-width="1.65" marker-end="url(#arrow-teal)"/>
+<line x1="518" y1="232" x2="302" y2="232" stroke="#0F766E" stroke-width="1.65" stroke-dasharray="6,4" marker-end="url(#arrow-open-teal)"/>
+<line x1="302" y1="280" x2="758" y2="280" stroke="#2563EB" stroke-width="1.65" marker-end="url(#arrow-blue)"/>
+<line x1="758" y1="315" x2="532" y2="315" stroke="#0F766E" stroke-width="1.65" marker-end="url(#arrow-teal)"/>
+<line x1="532" y1="355" x2="758" y2="355" stroke="#0F766E" stroke-width="1.65" stroke-dasharray="6,4" marker-end="url(#arrow-open-teal)"/>
+<line x1="772" y1="408" x2="1008" y2="408" stroke="#2563EB" stroke-width="1.65" marker-end="url(#arrow-blue)"/>
+<line x1="1022" y1="495" x2="1293" y2="495" stroke="#B45309" stroke-width="1.65" marker-end="url(#arrow-amber)"/>
+<line x1="1022" y1="594" x2="1293" y2="594" stroke="#B45309" stroke-width="1.65" marker-end="url(#arrow-amber)"/>
+<line x1="1022" y1="668" x2="1293" y2="668" stroke="#B45309" stroke-width="1.65" marker-end="url(#arrow-amber)"/>
+<line x1="1293" y1="700" x2="1022" y2="700" stroke="#1E293B" stroke-width="1.65" stroke-dasharray="6,4" marker-end="url(#arrow-open)"/>
+<line x1="772" y1="745" x2="1008" y2="745" stroke="#2563EB" stroke-width="1.65" marker-end="url(#arrow-blue)"/>
+<line x1="1008" y1="785" x2="772" y2="785" stroke="#2563EB" stroke-width="1.65" stroke-dasharray="6,4" marker-end="url(#arrow-open-blue)"/>
+<line x1="758" y1="828" x2="302" y2="828" stroke="#1E3A5F" stroke-width="1.65" stroke-dasharray="6,4" marker-end="url(#arrow-open)"/>
+<line x1="288" y1="868" x2="102" y2="868" stroke="#1E3A5F" stroke-width="1.65" stroke-dasharray="6,4" marker-end="url(#arrow-open)"/>
+<rect x="95.2" y="145.0" width="199.6" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="195.0" y="155.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E3A5F">1. Klik &#x27;Sign in with Google&#x27;</text>
+<rect x="319.8" y="177.0" width="180.4" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="410.0" y="187.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#0F766E">2. Pilih akun di popup GSI</text>
+<rect x="313.4" y="209.0" width="193.2" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="410.0" y="219.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#0F766E">3. Kembalikan JWT credential</text>
+<rect x="404.6" y="257.0" width="250.8" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="530.0" y="267.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#2563EB">4. POST /api/auth/google {credential}</text>
+<rect x="542.0" y="292.0" width="206.0" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="645.0" y="302.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#0F766E">5. GET /tokeninfo?id_token=...</text>
+<rect x="519.6" y="332.0" width="250.8" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="645.0" y="342.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#0F766E">6. Klaim valid (sub, email, aud, exp)</text>
+<rect x="745.4" y="385.0" width="289.2" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="890.0" y="395.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#2563EB">7. findOrCreateGoogleUser(sub, email, name)</text>
+<rect x="1027.8" y="438.0" width="244.4" height="20.0" rx="4" fill="#F8FAFC" stroke="none"/><text x="1150.0" y="448.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E3A5F">[google_sub / email sudah terdaftar]</text>
+<rect x="1054.5" y="458.0" width="206.0" height="34.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="1157.5" y="468.2" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">8a. SELECT / UPDATE google_sub</text>
+<text x="1157.5" y="481.8" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">&amp; email_verified = 1</text>
+<rect x="986.8" y="538.0" width="148.4" height="20.0" rx="4" fill="#F8FAFC" stroke="none"/><text x="1061.0" y="548.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E3A5F">[else: pengguna baru]</text>
+<rect x="1032.1" y="557.0" width="250.8" height="34.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="1157.5" y="567.2" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">8b. INSERT users (password_hash=NULL,</text>
+<text x="1157.5" y="580.8" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">team_key=&#x27;K4&#x27;, email_verified=1)</text>
+<rect x="1051.3" y="631.0" width="212.4" height="34.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="1157.5" y="641.2" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">9. ensureUserInK4Project():</text>
+<text x="1157.5" y="654.8" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#B45309">cek &amp; INSERT project_members K4</text>
+<rect x="1038.5" y="677.0" width="238.0" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="1157.5" y="687.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E293B">10. User + keanggotaan K4 tersimpan</text>
+<rect x="780.6" y="722.0" width="218.8" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="890.0" y="732.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#2563EB">11. Authenticator::logIn(userId)</text>
+<rect x="761.4" y="762.0" width="257.2" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="890.0" y="772.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#2563EB">12. Sesi aktif (session_regenerate_id)</text>
+<rect x="343.8" y="805.0" width="372.4" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="530.0" y="815.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E3A5F">13. HTTP 200 MeDTO + Set-Cookie: doto_session (HttpOnly)</text>
+<rect x="98.4" y="845.0" width="193.2" height="20.0" rx="4" fill="#FFFFFF" stroke="none"/><text x="195.0" y="855.0" text-anchor="middle" dominant-baseline="central" class="lbl" fill="#1E3A5F">14. Redirect ke welcome.html</text>
+</svg>
